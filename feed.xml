@@ -1,0 +1,239 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>imLZH1 Blog</title>
+  <subtitle>Love Live</subtitle>
+  <updated>2023-10-27T03:12:17+08:00</updated>
+  <author>
+    <name></name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="zh-CN"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <rights> © 2023  </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>NSSCTF-Round-14-Basic</title>
+    <link href="http://localhost:4000/posts/NSSCTF-Round-14-Basic/" rel="alternate" type="text/html" title="NSSCTF-Round-14-Basic" />
+    <published>2023-07-30T00:00:00+08:00</published>
+  
+    <updated>2023-07-30T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/NSSCTF-Round-14-Basic/</id>
+    <content src="http://localhost:4000/posts/NSSCTF-Round-14-Basic/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+‍
+
+​
+
+‍
+
+
+  5 道pwn 题
+
+
+‍
+
+love
+
+存在 格式化字符串漏洞
+
+​​
+
+‍
+
+然后进入 vuln 函数，然后直接溢出,由于上面需要的libc_base Canary 都已经有了，可以直接 return system(“/bin/sh”);
+
+​​
+
+
+  exploit 非预期
+
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.sendafter(str(delim), data)
+sl      = lambda data               :io.sendline(data)
+sla     = lambda delim,data         :io.sendlin...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>2023-AmateursCTF-WriteUps</title>
+    <link href="http://localhost:4000/posts/AmateursCTF/" rel="alternate" type="text/html" title="2023-AmateursCTF-WriteUps" />
+    <published>2023-07-19T20:55:00+08:00</published>
+  
+    <updated>2023-07-19T20:55:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/AmateursCTF/</id>
+    <content src="http://localhost:4000/posts/AmateursCTF/" />
+    <author>
+      <name>imlzh1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      https://ctf.amateurs.team/
+
+
+1.pwn-rntk
+
+
+  代码恢复
+  程序自己生产里一个类似 canary 的东西，溢出检测
+
+
+#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;string.h&amp;gt;
+#include&amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+
+long long int global_canary=NULL;
+
+int win()
+{
+  char s[72]; // [rsp+0h] [rbp-50h] BYREF
+  FILE *stream; // [rsp+48h] [rbp-8h]
+
+  stream = fopen("flag.txt", "r");
+  if ( !stream )
+  {
+    puts("flag file not found");...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>DASCTF 2023六月挑战赛｜二进制专项</title>
+    <link href="http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" rel="alternate" type="text/html" title="DASCTF 2023六月挑战赛｜二进制专项" />
+    <published>2023-06-04T00:00:00+08:00</published>
+  
+    <updated>2023-06-04T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/</id>
+    <content src="http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      二进制专项-签到
+
+‍
+
+简单统计下参与人数，祝大家玩得开心~
+
+DASCTF{Welcome_to_DASCTF5}
+
+
+‍
+
+Reverse-careful
+
+‍
+
+
+  题目给出了一个恶意样本,请分析出样本请求服务器的域名(flag的形式为DASCTF{md5(域名)}) 其中md5值都是小写
+
+
+‍
+
+拿到题目直接 IDA Pro 打开, 一眼就可以看 gethostbyname();
+
+动态调试可以获取name的值,但是这个地方获取的name不是真正的
+
+‍
+
+​​
+
+‍
+
+直接 快捷键 x  看 gethostbyname() 交叉引用 还有另一处
+
+‍
+
+​​
+
+‍
+
+直在这里下断点，然后动态调试
+
+‍
+
+​​
+
+‍
+
+得到 域名 Just_An_APIH00k11.com
+
+‍
+
+​​
+
+from hashlib import md5
+def md5sum(strin...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
