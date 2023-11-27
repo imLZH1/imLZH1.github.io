@@ -14,10 +14,17 @@
 
 
 <!-- `site.alt_lang` can specify a language different from the UI -->
-<html lang="zh-CN" >
+<html lang="zh-CN" data-mode="dark">
   <!-- The Head -->
-
-<head>
+  <style>
+    #canvas-dust {
+      z-index: -65536;
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
@@ -27,6 +34,9 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   >
+  <script src='/assets/aplayer/APlayer.min.js'></script>
+  <link rel="stylesheet" href="/assets/aplayer/APlayer.min.css">
+
 
   
 
@@ -101,151 +111,6 @@
   <!-- JavaScript -->
 
   
-    <!-- Switch the mode between dark and light. -->
-
-<script type="text/javascript">
-  class ModeToggle {
-    static get MODE_KEY() {
-      return 'mode';
-    }
-    static get MODE_ATTR() {
-      return 'data-mode';
-    }
-    static get DARK_MODE() {
-      return 'dark';
-    }
-    static get LIGHT_MODE() {
-      return 'light';
-    }
-    static get ID() {
-      return 'mode-toggle';
-    }
-
-    constructor() {
-      if (this.hasMode) {
-        if (this.isDarkMode) {
-          if (!this.isSysDarkPrefer) {
-            this.setDark();
-          }
-        } else {
-          if (this.isSysDarkPrefer) {
-            this.setLight();
-          }
-        }
-      }
-
-      let self = this;
-
-      /* always follow the system prefers */
-      this.sysDarkPrefers.addEventListener('change', () => {
-        if (self.hasMode) {
-          if (self.isDarkMode) {
-            if (!self.isSysDarkPrefer) {
-              self.setDark();
-            }
-          } else {
-            if (self.isSysDarkPrefer) {
-              self.setLight();
-            }
-          }
-
-          self.clearMode();
-        }
-
-        self.notify();
-      });
-    } /* constructor() */
-
-    get sysDarkPrefers() {
-      return window.matchMedia('(prefers-color-scheme: dark)');
-    }
-
-    get isSysDarkPrefer() {
-      return this.sysDarkPrefers.matches;
-    }
-
-    get isDarkMode() {
-      return this.mode === ModeToggle.DARK_MODE;
-    }
-
-    get isLightMode() {
-      return this.mode === ModeToggle.LIGHT_MODE;
-    }
-
-    get hasMode() {
-      return this.mode != null;
-    }
-
-    get mode() {
-      return sessionStorage.getItem(ModeToggle.MODE_KEY);
-    }
-
-    /* get the current mode on screen */
-    get modeStatus() {
-      if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) {
-        return ModeToggle.DARK_MODE;
-      } else {
-        return ModeToggle.LIGHT_MODE;
-      }
-    }
-
-    setDark() {
-      document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
-      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
-    }
-
-    setLight() {
-      document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
-      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
-    }
-
-    clearMode() {
-      document.documentElement.removeAttribute(ModeToggle.MODE_ATTR);
-      sessionStorage.removeItem(ModeToggle.MODE_KEY);
-    }
-
-    /* Notify another plugins that the theme mode has changed */
-    notify() {
-      window.postMessage(
-        {
-          direction: ModeToggle.ID,
-          message: this.modeStatus
-        },
-        '*'
-      );
-    }
-
-    flipMode() {
-      if (this.hasMode) {
-        if (this.isSysDarkPrefer) {
-          if (this.isLightMode) {
-            this.clearMode();
-          } else {
-            this.setLight();
-          }
-        } else {
-          if (this.isDarkMode) {
-            this.clearMode();
-          } else {
-            this.setDark();
-          }
-        }
-      } else {
-        if (this.isSysDarkPrefer) {
-          this.setLight();
-        } else {
-          this.setDark();
-        }
-      }
-
-      this.notify();
-    } /* flipMode() */
-  } /* ModeToggle */
-
-  const modeToggle = new ModeToggle();
-</script>
-
-  
 
   <!-- A placeholder to allow defining custom metadata -->
 
@@ -254,7 +119,7 @@
 
   <body>
     <!-- The Side Bar -->
-
+<canvas id="canvas-dust"></canvas>
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
   <header class="profile-wrapper">
     <a href="/" id="avatar" class="rounded-circle">
@@ -298,6 +163,146 @@
             document.getElementById('copywriting').innerHTML = myJson[copywritingId];
           });
           </script>
+	  <script>
+		'use strict';
+		function getElement(string, item = document.documentElement) {
+		    let tmp = item.querySelector(string);
+		    if (tmp === null) {
+			throw new Error("Unknown HTML");
+		    }
+		    return tmp;
+		}
+		function getParent(item, level = 1) {
+		    while (level--) {
+			let tmp = item.parentElement;
+			if (tmp === null) {
+			    throw new Error("Unknown HTML");
+			}
+			item = tmp;
+		    }
+		    return item;
+		}
+		function format(format, ...args) {
+		    return format.replaceAll(/\$\*?[0-9]*/g, (match) => {
+			if (match === '$*') {
+			    return '';
+			}
+			let Index = match.slice(1);
+			if (Index >= args.length) {
+			    return '';
+			}
+			return args[Index];
+		    });
+		}
+		class dust {
+		    constructor(x = 50, y = 50) {
+			this.vx = Math.random() * 1 + 1;
+			this.vy = Math.random() * 1 + 0.01;
+			this.shadowBlur = Math.random() * 3;
+			this.shadowX = (Math.random() * 2) - 1;
+			this.shadowY = (Math.random() * 2) - 1;
+			this.radiusX = Math.random() * 1.5 + 0.5;
+			this.radiusY = this.radiusX * (Math.random() * (1.3 - 0.3) + 0.3);
+			this.rotation = Math.PI * Math.floor(Math.random() * 2);
+			this.x = x;
+			this.y = y;
+		    }
+		}
+		class canvasDust {
+		    constructor(canvasID) {
+			this.color = '#fff';
+			this.width = 300;
+			this.height = 300;
+			this.dustQuantity = 50;
+			this.dustArr = [];
+			this.inStop = false;
+			this.build = () => {
+			    this.resize();
+			    if (this.ctx) {
+				const point = canvasDust.getPoint(this.dustQuantity);
+				for (let i of point) {
+				    const dustObj = new dust(i[0], i[1]);
+				    this.buildDust(dustObj);
+				    this.dustArr.push(dustObj);
+				}
+				requestAnimationFrame(this.paint);
+			    }
+			};
+			this.paint = () => {
+			    if (this.inStop) {
+				return;
+			    }
+			    const dustArr = this.dustArr;
+			    for (let i of dustArr) {
+				this.ctx.clearRect(i.x - 6, i.y - 6, 12, 12);
+				if (i.x < -5 || i.y < -5) {
+				    const x = this.width;
+				    const y = Math.floor(Math.random() * window.innerHeight);
+				    i.x = x;
+				    i.y = y;
+				}
+				else {
+				    i.x -= i.vx;
+				    i.y -= i.vy;
+				}
+			    }
+			    for (let i of dustArr) {
+				this.buildDust(i);
+			    }
+			    requestAnimationFrame(this.paint);
+			};
+			this.buildDust = (dust) => {
+			    const ctx = this.ctx;
+			    ctx.beginPath();
+			    ctx.shadowBlur = dust.shadowBlur;
+			    ctx.shadowOffsetX = dust.shadowX;
+			    ctx.shadowOffsetY = dust.shadowY;
+			    ctx.ellipse(dust.x, dust.y, dust.radiusX, dust.radiusY, dust.rotation, 0, Math.PI * 2);
+			    ctx.closePath();
+			    ctx.fill();
+			};
+			this.resize = () => {
+			    const canvas = this.canvas;
+			    const width = window.innerWidth;
+			    const height = window.innerHeight;
+			    this.width = width;
+			    this.height = height;
+			    this.dustQuantity = Math.floor((width + height) / 38);
+			    canvas.width = width;
+			    canvas.height = height;
+			    this.ctx.shadowColor =
+				this.ctx.fillStyle = this.color;
+			};
+			this.stop = () => {
+			    this.inStop = true;
+			};
+			this.play = () => {
+			    if (this.inStop === true) {
+				this.inStop = false;
+				requestAnimationFrame(this.paint);
+			    }
+			};
+			const canvas = getElement(canvasID);
+			this.canvas = canvas;
+			this.ctx = this.canvas.getContext('2d');
+			this.build();
+			window.addEventListener('resize', this.resize);
+		    }
+		}
+		canvasDust.getPoint = (number = 1) => {
+		    let point = [];
+		    for (let i = 0; i < number; ++i) {
+			const x = Math.floor(Math.random() * window.innerWidth);
+			const y = Math.floor(Math.random() * window.innerHeight);
+			point.push([x, y]);
+		    }
+		    return point;
+		};
+		try {
+		    var canvasDusts = new canvasDust('#canvas-dust');
+		}
+		catch (e) { }
+	  </script>
 
 
 
@@ -360,18 +365,12 @@
         </li>
         <!-- .nav-item -->
       
+      <div id="player"></div>
+      <script src='/assets/aplayer/music.js'></script>
     </ul>
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
-    
-      <button type="button" class="mode-toggle btn" aria-label="Switch Mode">
-        <i class="fas fa-adjust"></i>
-      </button>
-
-      
-        <span class="icon-border"></span>
-      
     
 
     
@@ -399,6 +398,8 @@
       
     
   </div>
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100"></div>
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100"></div>
   <!-- .sidebar-bottom -->
 </aside>
 <!-- #sidebar -->
@@ -673,6 +674,183 @@
     <!-- combine -->
     
   
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
 
   
 
@@ -741,7 +919,329 @@
 <div id="post-list" class="flex-grow-1 px-xl-1">
   
     <article class="card-wrapper card">
-      <a href="/posts/NSSCTF-Round-14-Basic/" class="post-preview row g-0 flex-md-row-reverse">
+      <a target="_blank" href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+          
+          
+
+          
+
+          
+
+          
+
+          <div class="col-md-5">
+            <div class="preview-img  shimmer"><img src="/assets/img/2023-CTFWP-images/2023香山杯决赛Pwn-分析/assets/log.png" alt="Preview Image"  loading="lazy"></div>
+          </div>
+
+          
+        
+
+        <div class="col-md-7">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">2023香山杯决赛Pwn-分析</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>
+                
+
+
+
+
+
+                camera
+
+‍
+
+程序分析
+
+‍
+
+​​
+
+‍
+
+根据程序的功能然后加上一些手法，可以double free
+
+后面就是填满 tcachebins 然后 fastbin double free 就好了
+
+‍
+
+​​
+
+‍
+
+‍
+
+cat 用的顺手了，我就直接用 cat  ORW 就好了
+
+​​
+
+‍
+
+Break
+
+‍
+
+from pwn import *
+s       = lambd...
+              </p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700481600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/20
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      CTF
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a target="_blank" href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+          
+          
+
+          
+
+          
+
+          
+
+          <div class="col-md-5">
+            <div class="preview-img  shimmer"><img src="/assets/img/2023-CTFWP-images/2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps/assets/image-20231120185421-dezwrh8.png" alt="Preview Image"  loading="lazy"></div>
+          </div>
+
+          
+        
+
+        <div class="col-md-7">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>
+                
+
+
+
+
+
+                ‍
+‍
+
+‍
+
+pwn-pwn0402
+
+‍
+
+​​​​
+
+‍
+
+
+  我们采用溢出后再次read  然后写shellcode 在栈上ret
+
+
+‍
+
+​​
+
+‍
+
+​​
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.s...
+              </p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700395200"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/19
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      CTF
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a target="_blank" href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+          
+          
+
+          
+
+          
+
+          
+
+          <div class="col-md-5">
+            <div class="preview-img  shimmer"><img src="/assets/img/2023-CTFWP-images/2023羊城杯-决赛Pwn-Writeups/assets/log.png" alt="Preview Image"  loading="lazy"></div>
+          </div>
+
+          
+        
+
+        <div class="col-md-7">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">2023羊城杯-决赛Pwn-Writeups</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>
+                
+
+
+
+
+
+                ‍
+
+‍
+
+‍
+
+​​
+
+‍
+
+‍
+
+PWN-arrary_index_bank
+
+‍
+
+‍
+
+程序功能
+
+1 可以泄露stack 上的数据 如 stack_addr 和 elf_addr 等
+
+2 修改一个stack[idx] ;idx !&amp;gt; you ;you = 1  修改 stack[idx] 处的数据
+
+3 存在后 system(“\/bin/sh”)
+
+4 漏洞点 可以修改 ...
+              </p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1694260800"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/09/09
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      CTF
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a target="_blank" href="/posts/NSSCTF-Round-14-Basic/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
@@ -850,7 +1350,7 @@ s       = lambda data...
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/AmateursCTF/" class="post-preview row g-0 flex-md-row-reverse">
+      <a target="_blank" href="/posts/AmateursCTF/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
@@ -944,7 +1444,7 @@ long long int gl...
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" class="post-preview row g-0 flex-md-row-reverse">
+      <a target="_blank" href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         

@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1 Blog</title>
   <subtitle>Love Live</subtitle>
-  <updated>2023-11-07T17:05:40+08:00</updated>
+  <updated>2023-11-27T12:38:51+08:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,228 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2023香山杯决赛Pwn-分析</title>
+    <link href="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" rel="alternate" type="text/html" title="2023香山杯决赛Pwn-分析" />
+    <published>2023-11-20T20:00:00+08:00</published>
+  
+    <updated>2023-11-20T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/</id>
+    <content src="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      camera
+
+‍
+
+程序分析
+
+‍
+
+​​
+
+‍
+
+根据程序的功能然后加上一些手法，可以double free
+
+后面就是填满 tcachebins 然后 fastbin double free 就好了
+
+‍
+
+​​
+
+‍
+
+‍
+
+cat 用的顺手了，我就直接用 cat  ORW 就好了
+
+​​
+
+‍
+
+Break
+
+‍
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.sendafter(str(delim), data)
+sl      = lambda data               :io.sendline(data)
+sla     = lambda delim,data         :io.s...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</title>
+    <link href="http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" rel="alternate" type="text/html" title="2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps" />
+    <published>2023-11-19T20:00:00+08:00</published>
+  
+    <updated>2023-11-19T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/</id>
+    <content src="http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+‍
+
+‍
+
+pwn-pwn0402
+
+‍
+
+​​​​
+
+‍
+
+
+  我们采用溢出后再次read  然后写shellcode 在栈上ret
+
+
+‍
+
+​​
+
+‍
+
+​​
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.sendafter(str(delim), data)
+sl      = lambda data               :io.sendline(data)
+sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
+r       = lambda num                :io.recv(n...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>2023羊城杯-决赛Pwn-Writeups</title>
+    <link href="http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" rel="alternate" type="text/html" title="2023羊城杯-决赛Pwn-Writeups" />
+    <published>2023-09-09T20:00:00+08:00</published>
+  
+    <updated>2023-09-09T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/</id>
+    <content src="http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+‍
+
+‍
+
+​​
+
+‍
+
+‍
+
+PWN-arrary_index_bank
+
+‍
+
+‍
+
+程序功能
+
+1 可以泄露stack 上的数据 如 stack_addr 和 elf_addr 等
+
+2 修改一个stack[idx] ;idx !&amp;gt; you ;you = 1  修改 stack[idx] 处的数据
+
+3 存在后 system(“\/bin/sh”)
+
+4 漏洞点 可以修改 -idx 处 ,只要计算好 idx 就可以 从 stack 0x7f 处 到 elf 0x55 处，从而修改 elf 上的you 值
+
+‍
+
+‍
+
+​
+
+jle 跳转 也就是可以输入 负数
+
+‍
+
+‍
+
+​​
+
+‍
+
+‍
+
+​​
+
+‍
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = la...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -141,94 +363,6 @@ int win()
   if ( !stream )
   {
     puts("flag file not found");...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>DASCTF 2023六月挑战赛｜二进制专项</title>
-    <link href="http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" rel="alternate" type="text/html" title="DASCTF 2023六月挑战赛｜二进制专项" />
-    <published>2023-06-04T00:00:00+08:00</published>
-  
-    <updated>2023-06-04T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/</id>
-    <content src="http://localhost:4000/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      二进制专项-签到
-
-‍
-
-简单统计下参与人数，祝大家玩得开心~
-
-DASCTF{Welcome_to_DASCTF5}
-
-
-‍
-
-Reverse-careful
-
-‍
-
-
-  题目给出了一个恶意样本,请分析出样本请求服务器的域名(flag的形式为DASCTF{md5(域名)}) 其中md5值都是小写
-
-
-‍
-
-拿到题目直接 IDA Pro 打开, 一眼就可以看 gethostbyname();
-
-动态调试可以获取name的值,但是这个地方获取的name不是真正的
-
-‍
-
-​​
-
-‍
-
-直接 快捷键 x  看 gethostbyname() 交叉引用 还有另一处
-
-‍
-
-​​
-
-‍
-
-直在这里下断点，然后动态调试
-
-‍
-
-​​
-
-‍
-
-得到 域名 Just_An_APIH00k11.com
-
-‍
-
-​​
-
-from hashlib import md5
-def md5sum(strin...
     </summary>
   
 
