@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1 Blog</title>
   <subtitle>Love Live</subtitle>
-  <updated>2023-11-27T12:38:51+08:00</updated>
+  <updated>2023-11-30T14:48:21+08:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,76 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</title>
+    <link href="http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" rel="alternate" type="text/html" title="2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups" />
+    <published>2023-11-25T20:00:00+08:00</published>
+  
+    <updated>2023-11-25T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/</id>
+    <content src="http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+‍
+DASCTF X CBCTF 2023｜无畏者先行
+
+‍
+
+‍
+
+Pwn-ASadStory
+
+‍
+
+
+  保护
+
+
+​​
+
+
+  沙箱
+
+
+​​
+
+‍
+
+
+  exploit
+
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.sendafter(str(delim), data)
+sl      = lambda data               :io.sendline(data)
+sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
+r       = lambda num                :...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -46,7 +116,11 @@
 
 
 
-      camera
+      
+  进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。
+
+
+camera
 
 ‍
 
@@ -83,8 +157,7 @@ Break
 from pwn import *
 s       = lambda data               :io.send(data)
 sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendline(data)
-sla     = lambda delim,data         :io.s...
+sl      = lambda data               :io.sendlin...
     </summary>
   
 
@@ -303,66 +376,6 @@ s       = lambda data               :io.send(data)
 sa      = lambda delim,data         :io.sendafter(str(delim), data)
 sl      = lambda data               :io.sendline(data)
 sla     = lambda delim,data         :io.sendlin...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023-AmateursCTF-WriteUps</title>
-    <link href="http://localhost:4000/posts/AmateursCTF/" rel="alternate" type="text/html" title="2023-AmateursCTF-WriteUps" />
-    <published>2023-07-19T20:55:00+08:00</published>
-  
-    <updated>2023-07-19T20:55:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/AmateursCTF/</id>
-    <content src="http://localhost:4000/posts/AmateursCTF/" />
-    <author>
-      <name>imlzh1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      https://ctf.amateurs.team/
-
-
-1.pwn-rntk
-
-
-  代码恢复
-  程序自己生产里一个类似 canary 的东西，溢出检测
-
-
-#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;string.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include &amp;lt;time.h&amp;gt;
-
-
-long long int global_canary=NULL;
-
-int win()
-{
-  char s[72]; // [rsp+0h] [rbp-50h] BYREF
-  FILE *stream; // [rsp+48h] [rbp-8h]
-
-  stream = fopen("flag.txt", "r");
-  if ( !stream )
-  {
-    puts("flag file not found");...
     </summary>
   
 

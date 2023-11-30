@@ -60,8 +60,8 @@
 <meta property="og:title" content="2023香山杯决赛Pwn-分析" />
 <meta name="author" content="imLZH1" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="camera" />
-<meta property="og:description" content="camera" />
+<meta name="description" content="进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。" />
+<meta property="og:description" content="进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。" />
 <link rel="canonical" href="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" />
 <meta property="og:url" content="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" />
 <meta property="og:site_name" content="imLZH1 Blog" />
@@ -72,7 +72,7 @@
 <meta property="twitter:image" content="http://localhost:4000/assets/img/2023-CTFWP-images/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/assets/log.png" />
 <meta property="twitter:title" content="2023香山杯决赛Pwn-分析" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"imLZH1"},"dateModified":"2023-11-20T20:00:00+08:00","datePublished":"2023-11-20T20:00:00+08:00","description":"camera","headline":"2023香山杯决赛Pwn-分析","image":"http://localhost:4000/assets/img/2023-CTFWP-images/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/assets/log.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/"},"url":"http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"imLZH1"},"dateModified":"2023-11-20T20:00:00+08:00","datePublished":"2023-11-20T20:00:00+08:00","description":"进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。","headline":"2023香山杯决赛Pwn-分析","image":"http://localhost:4000/assets/img/2023-CTFWP-images/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/assets/log.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/"},"url":"http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -2156,9 +2156,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1581 字"
+  title="1621 字"
 >
-  <em>8 分钟</em>阅读</span>
+  <em>9 分钟</em>阅读</span>
 
       </div>
       <!-- .d-flex -->
@@ -2167,7 +2167,11 @@
   </header>
 
   <div class="content">
-    <h2 id="camera"><span class="me-2">camera</span><a href="#camera" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+    <blockquote>
+  <p>进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。</p>
+</blockquote>
+
+<h2 id="camera"><span class="me-2">camera</span><a href="#camera" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>‍</p>
 
@@ -3238,6 +3242,18 @@ continue
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -3513,9 +3529,13 @@ s       = lambda data...
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="下一篇">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/"
+      class="btn btn-outline-primary"
+      aria-label="下一篇"
+    >
+      <p>2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</p>
+    </a>
   
 </nav>
 
