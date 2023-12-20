@@ -3159,6 +3159,59 @@ s       = lambda data...
               
               <!--  The comments switcher -->
 
+  
+  <!-- The Disqus lazy loading. -->
+
+<div id="disqus_thread">
+  <p class="text-center text-muted small">Comments powered by <a href="https://disqus.com/">Disqus</a>.</p>
+</div>
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/';
+    this.page.identifier = '/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/';
+  };
+
+  /* Lazy loading */
+  var disqus_observer = new IntersectionObserver(
+    function (entries) {
+      if (entries[0].isIntersecting) {
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = 'https://.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+
+        disqus_observer.disconnect();
+      }
+    },
+    { threshold: [0] }
+  );
+
+  disqus_observer.observe(document.querySelector('#disqus_thread'));
+
+  /* Auto switch theme */
+  function reloadDisqus() {
+    if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
+      /* Disqus hasn't been loaded */
+      if (typeof DISQUS === 'undefined') {
+        return;
+      }
+
+      if (document.readyState == 'complete') {
+        DISQUS.reset({ reload: true, config: disqus_config });
+      }
+    }
+  }
+
+  if (document.querySelector('.mode-toggle')) {
+    window.addEventListener('message', reloadDisqus);
+  }
+</script>
+
+
 
             
 
