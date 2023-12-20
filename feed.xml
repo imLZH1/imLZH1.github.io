@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1 Blog</title>
   <subtitle>Love Live</subtitle>
-  <updated>2023-11-30T14:48:21+08:00</updated>
+  <updated>2023-12-20T09:28:38+08:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,83 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</title>
+    <link href="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" rel="alternate" type="text/html" title="第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec" />
+    <published>2023-12-17T20:00:00+08:00</published>
+  
+    <updated>2023-12-17T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/</id>
+    <content src="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍‍
+2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec
+
+‍
+
+‍
+
+pwn-easygo
+
+‍
+
+程序分析
+
+‍
+
+
+  
+    存在一个后门
+  
+  
+    输入溢出覆盖栈上数据
+  
+  
+    没什么好玩的
+  
+
+
+‍
+
+Break
+
+‍
+
+
+  溢出直接覆盖就行了，
+
+
+‍
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data         :io.sendafter(str(delim), data)
+sl      = lambda data               :io.sendline(data)
+sla     = lambda de...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -308,74 +385,6 @@ jle 跳转 也就是可以输入 负数
 from pwn import *
 s       = lambda data               :io.send(data)
 sa      = la...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>NSSCTF-Round-14-Basic</title>
-    <link href="http://localhost:4000/posts/NSSCTF-Round-14-Basic/" rel="alternate" type="text/html" title="NSSCTF-Round-14-Basic" />
-    <published>2023-07-30T00:00:00+08:00</published>
-  
-    <updated>2023-07-30T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/NSSCTF-Round-14-Basic/</id>
-    <content src="http://localhost:4000/posts/NSSCTF-Round-14-Basic/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-‍
-
-​
-
-‍
-
-
-  5 道pwn 题
-
-
-‍
-
-love
-
-存在 格式化字符串漏洞
-
-​​
-
-‍
-
-然后进入 vuln 函数，然后直接溢出,由于上面需要的libc_base Canary 都已经有了，可以直接 return system(“/bin/sh”);
-
-​​
-
-
-  exploit 非预期
-
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendline(data)
-sla     = lambda delim,data         :io.sendlin...
     </summary>
   
 
