@@ -2,21 +2,95 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://localhost:4000/</id>
-  <title>imLZH1 Blog</title>
-  <subtitle>Love Live</subtitle>
-  <updated>2023-12-20T16:54:25+08:00</updated>
+  <title>imLZH1' Blog</title>
+  <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
+  <updated>2024-01-26T22:31:00+08:00</updated>
   <author>
-    <name></name>
+    <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
   </author>
   <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="zh-CN"
     href="http://localhost:4000/"/>
-  <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
-  <rights> © 2023  </rights>
+  <generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator>
+  <rights> © 2024 imLZH1 </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</title>
+    <link href="http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/" rel="alternate" type="text/html" title="2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps" />
+    <published>2024-01-26T00:00:00+08:00</published>
+  
+    <updated>2024-01-26T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/</id>
+    <content src="http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+
+  2023年春秋杯网络安全联赛冬季赛 ​pwn 方向 HouseofSome​ , 题解
+
+
+‍
+
+​​
+
+‍
+
+程序保护和沙箱
+
+​​
+
+​​
+
+‍
+
+菜单功能 泄露libc上的地址
+
+
+  ​scannf("%ldd",&amp;amp;xx)​ 传入 -​ 后面报错 会给出 libc上的地址​
+
+
+​​
+
+‍
+
+draw功能 任意地址写一个NULL 字节
+
+
+  通过上面泄露的_IO_2_1_stdin_​地址，我就基本上可以利用 draw​ 功能在 libc可写的地方写入一个NULL字节，写到哪里呢？？
+
+
+‍
+
+
+  写 到 main_arena + 1 (add 一个堆块 保证 top_chunk 的低地址是 0x00)
+  需要爆破一点 保证 heap 地址起始是 heap_base &amp;amp; 0xFFFF == 0x0000​​ ,然后攻击 main_arena+...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -299,92 +373,6 @@ sa      = lambda delim,data         :io.sendafter(str(delim), data)
 sl      = lambda data               :io.sendline(data)
 sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
 r       = lambda num                :io.recv(n...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023羊城杯-决赛Pwn-Writeups</title>
-    <link href="http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" rel="alternate" type="text/html" title="2023羊城杯-决赛Pwn-Writeups" />
-    <published>2023-09-09T20:00:00+08:00</published>
-  
-    <updated>2023-09-09T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/</id>
-    <content src="http://localhost:4000/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-‍
-
-‍
-
-​​
-
-‍
-
-‍
-
-PWN-arrary_index_bank
-
-‍
-
-‍
-
-程序功能
-
-1 可以泄露stack 上的数据 如 stack_addr 和 elf_addr 等
-
-2 修改一个stack[idx] ;idx !&amp;gt; you ;you = 1  修改 stack[idx] 处的数据
-
-3 存在后 system(“\/bin/sh”)
-
-4 漏洞点 可以修改 -idx 处 ,只要计算好 idx 就可以 从 stack 0x7f 处 到 elf 0x55 处，从而修改 elf 上的you 值
-
-‍
-
-‍
-
-​
-
-jle 跳转 也就是可以输入 负数
-
-‍
-
-‍
-
-​​
-
-‍
-
-‍
-
-​​
-
-‍
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = la...
     </summary>
   
 

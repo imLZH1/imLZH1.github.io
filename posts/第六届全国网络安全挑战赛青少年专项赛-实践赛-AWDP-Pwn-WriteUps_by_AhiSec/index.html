@@ -15,7 +15,7 @@
 
 <!-- `site.alt_lang` can specify a language different from the UI -->
 <html lang="zh-CN" data-mode="dark">
-  <!-- The Head -->
+  <head>
   <style>
     #canvas-dust {
       z-index: -65536;
@@ -30,33 +30,13 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta
-    name="viewport"
-    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
-  >
-  <script src='/assets/aplayer/APlayer.min.js'></script>
-  <link rel="stylesheet" href="/assets/aplayer/APlayer.min.css">
-
+  <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" >
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- Setup Open Graph image -->
 
   
 
-  
-    
-
-    
-      
-      
-
-      
-        <!-- it's a local file path -->
-
-      
-    
-  
-
-  
-    <!-- Begin Jekyll SEO tag v2.8.0 -->
-<meta name="generator" content="Jekyll v4.3.2" />
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec" />
 <meta name="author" content="imLZH1" />
 <meta property="og:locale" content="zh_CN" />
@@ -64,20 +44,19 @@
 <meta property="og:description" content="‍‍ 2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec" />
 <link rel="canonical" href="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" />
 <meta property="og:url" content="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" />
-<meta property="og:site_name" content="imLZH1 Blog" />
-<meta property="og:image" content="http://localhost:4000/assets/img/2023-CTFWP-images/2023-12-17-%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png" />
+<meta property="og:site_name" content="imLZH1’ Blog" />
+<meta property="og:image" content="/assets/img/2023-CTFWP-images/2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2023-12-17T20:00:00+08:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="http://localhost:4000/assets/img/2023-CTFWP-images/2023-12-17-%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png" />
+<meta property="twitter:image" content="/assets/img/2023-CTFWP-images/2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png" />
 <meta property="twitter:title" content="第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"imLZH1"},"dateModified":"2023-12-17T20:00:00+08:00","datePublished":"2023-12-17T20:00:00+08:00","description":"‍‍ 2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec","headline":"第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec","image":"http://localhost:4000/assets/img/2023-CTFWP-images/2023-12-17-%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/"},"url":"http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"imLZH1"},"dateModified":"2023-12-17T20:00:00+08:00","datePublished":"2023-12-17T20:00:00+08:00","description":"‍‍ 2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec","headline":"第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec","image":"/assets/img/2023-CTFWP-images/2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec/assets/logs.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/"},"url":"http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/"}</script>
 <!-- End Jekyll SEO tag -->
 
-  
 
-  <title>第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec | imLZH1 Blog
+  <title>第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec | imLZH1' Blog
   </title>
 
   <!--
@@ -92,8 +71,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
 <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
 <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="imLZH1 Blog">
-<meta name="application-name" content="imLZH1 Blog">
+<meta name="apple-mobile-web-app-title" content="imLZH1' Blog">
+<meta name="application-name" content="imLZH1' Blog">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
@@ -140,20 +119,20 @@
 
   <body>
     <!-- The Side Bar -->
+
 <canvas id="canvas-dust"></canvas>
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
   <header class="profile-wrapper">
-    <a href="/" id="avatar" class="rounded-circle">
-      
-        
-        <img src="/assets/img/tx.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
-      
-    </a>
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/tx.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
 
     <h1 class="site-title">
-      <a href="/">imLZH1 Blog</a>
+      <a href="/">imLZH1' Blog</a>
     </h1>
-    <p id ="copywriting"  class="site-subtitle fst-italic mb-0">A text-focused Jekyll theme</p>
+    <!--
+    <p class="site-subtitle fst-italic mb-0"></p>
+    -->
+    <p id="copywriting" class="site-subtitle fst-italic mb-0"></p>
+
     <script text="javascript">
           fetch('/assets/index_about.json',{headers:({
             'copywriting.jsion': 'application/x-www-form-urlencoded'
@@ -184,7 +163,7 @@
             document.getElementById('copywriting').innerHTML = myJson[copywritingId];
           });
           </script>
-	  <script>
+	<script>
 		'use strict';
 		function getElement(string, item = document.documentElement) {
 		    let tmp = item.querySelector(string);
@@ -323,13 +302,8 @@
 		    var canvasDusts = new canvasDust('#canvas-dust');
 		}
 		catch (e) { }
-	  </script>
-
-
-
-
-
-
+	  </script>	
+	  
 
 
   </header>
@@ -386,8 +360,6 @@
         </li>
         <!-- .nav-item -->
       
-      <div id="player"></div>
-      <script src='/assets/aplayer/music.js'></script>
     </ul>
   </nav>
 
@@ -414,13 +386,47 @@
             rel="noopener noreferrer"
           
         >
-          <i class="fab fa-github"></i>
+          <i class="fab fa-github-alt"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['qingwachong','qq.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
         </a>
       
     
   </div>
-  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100"></div>
-  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100"></div>
   <!-- .sidebar-bottom -->
 </aside>
 <!-- #sidebar -->
@@ -522,12 +528,6 @@
 
 
   
-  
-
-  <!-- CDN URL -->
-  
-
-  <!-- Add image path -->
   
 
   
@@ -2032,7 +2032,7 @@
           <em>
             
               
-                <a href=""></a>
+                
                 
               
             
@@ -2673,49 +2673,31 @@ continue
       <!-- Post sharing snippet -->
 
 <div class="share-wrapper d-flex align-items-center">
-  <span class="share-label text-muted me-1">分享</span>
+  <span class="share-label text-muted">分享</span>
   <span class="share-icons">
     
     
     
 
     
+
       
-      <a
-        href="https://twitter.com/intent/tweet?text=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1%20Blog&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Twitter"
-        target="_blank"
-        rel="noopener"
-        aria-label="Twitter"
-      >
-        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+
+      <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F&title=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1'%20Blog" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="QQ" aria-label="QQ">
+        <i class="fa-fw fa-brands fa-qq"></i>
       </a>
     
+
       
-      <a
-        href="https://www.facebook.com/sharer/sharer.php?title=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1%20Blog&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Facebook"
-        target="_blank"
-        rel="noopener"
-        aria-label="Facebook"
-      >
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1'%20Blog&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
+
       
-      <a
-        href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F&text=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1%20Blog"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Telegram"
-        target="_blank"
-        rel="noopener"
-        aria-label="Telegram"
-      >
+
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2F%25E7%25AC%25AC%25E5%2585%25AD%25E5%25B1%258A%25E5%2585%25A8%25E5%259B%25BD%25E7%25BD%2591%25E7%25BB%259C%25E5%25AE%2589%25E5%2585%25A8%25E6%258C%2591%25E6%2588%2598%25E8%25B5%259B%25E9%259D%2592%25E5%25B0%2591%25E5%25B9%25B4%25E4%25B8%2593%25E9%25A1%25B9%25E8%25B5%259B-%25E5%25AE%259E%25E8%25B7%25B5%25E8%25B5%259B-AWDP-Pwn-WriteUps_by_AhiSec%2F&text=%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec%20-%20imLZH1'%20Blog" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -2729,7 +2711,7 @@ continue
       title="分享链接"
       data-title-succeed="链接已复制！"
     >
-      <i class="fa-fw fas fa-link pe-none"></i>
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
     </button>
   </span>
 </div>
@@ -2747,7 +2729,7 @@ continue
           <!-- panel -->
           <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
             <div class="access">
-              <!-- Get the last 5 posts from lastmod list. -->
+              <!-- Get 5 last posted/updated posts -->
 
 
 
@@ -2761,6 +2743,49 @@ continue
 
 
 
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">最近更新</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/">2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/">2023香山杯决赛Pwn-分析</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/">2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
 
 
               <!-- The trending tags list -->
@@ -2846,6 +2871,18 @@ continue
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -3149,68 +3186,19 @@ s       = lambda data...
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="下一篇">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/"
+      class="btn btn-outline-primary"
+      aria-label="下一篇"
+    >
+      <p>2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</p>
+    </a>
   
 </nav>
 
             
               
               <!--  The comments switcher -->
-
-  
-  <!-- The Disqus lazy loading. -->
-
-<div id="disqus_thread">
-  <p class="text-center text-muted small">Comments powered by <a href="https://disqus.com/">Disqus</a>.</p>
-</div>
-
-<script type="text/javascript">
-  var disqus_config = function () {
-    this.page.url = 'http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/';
-    this.page.identifier = '/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/';
-  };
-
-  /* Lazy loading */
-  var disqus_observer = new IntersectionObserver(
-    function (entries) {
-      if (entries[0].isIntersecting) {
-        (function () {
-          var d = document,
-            s = d.createElement('script');
-          s.src = 'https://.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-
-        disqus_observer.disconnect();
-      }
-    },
-    { threshold: [0] }
-  );
-
-  disqus_observer.observe(document.querySelector('#disqus_thread'));
-
-  /* Auto switch theme */
-  function reloadDisqus() {
-    if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
-      /* Disqus hasn't been loaded */
-      if (typeof DISQUS === 'undefined') {
-        return;
-      }
-
-      if (document.readyState == 'complete') {
-        DISQUS.reset({ reload: true, config: disqus_config });
-      }
-    }
-  }
-
-  if (document.querySelector('.mode-toggle')) {
-    window.addEventListener('message', reloadDisqus);
-  }
-</script>
-
 
 
             
@@ -3226,8 +3214,8 @@ s       = lambda data...
 >
   <p>
     ©
-    <time>2023</time>
-    <a href=""></a>.
+    <time>2024</time>
+    <a href="https://user.qzone.qq.com/3461665835">imLZH1</a>.
     
       <span
         data-bs-toggle="tooltip"
@@ -3236,9 +3224,7 @@ s       = lambda data...
       >保留部分权利。</span>
     
   </p>
-
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+	<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 
   <p>本站采用 <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> 主题 <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
   </p>
