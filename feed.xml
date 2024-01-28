@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-01-26T22:31:00+08:00</updated>
+  <updated>2024-01-28T23:19:25+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -87,6 +87,93 @@ draw功能 任意地址写一个NULL 字节
 
   写 到 main_arena + 1 (add 一个堆块 保证 top_chunk 的低地址是 0x00)
   需要爆破一点 保证 heap 地址起始是 heap_base &amp;amp; 0xFFFF == 0x0000​​ ,然后攻击 main_arena+...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>CISCN 2023 华东北赛区 AWDPlus pwn 题复现</title>
+    <link href="http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/" rel="alternate" type="text/html" title="CISCN 2023 华东北赛区 AWDPlus pwn 题复现" />
+    <published>2024-01-23T00:00:00+08:00</published>
+  
+    <updated>2024-01-23T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/</id>
+    <content src="http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+
+  第十六届全国大学生信息安全竞赛—创新实践能力赛 华东北赛区
+
+
+‍
+
+‍
+
+‍
+
+minidb
+
+程序分析
+
+
+  
+    heap pwn 第一步 写菜单
+  
+  
+    类似一个数据库， 可以，添加数据库，删除数据库，show 数据库…..
+  
+
+
+​​
+
+‍
+
+
+  use_db() 里面还有一些操作
+
+
+​​
+
+
+  漏洞点在 use_db 里的 edit 功能里
+  18行 行可以输入 255 个字符串
+  19行测长度，21 虽然有长度限制防止堆溢出
+  但是 在 20行  就已经使用 到 输入字符串的长度了，heap_addr + len + 0x10 = 0
+  如果堆块的大小是 0xa0, 而输入的是 0x100 ，这样的话很明显
+  可以将下面一个堆块的size 或内容 1字节清空，
+
+
+​​
+
+
+  比如修改 fd
+
+
+​​
+
+
+  漏洞找到...
     </summary>
   
 
@@ -309,70 +396,6 @@ from pwn import *
 s       = lambda data               :io.send(data)
 sa      = lambda delim,data         :io.sendafter(str(delim), data)
 sl      = lambda data               :io.sendlin...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</title>
-    <link href="http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" rel="alternate" type="text/html" title="2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps" />
-    <published>2023-11-19T20:00:00+08:00</published>
-  
-    <updated>2023-11-19T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/</id>
-    <content src="http://localhost:4000/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-‍
-
-‍
-
-pwn-pwn0402
-
-‍
-
-​​​​
-
-‍
-
-
-  我们采用溢出后再次read  然后写shellcode 在栈上ret
-
-
-‍
-
-​​
-
-‍
-
-​​
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendline(data)
-sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
-r       = lambda num                :io.recv(n...
     </summary>
   
 
