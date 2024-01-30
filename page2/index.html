@@ -37,22 +37,23 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.3" />
-<meta property="og:title" content="CTF" />
+<meta property="og:title" content="imLZH1’ Blog" />
 <meta property="og:locale" content="zh_CN" />
 <meta name="description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
 <meta property="og:description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<link rel="canonical" href="http://localhost:4000/tags/ctf/" />
-<meta property="og:url" content="http://localhost:4000/tags/ctf/" />
+<link rel="canonical" href="http://localhost:4000/page2/" />
+<meta property="og:url" content="http://localhost:4000/page2/" />
 <meta property="og:site_name" content="imLZH1’ Blog" />
 <meta property="og:type" content="website" />
+<link rel="prev" href="http://localhost:4000/" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="CTF" />
+<meta property="twitter:title" content="imLZH1’ Blog" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"CTF","url":"http://localhost:4000/tags/ctf/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"imLZH1’ Blog","url":"http://localhost:4000/page2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>CTF | imLZH1' Blog
+  <title>imLZH1' Blog
   </title>
 
   <!--
@@ -93,6 +94,8 @@
 
   
 
+  
+    <link rel="stylesheet" href="/assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.min.css">
   
 
   
@@ -301,7 +304,7 @@
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
       <!-- home -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a href="/" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
           <span>首页</span>
@@ -434,31 +437,9 @@
       
 
       
-        
-          
-            <span>
-              <a href="/">
-                首页
-              </a>
-            </span>
+        <!-- index page -->
+        <span>首页</span>
 
-          
-        
-          
-            <span>
-              <a href="/tags">
-                标签
-              </a>
-            </span>
-          
-        
-          
-            
-              <span>CTF</span>
-            
-
-          
-        
       
     </nav>
     <!-- endof #breadcrumb -->
@@ -468,7 +449,7 @@
     </button>
 
     <div id="topbar-title">
-      标签
+      imLZH1' Blog
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -494,28 +475,230 @@
         <div class="row flex-grow-1">
           <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
             
-              
+              <!-- Refactor the HTML structure -->
 
 
 
-<article class="px-1">
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+  
+  
+
   
     
-
-
-
-<div id="page-tag">
-  <h1 class="ps-lg-2">
-    <i class="fa fa-tag fa-fw text-muted"></i>
-    CTF
-    <span class="lead text-muted ps-2">11</span>
-  </h1>
-  <ul class="content ps-0">
+      
+      
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/">2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+<!-- Get pinned posts -->
+
+
+
+
+
+
+<!-- Get default posts -->
+
+
+
+
+
+
+
+
+
+
+<div id="post-list" class="flex-grow-1 px-xl-1">
+  
+    <article class="card-wrapper card">
+      <a href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+          
+          
+
+          
+
+          
+
+          
+
+          <div class="col-md-5">
+            <div class="preview-img  shimmer"><img src="/assets/img/2023-CTFWP-images/DASCTF-2023六月挑战赛-二进制专项/assets/image-20230609160524-3hh6b56.png" alt="text"  loading="lazy"></div>
+          </div>
+
+          
+        
+
+        <div class="col-md-7">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">DASCTF 2023六月挑战赛｜二进制专项</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>
+                
+
+
+
+
+
+                二进制专项-签到
+
+‍
+
+简单统计下参与人数，祝大家玩得开心~
+
+DASCTF{Welcome_to_DASCTF5}
+
+
+‍
+
+Reverse-careful
+
+‍
+
+
+  题目给出了一个恶意样本,请分析出样本请求服务器的域名(flag的形式为DASCTF{md5(域名)}) 其中md5值都是小写
+
+
+‍
+
+拿到题目直接 IDA Pro 打开, 一眼就可以看 gethostbyname()...
+              </p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
   Date format snippet
   See: ${JS_ROOT}/utils/locale-dateime.js
 -->
@@ -524,248 +707,6 @@
 
 
 <time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1706198400"
-  data-df="YYYY/MM/DD"
-  
->
-  2024/01/26
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/Announcements/">Announcements</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1706198400"
-  data-df="YYYY/MM/DD"
-  
->
-  2024/01/26
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/">CISCN 2023 华东北赛区 AWDPlus pwn 题复现</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1705939200"
-  data-df="YYYY/MM/DD"
-  
->
-  2024/01/23
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1702814400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/12/17
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700913600"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/25
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/">2023香山杯决赛Pwn-分析</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700481600"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/20
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/">2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700395200"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/19
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/">2023羊城杯-决赛Pwn-Writeups</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1694260800"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/09/09
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/NSSCTF-Round-14-Basic/">NSSCTF-Round-14-Basic</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1690646400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/30
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/AmateursCTF/">2023-AmateursCTF-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1689771300"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/19
-</time>
-
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/">DASCTF 2023六月挑战赛｜二进制专项</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
   
   data-ts="1685808000"
   data-df="YYYY/MM/DD"
@@ -774,13 +715,105 @@
   2023/06/04
 </time>
 
-      </li>
-    
-  </ul>
-</div>
 
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      CTF
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
   
-</article>
+</div>
+<!-- #post-list -->
+
+
+  <!-- The paginator for post list on HomgPage. -->
+
+<nav aria-label="Page Navigation">
+  <ul class="pagination align-items-center mt-4 mb-0">
+    <!-- left arrow -->
+    
+
+    <li class="page-item ">
+      <a class="page-link" href="/" aria-label="previous-page">
+        <i class="fas fa-angle-left"></i>
+      </a>
+    </li>
+
+    <!-- page numbers -->
+    
+    
+
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item ">
+          <a
+            class="page-link"
+            href="/"
+          >1</a>
+        </li>
+      
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item  active">
+          <a
+            class="page-link"
+            href="/page2"
+          >2</a>
+        </li>
+      
+    
+
+    <!-- mobile pagination -->
+    <li class="page-index align-middle">
+      <span>2</span>
+      <span class="text-muted">/ 2</span>
+    </li>
+
+    <!-- right arrow -->
+    
+
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="next-page">
+        <i class="fas fa-angle-right"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- .pagination -->
+
+
+
 
             
           </main>
@@ -1024,6 +1057,10 @@
 <!-- layout specified -->
 
 
+  
+
+  
+
 
 
 
@@ -1051,6 +1088,10 @@
   
 
   
+    <script src="/assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.umd.min.js"></script>
+  
+
+  
     <script src="/assets/lib/dayjs/dayjs.min.js"></script>
   
 
@@ -1073,7 +1114,7 @@
 
 
 
-<script defer src="/assets/js/dist/misc.min.js"></script>
+<script defer src="/assets/js/dist/home.min.js"></script>
 
 
 

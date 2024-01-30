@@ -2355,6 +2355,13 @@ continue
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/Announcements/">Announcements</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/">2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</a>
         </li>
       
@@ -2377,13 +2384,6 @@ continue
         
         <li class="text-truncate lh-lg">
           <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/">2023香山杯决赛Pwn-分析</a>
         </li>
       
     </ul>
@@ -2550,6 +2550,18 @@ continue
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -2600,63 +2612,6 @@ continue
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">相关文章</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
-      
-        <article class="col">
-          <a href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1685808000"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/06/04
-</time>
-
-              <h4 class="pt-0 my-2">DASCTF 2023六月挑战赛｜二进制专项</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  二进制专项-签到
-
-‍
-
-简单统计下参与人数，祝大家玩得开心~
-
-DASCTF{Welcome_to_DASCTF5}
-
-
-‍
-
-Reverse-careful
-
-‍
-
-
-  题目给出了一个恶意样本,请分析出样本请求服务器的域名(flag的形式为DASCTF{md5(域名)}) 其中md5值都是小写
-
-
-‍
-
-拿到题目直接 IDA Pro 打开, 一眼就可以看 gethostbyname()...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
       
         <article class="col">
           <a href="/posts/AmateursCTF/" class="post-preview card h-100">
@@ -2777,6 +2732,106 @@ s       = lambda data...
           </a>
         </article>
       
+        <article class="col">
+          <a href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700395200"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/19
+</time>
+
+              <h4 class="pt-0 my-2">2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  ‍
+‍
+
+‍
+
+pwn-pwn0402
+
+‍
+
+​​​​
+
+‍
+
+
+  我们采用溢出后再次read  然后写shellcode 在栈上ret
+
+
+‍
+
+​​
+
+‍
+
+​​
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
     </nav>
   </aside>
   <!-- #related-posts -->
@@ -2814,6 +2869,74 @@ s       = lambda data...
             
               
               <!--  The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script type="text/javascript">
+  (function () {
+    const origin = 'https://giscus.app';
+    const iframe = 'iframe.giscus-frame';
+    const lightTheme = 'light';
+    const darkTheme = 'dark_dimmed';
+
+    let initTheme = lightTheme;
+    const html = document.documentElement;
+
+    if (
+      (html.hasAttribute('data-mode') &&
+        html.getAttribute('data-mode') === 'dark') ||
+      (!html.hasAttribute('data-mode') &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      initTheme = darkTheme;
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'imLZH1/me_giscus_Discussions-',
+      'data-repo-id': 'comments',
+      'data-category': 'general',
+      'data-category-id': '',
+      'data-mapping': 'pathname',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'bottom',
+      'data-lang': 'zh-CN',
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusScript = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusScript.setAttribute(key, value)
+    );
+    document.getElementById('tail-wrapper').appendChild(giscusScript);
+
+    addEventListener('message', (event) => {
+      if (
+        event.source === window &&
+        event.data &&
+        event.data.direction === ModeToggle.ID
+      ) {
+        /* global theme mode changed */
+        const mode = event.data.message;
+        const theme = mode === ModeToggle.DARK_MODE ? darkTheme : lightTheme;
+
+        const message = {
+          setConfig: {
+            theme: theme
+          }
+        };
+
+        const giscus = document.querySelector(iframe).contentWindow;
+        giscus.postMessage({ giscus: message }, origin);
+      }
+    });
+  })();
+</script>
+
 
 
             

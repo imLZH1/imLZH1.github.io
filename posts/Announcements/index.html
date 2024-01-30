@@ -37,22 +37,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.3" />
-<meta property="og:title" content="CTF" />
+<meta property="og:title" content="Announcements" />
+<meta name="author" content="imLZH1" />
 <meta property="og:locale" content="zh_CN" />
-<meta name="description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<meta property="og:description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<link rel="canonical" href="http://localhost:4000/tags/ctf/" />
-<meta property="og:url" content="http://localhost:4000/tags/ctf/" />
+<meta name="description" content="评论区" />
+<meta property="og:description" content="评论区" />
+<link rel="canonical" href="http://localhost:4000/posts/Announcements/" />
+<meta property="og:url" content="http://localhost:4000/posts/Announcements/" />
 <meta property="og:site_name" content="imLZH1’ Blog" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-26T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="CTF" />
+<meta property="twitter:title" content="Announcements" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"CTF","url":"http://localhost:4000/tags/ctf/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"imLZH1"},"dateModified":"2024-01-26T00:00:00+08:00","datePublished":"2024-01-26T00:00:00+08:00","description":"评论区","headline":"Announcements","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Announcements/"},"url":"http://localhost:4000/posts/Announcements/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>CTF | imLZH1' Blog
+  <title>Announcements | imLZH1' Blog
   </title>
 
   <!--
@@ -92,9 +94,16 @@
   <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
 
   
-
+    <link rel="stylesheet" href="/assets/lib/tocbot/tocbot.min.css">
   
 
+  
+    <link rel="stylesheet" href="/assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Manific Popup -->
+    <link rel="stylesheet" href="/assets/lib/magnific-popup/magnific-popup.css">
   
 
   <!-- JavaScript -->
@@ -445,16 +454,10 @@
           
         
           
-            <span>
-              <a href="/tags">
-                标签
-              </a>
-            </span>
-          
         
           
             
-              <span>CTF</span>
+              <span>Announcements</span>
             
 
           
@@ -468,7 +471,7 @@
     </button>
 
     <div id="topbar-title">
-      标签
+      文章
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -494,27 +497,102 @@
         <div class="row flex-grow-1">
           <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
             
-              
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
 
 
 
 <article class="px-1">
-  
-    
+  <header>
+    <h1 data-toc-skip>Announcements</h1>
 
-
-
-<div id="page-tag">
-  <h1 class="ps-lg-2">
-    <i class="fa fa-tag fa-fw text-muted"></i>
-    CTF
-    <span class="lead text-muted ps-2">11</span>
-  </h1>
-  <ul class="content ps-0">
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/">2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        发表于
         <!--
   Date format snippet
   See: ${JS_ROOT}/utils/locale-dateime.js
@@ -525,262 +603,173 @@
 
 <time
   
-    class="text-muted small text-nowrap"
-  
   data-ts="1706198400"
   data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
   2024/01/26
 </time>
 
-      </li>
-    
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/Announcements/">Announcements</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          作者
+
+          <em>
+            
+              
+                
+                
+              
+            
+          </em>
+        </span>
+
+        <!-- read time -->
+        <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
 
 
 
 
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1706198400"
-  data-df="YYYY/MM/DD"
-  
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="11 字"
 >
-  2024/01/26
-</time>
+  <em>1 分钟</em>阅读</span>
 
-      </li>
+      </div>
+      <!-- .d-flex -->
+    </div>
+    <!-- .post-meta -->
+  </header>
+
+  <div class="content">
+    <h2 id="评论区"><span class="me-2">评论区</span><a href="#评论区" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>🍎</li>
+  <li>有什么想说的？</li>
+</ul>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/">CISCN 2023 华东北赛区 AWDPlus pwn 题复现</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1705939200"
-  data-df="YYYY/MM/DD"
-  
->
-  2024/01/23
-</time>
-
-      </li>
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/ctf/">CTF</a>
+      </div>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
 
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1702814400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/12/17
-</time>
-
-      </li>
+    <!-- tags -->
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700913600"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/25
-</time>
-
-      </li>
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/ctf/"
+            class="post-tag no-text-decoration"
+          >CTF</a>
+        
+      </div>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/">2023香山杯决赛Pwn-分析</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
 
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
 
+          本文由作者按照 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         进行授权
+        
+      </div>
 
+      <!-- Post sharing snippet -->
 
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700481600"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/20
-</time>
-
-      </li>
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">分享</span>
+  <span class="share-icons">
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/">2023一带一路暨金砖国家技能发展与技术创新大赛之网络安全在企业信息管理中的应用-Pwn-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1700395200"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/11/19
-</time>
-
-      </li>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/">2023羊城杯-决赛Pwn-Writeups</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1694260800"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/09/09
-</time>
-
-      </li>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/NSSCTF-Round-14-Basic/">NSSCTF-Round-14-Basic</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
 
-
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1690646400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/30
-</time>
-
-      </li>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/AmateursCTF/">2023-AmateursCTF-WriteUps</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
 
+      
 
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1689771300"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/19
-</time>
-
-      </li>
+      <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FAnnouncements%2F&title=Announcements%20-%20imLZH1'%20Blog" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="QQ" aria-label="QQ">
+        <i class="fa-fw fa-brands fa-qq"></i>
+      </a>
     
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="/posts/DASCTF-2023%E5%85%AD%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%93%E9%A1%B9/">DASCTF 2023六月挑战赛｜二进制专项</a>
-        <span class="dash flex-grow-1"></span>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
 
+      
 
-
-
-<time
-  
-    class="text-muted small text-nowrap"
-  
-  data-ts="1685808000"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/06/04
-</time>
-
-      </li>
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Announcements%20-%20imLZH1'%20Blog&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FAnnouncements%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
     
-  </ul>
+
+      
+
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FAnnouncements%2F&text=Announcements%20-%20imLZH1'%20Blog" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="分享链接"
+      data-title-succeed="链接已复制！"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
 </div>
 
-  
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
 </article>
+
 
             
           </main>
@@ -888,12 +877,475 @@
             </div>
 
             
+              
+              
+
+
+
+  <section id="toc-wrapper" class="ps-0 pe-4">
+    <h2 class="panel-heading ps-3 pt-2 mb-2">文章内容</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
           </aside>
         </div>
 
         <div class="row">
           <!-- tail -->
           <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">相关文章</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/AmateursCTF/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1689771300"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/07/19
+</time>
+
+              <h4 class="pt-0 my-2">2023-AmateursCTF-WriteUps</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  https://ctf.amateurs.team/
+
+
+1.pwn-rntk
+
+
+  代码恢复
+  程序自己生产里一个类似 canary 的东西，溢出检测
+
+
+#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;string.h&amp;gt;
+#include&amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+
+long long int gl...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/NSSCTF-Round-14-Basic/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1690646400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/07/30
+</time>
+
+              <h4 class="pt-0 my-2">NSSCTF-Round-14-Basic</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  ‍
+
+‍
+
+​
+
+‍
+
+
+  5 道pwn 题
+
+
+‍
+
+love
+
+存在 格式化字符串漏洞
+
+​​
+
+‍
+
+然后进入 vuln 函数，然后直接溢出,由于上面需要的libc_base Canary 都已经有了，可以直接 return system(“/bin/sh”);
+
+​​
+
+
+  exploit 非预期
+
+
+from pwn import *
+s       = lambda data...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1694260800"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/09/09
+</time>
+
+              <h4 class="pt-0 my-2">2023羊城杯-决赛Pwn-Writeups</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  ‍
+
+‍
+
+‍
+
+​​
+
+‍
+
+‍
+
+PWN-arrary_index_bank
+
+‍
+
+‍
+
+程序功能
+
+1 可以泄露stack 上的数据 如 stack_addr 和 elf_addr 等
+
+2 修改一个stack[idx] ;idx !&amp;gt; you ;you = 1  修改 stack[idx] 处的数据
+
+3 存在后 system(“\/bin/sh”)
+
+4 漏洞点 可以修改 ...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/"
+      class="btn btn-outline-primary"
+      aria-label="上一篇"
+    >
+      <p>CISCN 2023 华东北赛区 AWDPlus pwn 题复现</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/"
+      class="btn btn-outline-primary"
+      aria-label="下一篇"
+    >
+      <p>2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</p>
+    </a>
+  
+</nav>
+
+            
+              
+              <!--  The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script type="text/javascript">
+  (function () {
+    const origin = 'https://giscus.app';
+    const iframe = 'iframe.giscus-frame';
+    const lightTheme = 'light';
+    const darkTheme = 'dark_dimmed';
+
+    let initTheme = lightTheme;
+    const html = document.documentElement;
+
+    if (
+      (html.hasAttribute('data-mode') &&
+        html.getAttribute('data-mode') === 'dark') ||
+      (!html.hasAttribute('data-mode') &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      initTheme = darkTheme;
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'imLZH1/me_giscus_Discussions-',
+      'data-repo-id': 'comments',
+      'data-category': 'general',
+      'data-category-id': '',
+      'data-mapping': 'pathname',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'bottom',
+      'data-lang': 'zh-CN',
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusScript = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusScript.setAttribute(key, value)
+    );
+    document.getElementById('tail-wrapper').appendChild(giscusScript);
+
+    addEventListener('message', (event) => {
+      if (
+        event.source === window &&
+        event.data &&
+        event.data.direction === ModeToggle.ID
+      ) {
+        /* global theme mode changed */
+        const mode = event.data.message;
+        const theme = mode === ModeToggle.DARK_MODE ? darkTheme : lightTheme;
+
+        const message = {
+          setConfig: {
+            theme: theme
+          }
+        };
+
+        const giscus = document.querySelector(iframe).contentWindow;
+        giscus.postMessage({ giscus: message }, origin);
+      }
+    });
+  })();
+</script>
+
+
+
             
 
             <!-- The Footer -->
@@ -1024,6 +1476,13 @@
 <!-- layout specified -->
 
 
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
 
 
 
@@ -1051,6 +1510,18 @@
   
 
   
+    <script src="/assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.umd.min.js"></script>
+  
+
+  
+    <script src="/assets/lib/magnific-popup/jquery.magnific-popup.min.js"></script>
+  
+
+  
+    <script src="/assets/lib/clipboard/clipboard.min.js"></script>
+  
+
+  
     <script src="/assets/lib/dayjs/dayjs.min.js"></script>
   
 
@@ -1066,6 +1537,9 @@
     <script src="/assets/lib/dayjs/plugin/localizedFormat.min.js"></script>
   
 
+  
+    <script src="/assets/lib/tocbot/tocbot.min.js"></script>
+  
 
 
 
@@ -1073,7 +1547,8 @@
 
 
 
-<script defer src="/assets/js/dist/misc.min.js"></script>
+
+<script defer src="/assets/js/dist/post.min.js"></script>
 
 
 

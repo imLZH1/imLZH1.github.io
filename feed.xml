@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-01-28T23:19:25+08:00</updated>
+  <updated>2024-01-30T09:28:46+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -87,6 +87,46 @@ draw功能 任意地址写一个NULL 字节
 
   写 到 main_arena + 1 (add 一个堆块 保证 top_chunk 的低地址是 0x00)
   需要爆破一点 保证 heap 地址起始是 heap_base &amp;amp; 0xFFFF == 0x0000​​ ,然后攻击 main_arena+...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Announcements</title>
+    <link href="http://localhost:4000/posts/Announcements/" rel="alternate" type="text/html" title="Announcements" />
+    <published>2024-01-26T00:00:00+08:00</published>
+  
+    <updated>2024-01-26T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Announcements/</id>
+    <content src="http://localhost:4000/posts/Announcements/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      评论区
+
+
+  🍎
+  有什么想说的？
+
+
     </summary>
   
 
@@ -321,81 +361,6 @@ sa      = lambda delim,data         :io.sendafter(str(delim), data)
 sl      = lambda data               :io.sendline(data)
 sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
 r       = lambda num                :...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023香山杯决赛Pwn-分析</title>
-    <link href="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" rel="alternate" type="text/html" title="2023香山杯决赛Pwn-分析" />
-    <published>2023-11-20T20:00:00+08:00</published>
-  
-    <updated>2023-11-20T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/</id>
-    <content src="http://localhost:4000/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      
-  进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。
-
-
-camera
-
-‍
-
-程序分析
-
-‍
-
-​​
-
-‍
-
-根据程序的功能然后加上一些手法，可以double free
-
-后面就是填满 tcachebins 然后 fastbin double free 就好了
-
-‍
-
-​​
-
-‍
-
-‍
-
-cat 用的顺手了，我就直接用 cat  ORW 就好了
-
-​​
-
-‍
-
-Break
-
-‍
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendlin...
     </summary>
   
 
