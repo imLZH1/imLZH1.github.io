@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-01-30T09:28:46+08:00</updated>
+  <updated>2024-02-20T20:01:55+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,101 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2024-SICTF Round#3-WriteUps_by_AhiSec</title>
+    <link href="http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/" rel="alternate" type="text/html" title="2024-SICTF Round#3-WriteUps_by_AhiSec" />
+    <published>2024-02-16T18:42:08+08:00</published>
+  
+    <updated>2024-02-16T18:42:08+08:00</updated>
+  
+    <id>http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/</id>
+    <content src="http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+Reverse
+
+Baby_C++
+
+‍
+
+1.签到题 shift + F12直接看见flag
+
+​​
+
+‍
+
+Ez_pyc
+
+‍
+
+1.在线网址反编译不全，发现是3.8的python版本，直接使用3.8的uncompyle6反编译出源码
+
+​​
+
+2.一个数独游戏可以求解不过观察判断条件，发现如果数独正确输出的flag是正确flag的md5后的值提交一下发现flag就是那个md5 
+
+
+​​
+
+‍
+
+ArtBreaker
+
+‍
+
+
+  比较抽象IDA打开发现节点过多修改节点个数限制，发现flag在流程图里面
+
+
+​​
+
+‍
+
+‍
+
+SweetTofu
+
+‍
+
+
+  简单的签到，主函数就是用户输入并且判断输入的长度是否大于0x100,调用v1这个函数指针加密直接打断点运行到v1指向的函数
+
+
+​​
+
+2.发现就是一个异或0x66而已
+
+​​
+
+3.解密得到flag
+
+​​
+
+‍...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -291,76 +386,6 @@ s       = lambda data               :io.send(data)
 sa      = lambda delim,data         :io.sendafter(str(delim), data)
 sl      = lambda data               :io.sendline(data)
 sla     = lambda de...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</title>
-    <link href="http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" rel="alternate" type="text/html" title="2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups" />
-    <published>2023-11-25T20:00:00+08:00</published>
-  
-    <updated>2023-11-25T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/</id>
-    <content src="http://localhost:4000/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-‍
-DASCTF X CBCTF 2023｜无畏者先行
-
-‍
-
-‍
-
-Pwn-ASadStory
-
-‍
-
-
-  保护
-
-
-​​
-
-
-  沙箱
-
-
-​​
-
-‍
-
-
-  exploit
-
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendline(data)
-sla     = lambda delim,data         :io.sendlineafter(str(delim), data)
-r       = lambda num                :...
     </summary>
   
 

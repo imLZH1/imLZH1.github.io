@@ -2345,6 +2345,13 @@ continue
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/SICTF-Round-3-WriteUps_by_AhiSec/">2024-SICTF Round#3-WriteUps_by_AhiSec</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/Announcements/">Announcements</a>
         </li>
       
@@ -2367,13 +2374,6 @@ continue
         
         <li class="text-truncate lh-lg">
           <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</a>
         </li>
       
     </ul>
@@ -2540,6 +2540,18 @@ continue
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -2602,58 +2614,6 @@ continue
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">相关文章</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
-      
-        <article class="col">
-          <a href="/posts/AmateursCTF/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1689771300"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/19
-</time>
-
-              <h4 class="pt-0 my-2">2023-AmateursCTF-WriteUps</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  https://ctf.amateurs.team/
-
-
-1.pwn-rntk
-
-
-  代码恢复
-  程序自己生产里一个类似 canary 的东西，溢出检测
-
-
-#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;string.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include &amp;lt;time.h&amp;gt;
-
-
-long long int gl...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
       
         <article class="col">
           <a href="/posts/NSSCTF-Round-14-Basic/" class="post-preview card h-100">
@@ -2778,6 +2738,72 @@ PWN-arrary_index_bank
 3 存在后 system(“\/bin/sh”)
 
 4 漏洞点 可以修改 ...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700481600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/20
+</time>
+
+              <h4 class="pt-0 my-2">2023香山杯决赛Pwn-分析</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  
+  进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。
+
+
+camera
+
+‍
+
+程序分析
+
+‍
+
+​​
+
+‍
+
+根据程序的功能然后加上一些手法，可以double free
+
+后面就是填满 tcachebins 然后 fastbin double free 就好了
+
+‍
+
+​​
+
+‍
+
+‍
+
+cat 用的顺手了，我就直接用 cat  ORW 就好了
+
+​...
                 </p>
               </div>
             </div>
