@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-02-21T08:57:54+08:00</updated>
+  <updated>2024-03-10T20:20:00+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,77 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2024-03-05-GCC-CTF-Pwn_Writeups</title>
+    <link href="http://localhost:4000/posts/GCC-CTF/" rel="alternate" type="text/html" title="2024-03-05-GCC-CTF-Pwn_Writeups" />
+    <published>2024-03-07T00:00:00+08:00</published>
+  
+    <updated>2024-03-07T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/GCC-CTF/</id>
+    <content src="http://localhost:4000/posts/GCC-CTF/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      2024-03-05-GCC-CTF
+
+https://gcc-ctf.com/
+
+就看看题
+
+Flag_Roulette
+
+
+  Description
+
+
+
+  Are you tired of solving challs?
+
+  Here, have a little break. If we win my game, I will give you a flag.
+
+  I promise you I will not cheat :)
+
+  The flag is in the /flag file.
+
+  Author: 0xdeadbeef
+
+
+‍
+
+
+  
+    Get
+
+    
+      ​_IO_2_1_stdout_​ 泄露地址
+      ​mp_​ 结构题
+      Attack tls_dtor_list​ 指针 ORW 利用
+    
+  
+
+...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -307,83 +378,6 @@ minidb
 
 
   漏洞找到...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</title>
-    <link href="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" rel="alternate" type="text/html" title="第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec" />
-    <published>2023-12-17T20:00:00+08:00</published>
-  
-    <updated>2023-12-17T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/</id>
-    <content src="http://localhost:4000/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍‍
-2023-12-17-第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec
-
-‍
-
-‍
-
-pwn-easygo
-
-‍
-
-程序分析
-
-‍
-
-
-  
-    存在一个后门
-  
-  
-    输入溢出覆盖栈上数据
-  
-  
-    没什么好玩的
-  
-
-
-‍
-
-Break
-
-‍
-
-
-  溢出直接覆盖就行了，
-
-
-‍
-
-from pwn import *
-s       = lambda data               :io.send(data)
-sa      = lambda delim,data         :io.sendafter(str(delim), data)
-sl      = lambda data               :io.sendline(data)
-sla     = lambda de...
     </summary>
   
 

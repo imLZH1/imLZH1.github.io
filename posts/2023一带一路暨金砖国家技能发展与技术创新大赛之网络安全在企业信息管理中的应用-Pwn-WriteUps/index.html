@@ -2345,6 +2345,13 @@ continue
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/GCC-CTF/">2024-03-05-GCC-CTF-Pwn_Writeups</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/SICTF-Round-3-WriteUps_by_AhiSec/">2024-SICTF Round#3-WriteUps_by_AhiSec</a>
         </li>
       
@@ -2367,13 +2374,6 @@ continue
         
         <li class="text-truncate lh-lg">
           <a href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/">CISCN 2023 华东北赛区 AWDPlus pwn 题复现</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
         </li>
       
     </ul>
@@ -2552,6 +2552,18 @@ continue
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -2614,73 +2626,6 @@ continue
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">相关文章</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
-      
-        <article class="col">
-          <a href="/posts/NSSCTF-Round-14-Basic/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1690646400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/30
-</time>
-
-              <h4 class="pt-0 my-2">NSSCTF-Round-14-Basic</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  ‍
-
-‍
-
-​
-
-‍
-
-
-  5 道pwn 题
-
-
-‍
-
-love
-
-存在 格式化字符串漏洞
-
-​​
-
-‍
-
-然后进入 vuln 函数，然后直接溢出,由于上面需要的libc_base Canary 都已经有了，可以直接 return system(“/bin/sh”);
-
-​​
-
-
-  exploit 非预期
-
-
-from pwn import *
-s       = lambda data...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
       
         <article class="col">
           <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" class="post-preview card h-100">
@@ -2804,6 +2749,109 @@ camera
 cat 用的顺手了，我就直接用 cat  ORW 就好了
 
 ​...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700913600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/25
+</time>
+
+              <h4 class="pt-0 my-2">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  ‍
+
+‍
+DASCTF X CBCTF 2023｜无畏者先行
+
+‍
+
+‍
+
+Pwn-ASadStory
+
+‍
+
+
+  保护
+
+
+​​
+
+
+  沙箱
+
+
+​​
+
+‍
+
+
+  exploit
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37...
                 </p>
               </div>
             </div>

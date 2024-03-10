@@ -5185,6 +5185,13 @@ continue
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/GCC-CTF/">2024-03-05-GCC-CTF-Pwn_Writeups</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/SICTF-Round-3-WriteUps_by_AhiSec/">2024-SICTF Round#3-WriteUps_by_AhiSec</a>
         </li>
       
@@ -5207,13 +5214,6 @@ continue
         
         <li class="text-truncate lh-lg">
           <a href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/">CISCN 2023 华东北赛区 AWDPlus pwn 题复现</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E8%B5%9B%E9%9D%92%E5%B0%91%E5%B9%B4%E4%B8%93%E9%A1%B9%E8%B5%9B-%E5%AE%9E%E8%B7%B5%E8%B5%9B-AWDP-Pwn-WriteUps_by_AhiSec/">第六届全国网络安全挑战赛青少年专项赛-实践赛-AWDP-Pwn-WriteUps_by_AhiSec</a>
         </li>
       
     </ul>
@@ -5304,6 +5304,18 @@ continue
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -5456,73 +5468,6 @@ continue
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/NSSCTF-Round-14-Basic/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1690646400"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/07/30
-</time>
-
-              <h4 class="pt-0 my-2">NSSCTF-Round-14-Basic</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  ‍
-
-‍
-
-​
-
-‍
-
-
-  5 道pwn 题
-
-
-‍
-
-love
-
-存在 格式化字符串漏洞
-
-​​
-
-‍
-
-然后进入 vuln 函数，然后直接溢出,由于上面需要的libc_base Canary 都已经有了，可以直接 return system(“/bin/sh”);
-
-​​
-
-
-  exploit 非预期
-
-
-from pwn import *
-s       = lambda data...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
           <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -5641,6 +5586,72 @@ pwn-pwn0402
 from pwn import *
 s       = lambda data               :io.send(data)
 sa      = lambda delim,data         :io.s...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/2023%E9%A6%99%E5%B1%B1%E6%9D%AF%E5%86%B3%E8%B5%9BPwn-%E5%88%86%E6%9E%90/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700481600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/20
+</time>
+
+              <h4 class="pt-0 my-2">2023香山杯决赛Pwn-分析</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  
+  进决赛了，但是和金砖的比赛冲突了决赛没时间去了呜呜呜😭😭😭，选择去打金砖了，好打一点。
+
+
+camera
+
+‍
+
+程序分析
+
+‍
+
+​​
+
+‍
+
+根据程序的功能然后加上一些手法，可以double free
+
+后面就是填满 tcachebins 然后 fastbin double free 就好了
+
+‍
+
+​​
+
+‍
+
+‍
+
+cat 用的顺手了，我就直接用 cat  ORW 就好了
+
+​...
                 </p>
               </div>
             </div>
