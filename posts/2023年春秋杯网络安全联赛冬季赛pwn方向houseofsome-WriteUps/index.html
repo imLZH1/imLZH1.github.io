@@ -1855,6 +1855,13 @@ brva 0x1804
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/PHP-So-Pwn/">2024-05-31-PHP-So-Pwn</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/GCC-CTF/">2024-03-05-GCC-CTF-Pwn_Writeups</a>
         </li>
       
@@ -1877,13 +1884,6 @@ brva 0x1804
         
         <li class="text-truncate lh-lg">
           <a href="/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/">2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/">CISCN 2023 华东北赛区 AWDPlus pwn 题复现</a>
         </li>
       
     </ul>
@@ -1974,6 +1974,18 @@ brva 0x1804
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -2138,68 +2150,6 @@ brva 0x1804
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF-%E5%86%B3%E8%B5%9BPwn-Writeups/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1694260800"
-  data-df="YYYY/MM/DD"
-  
->
-  2023/09/09
-</time>
-
-              <h4 class="pt-0 my-2">2023羊城杯-决赛Pwn-Writeups</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  ‍
-
-‍
-
-‍
-
-​​
-
-‍
-
-‍
-
-PWN-arrary_index_bank
-
-‍
-
-‍
-
-程序功能
-
-1 可以泄露stack 上的数据 如 stack_addr 和 elf_addr 等
-
-2 修改一个stack[idx] ;idx !&amp;gt; you ;you = 1  修改 stack[idx] 处的数据
-
-3 存在后 system(“\/bin/sh”)
-
-4 漏洞点 可以修改 ...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
           <a href="/posts/2023%E4%B8%80%E5%B8%A6%E4%B8%80%E8%B7%AF%E6%9A%A8%E9%87%91%E7%A0%96%E5%9B%BD%E5%AE%B6%E6%8A%80%E8%83%BD%E5%8F%91%E5%B1%95%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9C%A8%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8-Pwn-WriteUps/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -2322,6 +2272,75 @@ camera
 cat 用的顺手了，我就直接用 cat  ORW 就好了
 
 ​...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/DASCTF-X-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-%E8%B6%8A%E8%89%B0%E5%B7%A8-%E8%B6%8A%E7%8B%82%E7%83%AD-pwn-Writeups/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1700913600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2023/11/25
+</time>
+
+              <h4 class="pt-0 my-2">2023DASCTF X 0psu3十一月挑战赛｜越艰巨·越狂热-pwn-Writeups</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  ‍
+
+‍
+DASCTF X CBCTF 2023｜无畏者先行
+
+‍
+
+‍
+
+Pwn-ASadStory
+
+‍
+
+
+  保护
+
+
+​​
+
+
+  沙箱
+
+
+​​
+
+‍
+
+
+  exploit
+
+
+from pwn import *
+s       = lambda data               :io.send(data)
+sa      = lambda delim,data     ...
                 </p>
               </div>
             </div>

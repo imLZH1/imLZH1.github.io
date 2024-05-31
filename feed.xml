@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-03-10T20:20:00+08:00</updated>
+  <updated>2024-05-31T11:46:11+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,96 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>2024-05-31-PHP-So-Pwn</title>
+    <link href="http://localhost:4000/posts/PHP-So-Pwn/" rel="alternate" type="text/html" title="2024-05-31-PHP-So-Pwn" />
+    <published>2024-05-31T00:00:00+08:00</published>
+  
+    <updated>2024-05-31T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/PHP-So-Pwn/</id>
+    <content src="http://localhost:4000/posts/PHP-So-Pwn/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+基础的一些知识
+‍
+
+
+  
+    最近打比赛 遇到了几道 php so 模块的 pwn 题，个人感觉挺有意思的
+  
+  
+    一般情况下会把php 大部分函数 ban 掉，只是用 自定义so 文件里的函数
+  
+
+
+‍
+
+.so 文件的导出函数
+
+虽然里面函数名前面有zif_​ ,实际上调用的函数名是
+
+add_chunk()
+show_chunk()
+edit_chunk()
+edit_name()
+free_chunk()
+
+
+​​
+
+‍
+
+gdb调试方法(一种)
+
+
+  可以先把本地的 gdbserver 上次到docker, 能正常运行就行了
+
+
+​​
+
+
+  我只开了一个 docker 环境，正常情况下，他的ip 就是 这个加1 ,也就是 172.17.0.2​
+
+
+​​
+
+​​
+
+
+  然后用 gdbserver 启动
+
+
+​​
+
+​​
+
+
+  上面是调试...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -291,93 +381,6 @@ draw功能 任意地址写一个NULL 字节
   有什么想说的？
 
 
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>CISCN 2023 华东北赛区 AWDPlus pwn 题复现</title>
-    <link href="http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/" rel="alternate" type="text/html" title="CISCN 2023 华东北赛区 AWDPlus pwn 题复现" />
-    <published>2024-01-23T00:00:00+08:00</published>
-  
-    <updated>2024-01-23T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/</id>
-    <content src="http://localhost:4000/posts/CISCN-2023-%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA-AWDPlus-pwn-%E9%A2%98%E5%A4%8D%E7%8E%B0/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-
-  第十六届全国大学生信息安全竞赛—创新实践能力赛 华东北赛区
-
-
-‍
-
-‍
-
-‍
-
-minidb
-
-程序分析
-
-
-  
-    heap pwn 第一步 写菜单
-  
-  
-    类似一个数据库， 可以，添加数据库，删除数据库，show 数据库…..
-  
-
-
-​​
-
-‍
-
-
-  use_db() 里面还有一些操作
-
-
-​​
-
-
-  漏洞点在 use_db 里的 edit 功能里
-  18行 行可以输入 255 个字符串
-  19行测长度，21 虽然有长度限制防止堆溢出
-  但是 在 20行  就已经使用 到 输入字符串的长度了，heap_addr + len + 0x10 = 0
-  如果堆块的大小是 0xa0, 而输入的是 0x100 ，这样的话很明显
-  可以将下面一个堆块的size 或内容 1字节清空，
-
-
-​​
-
-
-  比如修改 fd
-
-
-​​
-
-
-  漏洞找到...
     </summary>
   
 
