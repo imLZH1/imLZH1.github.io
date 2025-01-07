@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2024-05-31T12:07:45+08:00</updated>
+  <updated>2025-01-07T16:40:35+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -13,10 +13,124 @@
   <link rel="alternate" type="text/html" hreflang="zh-CN"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator>
-  <rights> © 2024 imLZH1 </rights>
+  <rights> © 2025 imLZH1 </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>IrisCTF2025-Pwn-Binary-Exploitation-WriteUps</title>
+    <link href="http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/" rel="alternate" type="text/html" title="IrisCTF2025-Pwn-Binary-Exploitation-WriteUps" />
+    <published>2025-01-07T00:00:00+08:00</published>
+  
+    <updated>2025-01-07T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/</id>
+    <content src="http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+  This IrisCTF2025 binary vulnerability exploitation report was written by imLZH1, a member of the “Just For the Questions” team
+
+
+sqlate
+int main(void) {
+  
+	......
+
+    init_admin();
+    login_anonymous();
+	......
+	do{
+		......
+        switch (c) {
+          	......
+            case '5': {
+                printf("Registration is currently closed.\n\n");
+                action_login();
+      ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>2024-BRISC-CTF-Pwn-WriteUps</title>
+    <link href="http://localhost:4000/posts/BRISC-CTF/" rel="alternate" type="text/html" title="2024-BRISC-CTF-Pwn-WriteUps" />
+    <published>2025-01-07T00:00:00+08:00</published>
+  
+    <updated>2025-01-07T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/BRISC-CTF/</id>
+    <content src="http://localhost:4000/posts/BRISC-CTF/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      hard-physler-kernel
+非预期做法
+
+
+  权限没设置好，全部都时 rwx
+
+
+​​
+
+把 /bin/busybox 文件覆盖，然后 exit
+
+​​
+
+
+  exploit
+
+
+#include "minilib.h"
+
+extern void _start(){
+    char *files[] = {
+        "/flag",
+        "/flag.txt",
+        "/root/flag",
+        "/root/flag.txt",
+        0};
+
+    for(int i=0;files[i];i++){
+        int fd = open(files[i],0);
+        if(fd&amp;gt;0){
+            sendfile(1, fd, 0, 0x100);
+        ...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -267,120 +381,6 @@ SweetTofu
 ​​
 
 3.解密得到...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps</title>
-    <link href="http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/" rel="alternate" type="text/html" title="2023年春秋杯网络安全联赛冬季赛pwn方向houseofsome-WriteUps" />
-    <published>2024-01-26T00:00:00+08:00</published>
-  
-    <updated>2024-01-26T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/</id>
-    <content src="http://localhost:4000/posts/2023%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9Bpwn%E6%96%B9%E5%90%91houseofsome-WriteUps/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-
-  2023年春秋杯网络安全联赛冬季赛 ​pwn 方向 HouseofSome​ , 题解
-
-
-‍
-
-​​
-
-‍
-
-程序保护和沙箱
-
-​​
-
-​​
-
-‍
-
-菜单功能 泄露libc上的地址
-
-
-  ​scannf("%ldd",&amp;amp;xx)​ 传入 -​ 后面报错 会给出 libc上的地址​
-
-
-​​
-
-‍
-
-draw功能 任意地址写一个NULL 字节
-
-
-  通过上面泄露的_IO_2_1_stdin_​地址，我就基本上可以利用 draw​ 功能在 libc可写的地方写入一个NULL字节，写到哪里呢？？
-
-
-‍
-
-
-  写 到 main_arena + 1 (add 一个堆块 保证 top_chunk 的低地址是 0x00)
-  需要爆破一点 保证 heap 地址起始是 heap_base &amp;amp; 0xFFFF == 0x0000​​ ,然后攻击 main_arena+...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Announcements</title>
-    <link href="http://localhost:4000/posts/Announcements/" rel="alternate" type="text/html" title="Announcements" />
-    <published>2024-01-26T00:00:00+08:00</published>
-  
-    <updated>2024-01-26T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Announcements/</id>
-    <content src="http://localhost:4000/posts/Announcements/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      评论区
-
-
-  🍎
-  有什么想说的？
-
-
     </summary>
   
 
