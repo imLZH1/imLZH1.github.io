@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-08T14:25:41+08:00</updated>
+  <updated>2025-01-18T23:48:26+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,68 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>第八届西湖论剑-网络攻防实战赛初赛-Pwn-解题思路</title>
+    <link href="http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/" rel="alternate" type="text/html" title="第八届西湖论剑-网络攻防实战赛初赛-Pwn-解题思路" />
+    <published>2025-01-18T00:00:00+08:00</published>
+  
+    <updated>2025-01-18T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/</id>
+    <content src="http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+
+  第八届西湖论剑·中国杭州网络安全安全技能大赛-网络攻防实战赛初赛
+‍
+
+
+Pwn-babytrace
+
+‍
+
+patch 成这样，方便调试
+
+​​
+
+‍
+
+
+  调试脚本
+
+
+# imLZH1
+from pwn import *
+#from ctypes import CDLL
+#cdl = CDLL('/lib/x86_64-linux-gnu/libc.so.6')
+s    = lambda   x : io.send(x)
+sa   = lambda x,y : io.sendafter(x,y)
+sl   = lambda   x : io.sendline(x)
+sla  = lambda x,y : io.sendlineafter(x,y)
+r    = lambda x   : io.recv(x)
+ru   = lambda x   : io.recv...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -288,99 +350,6 @@ Flag_Roulette
   
 
 ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2024-SICTF Round#3-WriteUps_by_AhiSec</title>
-    <link href="http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/" rel="alternate" type="text/html" title="2024-SICTF Round#3-WriteUps_by_AhiSec" />
-    <published>2024-02-16T18:42:08+08:00</published>
-  
-    <updated>2024-02-16T18:42:08+08:00</updated>
-  
-    <id>http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/</id>
-    <content src="http://localhost:4000/posts/SICTF-Round-3-WriteUps_by_AhiSec/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      
-  感谢队友带我飞.
-
-
-Reverse
-
-Baby_C++
-
-‍
-
-1.签到题 shift + F12直接看见flag
-
-​​
-
-‍
-
-Ez_pyc
-
-‍
-
-1.在线网址反编译不全，发现是3.8的python版本，直接使用3.8的uncompyle6反编译出源码
-
-​​
-
-2.一个数独游戏可以求解不过观察判断条件，发现如果数独正确输出的flag是正确flag的md5后的值提交一下发现flag就是那个md5 
-
-
-​​
-
-‍
-
-ArtBreaker
-
-‍
-
-
-  比较抽象IDA打开发现节点过多修改节点个数限制，发现flag在流程图里面
-
-
-​​
-
-‍
-
-‍
-
-SweetTofu
-
-‍
-
-
-  简单的签到，主函数就是用户输入并且判断输入的长度是否大于0x100,调用v1这个函数指针加密直接打断点运行到v1指向的函数
-
-
-​​
-
-2.发现就是一个异或0x66而已
-
-​​
-
-3.解密得到...
     </summary>
   
 
