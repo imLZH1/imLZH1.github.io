@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-18T23:48:26+08:00</updated>
+  <updated>2025-02-02T22:51:16+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,56 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>HACKIM 2025 CTF 一道wasm pwn题分享</title>
+    <link href="http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/" rel="alternate" type="text/html" title="HACKIM 2025 CTF 一道wasm pwn题分享" />
+    <published>2025-02-02T00:00:00+08:00</published>
+  
+    <updated>2025-02-02T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/</id>
+    <content src="http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      wat-wasm转换
+
+​.wat​ 文件通常是 WebAssembly (Wasm) 文本格式（WebAssembly Text Format）。如果你想在 Linux 上运行 .wat​ 文件，首先需要将它转换为 WebAssembly 二进制格式（.wasm），然后使用 WebAssembly 运行时环境（如 Node.js 或浏览器）运行它。
+
+步骤：
+
+
+  
+    安装 ​wasi-sdk​​ 或 ​wasmer​​ 等工具：
+
+    
+      如果你要直接使用 WebAssembly，可以安装 wasmer​ 或 wasi-sdk​，它们提供了运行 .wasm​ 文件的功能。
+    
+
+     curl https://get.wasmer.io -sSfL | sh
+    
+
+    或者安装 wasi-sdk​ 来编译和运行 WebAssembly。
+...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -279,77 +329,6 @@ gdb调试方法(一种)
 
 
   上面是调试...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2024-03-05-GCC-CTF-Pwn_Writeups</title>
-    <link href="http://localhost:4000/posts/GCC-CTF/" rel="alternate" type="text/html" title="2024-03-05-GCC-CTF-Pwn_Writeups" />
-    <published>2024-03-07T00:00:00+08:00</published>
-  
-    <updated>2024-03-07T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/GCC-CTF/</id>
-    <content src="http://localhost:4000/posts/GCC-CTF/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      2024-03-05-GCC-CTF
-
-https://gcc-ctf.com/
-
-就看看题
-
-Flag_Roulette
-
-
-  Description
-
-
-
-  Are you tired of solving challs?
-
-  Here, have a little break. If we win my game, I will give you a flag.
-
-  I promise you I will not cheat :)
-
-  The flag is in the /flag file.
-
-  Author: 0xdeadbeef
-
-
-‍
-
-
-  
-    Get
-
-    
-      ​_IO_2_1_stdout_​ 泄露地址
-      ​mp_​ 结构题
-      Attack tls_dtor_list​ 指针 ORW 利用
-    
-  
-
-...
     </summary>
   
 
