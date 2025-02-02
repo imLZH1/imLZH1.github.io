@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-02T22:51:16+08:00</updated>
+  <updated>2025-02-02T22:56:33+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -44,7 +44,13 @@
 
 
 
-      wat-wasm转换
+      
+  nullcon HackIM CTF Goa 2025!
+
+
+wat-wasm转换
+
+chat gpt
 
 ​.wat​ 文件通常是 WebAssembly (Wasm) 文本格式（WebAssembly Text Format）。如果你想在 Linux 上运行 .wat​ 文件，首先需要将它转换为 WebAssembly 二进制格式（.wasm），然后使用 WebAssembly 运行时环境（如 Node.js 或浏览器）运行它。
 
@@ -59,10 +65,7 @@
     
 
      curl https://get.wasmer.io -sSfL | sh
-    
-
-    或者安装 wasi-sdk​ 来编译和运行 WebAssembly。
-...
+ ...
     </summary>
   
 
