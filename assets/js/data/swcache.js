@@ -15,6 +15,8 @@ const resource = [
   
     '/about/',
   
+    '/Friends/',
+  
 
   /* --- Favicons & compressed JS --- */
   
