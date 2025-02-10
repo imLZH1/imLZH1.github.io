@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-05T15:45:09+08:00</updated>
+  <updated>2025-02-10T20:54:35+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,69 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>LA CTF 2025 部分Pwn解题思路 by g1P03n</title>
+    <link href="http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/" rel="alternate" type="text/html" title="LA CTF 2025 部分Pwn解题思路 by g1P03n" />
+    <published>2025-02-02T00:00:00+08:00</published>
+  
+    <updated>2025-02-02T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/</id>
+    <content src="http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+‍
+
+‍
+
+2password
+
+
+  题目源码
+
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+void readline(char *buf, size_t size, FILE *file) {
+  if (!fgets(buf, size, file)) {
+    puts("wtf");
+    exit(1);
+  }
+  char *end = strchr(buf, '\n');
+  if (end) {
+    *end = '\0';
+  }
+}
+
+int main(void) {
+  setbuf(stdout, NULL);
+  printf("Enter username: ");
+  char username[42];
+  readli...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -242,96 +305,6 @@ extern void _start(){
         if(fd&amp;gt;0){
             sendfile(1, fd, 0, 0x100);
         ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2024-05-31-PHP-So-Pwn</title>
-    <link href="http://localhost:4000/posts/PHP-So-Pwn/" rel="alternate" type="text/html" title="2024-05-31-PHP-So-Pwn" />
-    <published>2024-05-31T00:00:00+08:00</published>
-  
-    <updated>2024-05-31T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/PHP-So-Pwn/</id>
-    <content src="http://localhost:4000/posts/PHP-So-Pwn/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-基础的一些知识
-‍
-
-
-  
-    最近打比赛 遇到了几道 php so 模块的 pwn 题，个人感觉挺有意思的
-  
-  
-    一般情况下会把php 大部分函数 ban 掉，只是用 自定义so 文件里的函数
-  
-
-
-‍
-
-.so 文件的导出函数
-
-虽然里面函数名前面有zif_​ ,实际上调用的函数名是
-
-add_chunk()
-show_chunk()
-edit_chunk()
-edit_name()
-free_chunk()
-
-
-​​
-
-‍
-
-gdb调试方法(一种)
-
-
-  可以先把本地的 gdbserver 上次到docker, 能正常运行就行了
-
-
-​​
-
-
-  我只开了一个 docker 环境，正常情况下，他的ip 就是 这个加1 ,也就是 172.17.0.2​
-
-
-​​
-
-​​
-
-
-  然后用 gdbserver 启动
-
-
-​​
-
-​​
-
-
-  上面是调试...
     </summary>
   
 
