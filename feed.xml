@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-10T20:54:35+08:00</updated>
+  <updated>2025-02-26T14:38:52+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,77 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Kernel Pwn 刷题记录</title>
+    <link href="http://localhost:4000/posts/Kernel-Pwn-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-1/" rel="alternate" type="text/html" title="Kernel Pwn 刷题记录" />
+    <published>2025-02-26T00:00:00+08:00</published>
+  
+    <updated>2025-02-26T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Kernel-Pwn-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-1/</id>
+    <content src="http://localhost:4000/posts/Kernel-Pwn-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-1/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+添加到启动脚本
+
+
+if [ ! -d "./rootfs/" ];then
+    mkdir ./rootfs/
+    pushd rootfs
+    cpio -idmv &amp;lt; ../rootfs.cpio
+    popd
+fi
+if [ ! -d "./exp/" ];then
+    mkdir ./exp/
+    pushd exp
+    cp /opt/kernel_exp/* .
+    popd
+fi
+
+pushd exp
+make
+cp exploit ../rootfs/
+popd
+
+pushd rootfs
+find ./* | cpio -H newc -o &amp;gt; ../rootfs.cpio
+popd
+
+
+‍
+
+attach
+
+‍
+
+python
+import os
+end
+
+file ./vmlinux
+target remote...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -242,69 +313,6 @@ int main(void) {
                 printf("Registration is currently closed.\n\n");
                 action_login();
       ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>2024-BRISC-CTF-Pwn-WriteUps</title>
-    <link href="http://localhost:4000/posts/BRISC-CTF/" rel="alternate" type="text/html" title="2024-BRISC-CTF-Pwn-WriteUps" />
-    <published>2025-01-07T00:00:00+08:00</published>
-  
-    <updated>2025-01-07T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/BRISC-CTF/</id>
-    <content src="http://localhost:4000/posts/BRISC-CTF/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      hard-physler-kernel
-非预期做法
-
-
-  权限没设置好，全部都时 rwx
-
-
-​​
-
-把 /bin/busybox 文件覆盖，然后 exit
-
-​​
-
-
-  exploit
-
-
-#include "minilib.h"
-
-extern void _start(){
-    char *files[] = {
-        "/flag",
-        "/flag.txt",
-        "/root/flag",
-        "/root/flag.txt",
-        0};
-
-    for(int i=0;files[i];i++){
-        int fd = open(files[i],0);
-        if(fd&amp;gt;0){
-            sendfile(1, fd, 0, 0x100);
-        ...
     </summary>
   
 
