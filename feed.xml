@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>imLZH1' Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-26T14:47:30+08:00</updated>
+  <updated>2025-05-06T15:54:51+08:00</updated>
   <author>
     <name>imLZH1</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,209 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>第二届“长城杯”信息安全铁人三项赛（防护赛）总决赛-Pwn方向部分题解</title>
+    <link href="http://localhost:4000/posts/2025CCB/" rel="alternate" type="text/html" title="第二届“长城杯”信息安全铁人三项赛（防护赛）总决赛-Pwn方向部分题解" />
+    <published>2025-05-05T00:00:00+08:00</published>
+  
+    <updated>2025-05-05T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/2025CCB/</id>
+    <content src="http://localhost:4000/posts/2025CCB/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+  第二届“长城杯”信息安全铁人三项赛（防护赛）总决赛-Pwn方向部分题解
+
+
+
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>squ1rrelCTF Pwn WriteUp - g1P03n</title>
+    <link href="http://localhost:4000/posts/squ1rrel-CTF-PWN-g1P03n/" rel="alternate" type="text/html" title="squ1rrelCTF Pwn WriteUp - g1P03n" />
+    <published>2025-04-07T00:00:00+08:00</published>
+  
+    <updated>2025-04-07T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/squ1rrel-CTF-PWN-g1P03n/</id>
+    <content src="http://localhost:4000/posts/squ1rrel-CTF-PWN-g1P03n/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ak
+
+pwn-deja vu
+
+‍
+
+
+
+
+
+栈溢出，ret2text
+
+#!/usr/bin/python3
+
+from pwn import*  
+elf=ELF('./vu')
+p=process('./vu') 
+#p=remote('20.84.72.194',5002)
+context(os='linux',arch='amd64',log_level='debug')
+#libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
+def s(a):
+    p.send(a)
+def sa(a, b):
+    p.sendafter(a, b)
+def sl(a):
+    p.sendline(a)
+def sla(a, b):
+    p.sendlineafter(a, b)   
+def li(a):
+    print(hex(...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>HTB - Cyber Apocalypse CTF 2025 Tales from Eldoria - Pwn WriteUp</title>
+    <link href="http://localhost:4000/posts/Cyber-Apocalypse-CTF-2025-Tales-from-Eldoria/" rel="alternate" type="text/html" title="HTB - Cyber Apocalypse CTF 2025 Tales from Eldoria - Pwn WriteUp" />
+    <published>2025-03-27T00:00:00+08:00</published>
+  
+    <updated>2025-03-27T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Cyber-Apocalypse-CTF-2025-Tales-from-Eldoria/</id>
+    <content src="http://localhost:4000/posts/Cyber-Apocalypse-CTF-2025-Tales-from-Eldoria/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      ‍
+
+https://ctftime.org/event/2674
+
+
+
+
+‍
+
+vault
+
+题目并不难，但是这题也卡了我很长时间，怪我不够细，下次要细啊（我的粗😋）
+
+‍
+
+
+  源码（手动恢复）
+
+
+‍
+
+struct Entry{
+  char url[128];
+  char pwd[256];
+  size_t pwd_size;
+};
+
+char tmp_url[0x100];
+struct Entry entries[0xA];
+char global_key[0x40];
+size_t num_entries = 0;
+
+
+void xor_buffer(char *dst, char *src, int len){
+  __int64 i; // rcx
+
+  if ( len &amp;gt; 0 )
+  {
+    for ( i = 0LL; i != len; +...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>CCB_CISCN_半决赛-AWDP-Pwn</title>
+    <link href="http://localhost:4000/posts/CCB_CISCN_AWDP-Pwn/" rel="alternate" type="text/html" title="CCB_CISCN_半决赛-AWDP-Pwn" />
+    <published>2025-03-18T00:00:00+08:00</published>
+  
+    <updated>2025-03-18T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/CCB_CISCN_AWDP-Pwn/</id>
+    <content src="http://localhost:4000/posts/CCB_CISCN_AWDP-Pwn/" />
+    <author>
+      <name>imLZH1</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+  CCB_CISCN_半决赛-AWDP-Pwn
+
+
+
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -84,235 +287,6 @@ end
 
 file ./vmlinux
 target remote...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>LA CTF 2025 部分Pwn解题思路 by g1P03n</title>
-    <link href="http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/" rel="alternate" type="text/html" title="LA CTF 2025 部分Pwn解题思路 by g1P03n" />
-    <published>2025-02-02T00:00:00+08:00</published>
-  
-    <updated>2025-02-02T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/</id>
-    <content src="http://localhost:4000/posts/LA_CTF-%E9%83%A8%E5%88%86Pwn%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-by-g1P03n/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-‍
-
-‍
-
-2password
-
-
-  题目源码
-
-
-#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;stdlib.h&amp;gt;
-#include &amp;lt;string.h&amp;gt;
-
-void readline(char *buf, size_t size, FILE *file) {
-  if (!fgets(buf, size, file)) {
-    puts("wtf");
-    exit(1);
-  }
-  char *end = strchr(buf, '\n');
-  if (end) {
-    *end = '\0';
-  }
-}
-
-int main(void) {
-  setbuf(stdout, NULL);
-  printf("Enter username: ");
-  char username[42];
-  readli...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>HACKIM 2025 CTF 一道wasm pwn题分享</title>
-    <link href="http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/" rel="alternate" type="text/html" title="HACKIM 2025 CTF 一道wasm pwn题分享" />
-    <published>2025-02-02T00:00:00+08:00</published>
-  
-    <updated>2025-02-02T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/</id>
-    <content src="http://localhost:4000/posts/Nullcon-Goa-HackIM-2025-CTF/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      
-  nullcon HackIM CTF Goa 2025!
-
-
-wat-wasm转换
-
-chat gpt
-
-​.wat​ 文件通常是 WebAssembly (Wasm) 文本格式（WebAssembly Text Format）。如果你想在 Linux 上运行 .wat​ 文件，首先需要将它转换为 WebAssembly 二进制格式（.wasm），然后使用 WebAssembly 运行时环境（如 Node.js 或浏览器）运行它。
-
-步骤：
-
-
-  
-    安装 ​wasi-sdk​​ 或 ​wasmer​​ 等工具：
-
-    
-      如果你要直接使用 WebAssembly，可以安装 wasmer​ 或 wasi-sdk​，它们提供了运行 .wasm​ 文件的功能。
-    
-
-     curl https://get.wasmer.io -sSfL | sh
- ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>第八届西湖论剑-网络攻防实战赛初赛-Pwn-解题思路</title>
-    <link href="http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/" rel="alternate" type="text/html" title="第八届西湖论剑-网络攻防实战赛初赛-Pwn-解题思路" />
-    <published>2025-01-18T00:00:00+08:00</published>
-  
-    <updated>2025-01-18T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/</id>
-    <content src="http://localhost:4000/posts/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B-Pwn-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      ‍
-
-
-  第八届西湖论剑·中国杭州网络安全安全技能大赛-网络攻防实战赛初赛
-‍
-
-
-Pwn-babytrace
-
-‍
-
-patch 成这样，方便调试
-
-​​
-
-‍
-
-
-  调试脚本
-
-
-# imLZH1
-from pwn import *
-#from ctypes import CDLL
-#cdl = CDLL('/lib/x86_64-linux-gnu/libc.so.6')
-s    = lambda   x : io.send(x)
-sa   = lambda x,y : io.sendafter(x,y)
-sl   = lambda   x : io.sendline(x)
-sla  = lambda x,y : io.sendlineafter(x,y)
-r    = lambda x   : io.recv(x)
-ru   = lambda x   : io.recv...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>IrisCTF2025-Pwn-Binary-Exploitation-WriteUps</title>
-    <link href="http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/" rel="alternate" type="text/html" title="IrisCTF2025-Pwn-Binary-Exploitation-WriteUps" />
-    <published>2025-01-07T00:00:00+08:00</published>
-  
-    <updated>2025-01-07T00:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/</id>
-    <content src="http://localhost:4000/posts/IrisCTF2025-Pwn-Binary-Exploitation-WriteUps/" />
-    <author>
-      <name>imLZH1</name>
-    </author>
-
-  
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      
-  This IrisCTF2025 binary vulnerability exploitation report was written by imLZH1, a member of the “Just For the Questions” team
-
-
-sqlate
-int main(void) {
-  
-	......
-
-    init_admin();
-    login_anonymous();
-	......
-	do{
-		......
-        switch (c) {
-          	......
-            case '5': {
-                printf("Registration is currently closed.\n\n");
-                action_login();
-      ...
     </summary>
   
 
