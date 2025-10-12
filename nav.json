@@ -1,0 +1,53 @@
+{
+    "2025-writeups": [
+        {
+            "note_name": "2024-10-05-BRISC-CTF",
+            "note_root": "./_posts/2025-writeups/2024-10-05-BRISC-CTF/",
+            "note_src": "./_posts/2025-writeups/2024-10-05-BRISC-CTF/2024-10-05-BRISC-CTF.md"
+        },
+        {
+            "note_name": "2025-01-04-IrisCTF2025",
+            "note_root": "./_posts/2025-writeups/2025-01-04-IrisCTF2025/",
+            "note_src": "./_posts/2025-writeups/2025-01-04-IrisCTF2025/2025-01-04-IrisCTF2025.md"
+        },
+        {
+            "note_name": "2025-01-18-第八届西湖论剑初赛-Pwn-解题思路",
+            "note_root": "./_posts/2025-writeups/2025-01-18-第八届西湖论剑初赛-Pwn-解题思路/",
+            "note_src": "./_posts/2025-writeups/2025-01-18-第八届西湖论剑初赛-Pwn-解题思路/2025-01-18-第八届西湖论剑初赛-Pwn-解题思路.md"
+        },
+        {
+            "note_name": "2025-02-01-Nullcon-Goa-HackIM-2025-CTF",
+            "note_root": "./_posts/2025-writeups/2025-02-01-Nullcon-Goa-HackIM-2025-CTF/",
+            "note_src": "./_posts/2025-writeups/2025-02-01-Nullcon-Goa-HackIM-2025-CTF/2025-02-01-Nullcon-Goa-HackIM-2025-CTF.md"
+        },
+        {
+            "note_name": "2025-02-09-LA_CTF-部分Pwn解题思路",
+            "note_root": "./_posts/2025-writeups/2025-02-09-LA_CTF-部分Pwn解题思路/",
+            "note_src": "./_posts/2025-writeups/2025-02-09-LA_CTF-部分Pwn解题思路/2025-02-09-LA_CTF-部分Pwn解题思路.md"
+        },
+        {
+            "note_name": "2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria",
+            "note_root": "./_posts/2025-writeups/2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria/",
+            "note_src": "./_posts/2025-writeups/2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria/2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria.md"
+        },
+        {
+            "note_name": "2025-10-12-羊城杯pwn-writeups",
+            "note_root": "./_posts/2025-writeups/2025-10-12-羊城杯pwn-writeups/",
+            "note_src": "./_posts/2025-writeups/2025-10-12-羊城杯pwn-writeups/2025-10-12-羊城杯pwn-writeups.md"
+        }
+    ],
+    "LEA": [
+        {
+            "note_name": "index",
+            "note_root": "./_posts/LEA/",
+            "note_src": "./_posts/LEA/index.md"
+        }
+    ],
+    "pwn-tips": [
+        {
+            "note_name": "glibc_IO_FILE-利用",
+            "note_root": "./_posts/pwn-tips/glibc_IO_FILE-利用/",
+            "note_src": "./_posts/pwn-tips/glibc_IO_FILE-利用/glibc_IO_FILE-利用.md"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imLZH1's blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="marked.min.js"></script>
+    <!-- DOMPurify for security -->
+    <script src="purify.min.js"></script>
+    <!-- Prism.js for code syntax highlighting -->
+    <link rel="stylesheet" href="prism.css">
+    <script src="prism.min.js"></script>
+    <!-- Prism.js language components -->
+    <script src="prism-python.min.js"></script>
+    <script src="prism-c.min.js"></script>
+    <script src="prism-bash.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧边栏 - 笔记列表 -->
+        <div class="sidebar-left" id="sidebar-left">
+            <div class="sidebar-header">
+                <h2>Note List</h2>
+            </div>
+            <div class="file-tree">
+            </div>
+        </div>
+
+        <!-- 左侧拖拽分隔条 -->
+        <div class="resizer resizer-left" id="resizer-left"></div>
+
+        <!-- 中间主体 - 内容展示 -->
+        <div class="main-content" id="main-content">
+            <div class="content-header">
+                <h1></h1>
+                <div class="content-actions">
+                    <button id="dark-mode-toggle" class="btn" title="切换暗色模式">
+                        🌙 暗色模式
+                    </button>
+                </div>
+            </div>
+            <div class="content-area">
+                <div class="markdown-body">
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧拖拽分隔条 -->
+        <div class="resizer resizer-right" id="resizer-right"></div>
+
+        <!-- 右侧边栏 - 导航大纲 -->
+        <div class="sidebar-right" id="sidebar-right">
+            <div class="sidebar-header">
+                <h2>大纲</h2>
+            </div>
+            <div class="outline-container">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
