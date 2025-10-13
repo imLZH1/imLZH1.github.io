@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imLZH1.github.io/sitemap.xml
+
+# 爬虫设置
+Crawl-delay: 1
+
+# 禁止爬取的目录
+Disallow: /_posts/
+Disallow: /assets/
+
+# 允许爬取的主要页面
+Allow: /index.html
+Allow: /app.js
+Allow: /styles.css
