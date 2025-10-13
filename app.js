@@ -225,8 +225,15 @@ class NavManager {
         this.renderFileTree();
         this.bindEvents();
         
-        // 默认加载LEA/index.md作为主页
-        this.loadDefaultHome();
+        // 延迟处理hash变化，确保DOM完全渲染
+        setTimeout(() => {
+            this.handleHashChange();
+        }, 100);
+        
+        // 监听hash变化
+        window.addEventListener('hashchange', () => {
+            this.handleHashChange();
+        });
     }
 
     async loadNavData() {
@@ -319,13 +326,13 @@ class NavManager {
                 // 添加当前激活状态
                 noteItem.classList.add('active');
                 
-                // 加载笔记内容
-                this.loadNoteContent(noteItem.dataset.src);
+                // 加载笔记内容并更新URL
+                this.loadNoteContent(noteItem.dataset.src, true);
             }
         });
     }
 
-    async loadNoteContent(noteSrc) {
+    async loadNoteContent(noteSrc, updateURL = false) {
         try {
             const response = await fetch(noteSrc);
             if (!response.ok) throw new Error('文件不存在');
@@ -337,6 +344,11 @@ class NavManager {
             const noteRoot = noteItem ? noteItem.dataset.root : './';
             
             this.renderMarkdown(markdownContent, noteSrc, noteRoot);
+            
+            // 如果需要更新URL，则更新hash
+            if (updateURL) {
+                this.updateURLForNote(noteSrc);
+            }
         } catch (error) {
             console.error('加载笔记内容失败:', error);
             this.renderError('无法加载笔记内容');
@@ -587,6 +599,133 @@ class NavManager {
             }
         }
         return null;
+    }
+
+    // URL路由处理方法
+    handleHashChange() {
+        const hash = window.location.hash;
+        
+        if (hash && hash.startsWith('#/')) {
+            // 解析hash并加载指定笔记
+            const path = hash.substring(2); // 移除 '#/'
+            this.loadNoteFromPath(path);
+        } else {
+            // 没有hash或hash为空，重定向到默认主页
+            this.redirectToDefaultHome();
+        }
+    }
+    
+    loadNoteFromPath(path) {
+        console.log('加载路径:', path);
+        
+        // 解析路径格式：目录/笔记名
+        const parts = path.split('/');
+        if (parts.length < 2) {
+            console.warn('无效的URL路径格式:', path);
+            this.loadDefaultHome();
+            return;
+        }
+        
+        const category = decodeURIComponent(parts[0]);
+        const noteName = decodeURIComponent(parts[1]);
+        
+        console.log('查找笔记(解码后):', category, noteName);
+        
+        // 查找对应的笔记
+        const note = this.findNoteByPath(category, noteName);
+        if (note) {
+            console.log('找到笔记:', note);
+            
+            // 激活对应的笔记项并加载内容
+            const noteItem = document.querySelector(`.note-item[data-src="${note.note_src}"]`);
+            if (noteItem) {
+                console.log('找到笔记项:', noteItem);
+                
+                // 移除所有激活状态
+                const noteItems = document.querySelectorAll('.note-item');
+                noteItems.forEach(item => item.classList.remove('active'));
+                
+                // 添加当前激活状态
+                noteItem.classList.add('active');
+                
+                // 加载笔记内容，但不更新URL（避免循环）
+                this.loadNoteContent(note.note_src, false);
+                
+                // 展开对应的目录
+                this.expandCategory(category);
+            } else {
+                console.warn('未找到对应的笔记项:', note.note_src);
+                // 即使没有找到DOM元素，也直接加载笔记内容
+                this.loadNoteContent(note.note_src, false);
+            }
+        } else {
+            console.warn('未找到笔记:', category, noteName);
+            this.loadDefaultHome();
+        }
+    }
+    
+    findNoteByPath(category, noteName) {
+        console.log('查找笔记:', category, noteName);
+        console.log('navData:', this.navData);
+        
+        if (!this.navData || !this.navData[category]) {
+            console.log('目录不存在:', category);
+            return null;
+        }
+        
+        // 在指定目录中查找笔记
+        for (const note of this.navData[category]) {
+            console.log('检查笔记:', note.note_name, '==', noteName);
+            if (note.note_name === noteName) {
+                console.log('找到匹配的笔记:', note);
+                return note;
+            }
+        }
+        console.log('未找到匹配的笔记');
+        return null;
+    }
+    
+    expandCategory(category) {
+        // 展开指定目录
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(item => {
+            const categoryName = item.querySelector('.category-name').textContent;
+            if (categoryName === category) {
+                const notesContainer = item.querySelector('.notes-container');
+                const expandIcon = item.querySelector('.expand-icon');
+                
+                notesContainer.style.display = 'block';
+                expandIcon.textContent = '▼';
+                item.classList.add('expanded');
+            }
+        });
+    }
+    
+    updateURLForNote(noteSrc) {
+        // 从当前激活的笔记项获取目录和笔记名
+        const activeNoteItem = document.querySelector('.note-item.active');
+        if (activeNoteItem) {
+            const category = activeNoteItem.closest('.category-item').querySelector('.category-name').textContent;
+            const noteName = activeNoteItem.querySelector('.note-name').textContent;
+            
+            const newHash = `#/${category}/${noteName}`;
+            if (window.location.hash !== newHash) {
+                window.history.replaceState(null, null, newHash);
+            }
+        }
+    }
+    
+    redirectToDefaultHome() {
+        // 重定向到默认主页
+        const defaultPath = 'LEA/index';
+        const newHash = `#/${defaultPath}`;
+        
+        if (window.location.hash !== newHash) {
+            window.location.hash = newHash;
+        } else {
+            // 如果已经是默认路径，则加载默认主页
+            this.loadDefaultHome();
+        }
     }
 
     renderError(message) {
