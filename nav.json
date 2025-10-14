@@ -75,6 +75,11 @@
     ],
     "LEA": [
         {
+            "note_name": "Friends",
+            "note_root": "./_posts/LEA/",
+            "note_src": "./_posts/LEA/Friends.md"
+        },
+        {
             "note_name": "index",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/index.md"
