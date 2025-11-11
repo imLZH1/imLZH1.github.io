@@ -63,14 +63,19 @@
             "note_src": "./_posts/2025-writeups/2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria/2025-03-26-Cyber-Apocalypse-CTF-2025_Tales-from-Eldoria.md"
         },
         {
+            "note_name": "2025-04-28-第二届长城杯总决赛-Pwn解题思路",
+            "note_root": "./_posts/2025-writeups/2025-04-28-第二届长城杯总决赛-Pwn解题思路/",
+            "note_src": "./_posts/2025-writeups/2025-04-28-第二届长城杯总决赛-Pwn解题思路/2025-04-28-第二届长城杯总决赛-Pwn解题思路.md"
+        },
+        {
             "note_name": "2025-10-12-羊城杯pwn-writeups",
             "note_root": "./_posts/2025-writeups/2025-10-12-羊城杯pwn-writeups/",
             "note_src": "./_posts/2025-writeups/2025-10-12-羊城杯pwn-writeups/2025-10-12-羊城杯pwn-writeups.md"
         },
         {
-            "note_name": "第二届长城杯总决赛-Pwn解题思路",
-            "note_root": "./_posts/2025-writeups/第二届长城杯总决赛-Pwn解题思路/",
-            "note_src": "./_posts/2025-writeups/第二届长城杯总决赛-Pwn解题思路/第二届长城杯总决赛-Pwn解题思路.md"
+            "note_name": "2025-11-08-Infobahn-CTF-2025",
+            "note_root": "./_posts/2025-writeups/2025-11-08-Infobahn-CTF-2025/",
+            "note_src": "./_posts/2025-writeups/2025-11-08-Infobahn-CTF-2025/2025-11-08-Infobahn-CTF-2025.md"
         }
     ],
     "LEA": [

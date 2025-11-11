@@ -26,7 +26,7 @@
 ### 🎯 技术栈
 
 - **二进制安全**：IDA Pro、GDB、Pwntools
-- **开发语言**：Python、C/C++
+- **开发语言**：Python、C
 
 </div>
 
@@ -40,7 +40,7 @@
 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; margin: 30px 0;">
 
 - **⚡ AAAA**: xxxx
-- **🌙 BBBB**：xxxx
+- **🌙 BBBB**: xxxx
 
 </div>
 
@@ -60,7 +60,7 @@
 
 **END**
 
-> 年轻不折腾😅，三角洲启动
+> 
 
 *最后更新：2025年10月*
 
