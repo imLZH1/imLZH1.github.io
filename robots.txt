@@ -1,14 +1,7 @@
 User-agent: *
 Allow: /
-
-# 爬虫设置
-Crawl-delay: 4
-
-# 禁止爬取的目录
-Disallow: /_posts/
-Disallow: /assets/
-
-# 允许爬取的主要页面
 Allow: /index.html
 Allow: /styles.css
-Allow: /index.html*
+Allow: /#/
+Disallow: /_posts/
+Disallow: /assets/
