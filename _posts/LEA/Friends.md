@@ -74,7 +74,7 @@
 <div class="friends-grid">
 
   <a href="https://baozongwi.xyz/" class="friend-card" target="_blank">
-    <img src="http://q1.qlogo.cn/g?b=qq&nk=2405758945&s=100" alt="同学B" class="friend-avatar">
+    <img src="http://q1.qlogo.cn/g?b=qq&nk=2405758945&s=100" alt="" class="friend-avatar">
     <div class="friend-name">baozongwi</div>
   </a>
 
@@ -88,13 +88,18 @@
     <div class="friend-name">y7syeu</div>
   </a>
 
+  <a href="https://w3nx1z1.github.io/" class="friend-card" target="_blank">
+    <img src="https://w3nx1z1.github.io/img/mikey.png" alt="" class="friend-avatar">
+    <div class="friend-name">w3nx1z1</div>
+  </a>
+
   <a href="https://blogyoulin.top/" class="friend-card" target="_blank">
-    <img src="http://q1.qlogo.cn/g?b=qq&nk=1498041059&s=100" alt="同学B" class="friend-avatar">
+    <img src="http://q1.qlogo.cn/g?b=qq&nk=1498041059&s=100" alt="" class="friend-avatar">
     <div class="friend-name">幽林</div>
   </a>
 
   <a href="https://github.com/IHK-ONE" class="friend-card" target="_blank">
-    <img src="http://q1.qlogo.cn/g?b=qq&nk=813888284&s=100" alt="同学B" class="friend-avatar">
+    <img src="http://q1.qlogo.cn/g?b=qq&nk=813888284&s=100" alt="" class="friend-avatar">
     <div class="friend-name">黄康</div>
   </a>
 
