@@ -1,7 +1,3 @@
-# ycb-pwn
-
-‍
-
 ## malloc
 
 ‍

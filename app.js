@@ -17,6 +17,8 @@ class Resizer {
     bindEvents() {
         const leftResizer = document.getElementById('resizer-left');
         const rightResizer = document.getElementById('resizer-right');
+
+        if (!leftResizer || !rightResizer) return;
         
         // 左侧分隔条事件
         leftResizer.addEventListener('mousedown', (e) => {
@@ -118,8 +120,8 @@ class Resizer {
         document.body.style.cursor = '';
         document.body.style.userSelect = '';
         
-        document.getElementById('resizer-left').classList.remove('dragging');
-        document.getElementById('resizer-right').classList.remove('dragging');
+        document.getElementById('resizer-left')?.classList.remove('dragging');
+        document.getElementById('resizer-right')?.classList.remove('dragging');
         
         // 保存布局到localStorage
         this.saveLayout();
@@ -166,7 +168,10 @@ class Resizer {
 // 暗色模式切换
 class ThemeManager {
     constructor() {
-        this.isDarkMode = localStorage.getItem('darkMode') === 'true';
+        const savedTheme = localStorage.getItem('darkMode');
+        this.isDarkMode = savedTheme === null
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches
+            : savedTheme === 'true';
         this.init();
     }
 
@@ -203,11 +208,15 @@ class ThemeManager {
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         if (darkModeToggle) {
             if (this.isDarkMode) {
-                darkModeToggle.innerHTML = '☀️ 亮色模式';
+                darkModeToggle.textContent = 'Light';
                 darkModeToggle.title = '切换到亮色模式';
+                darkModeToggle.classList.add('active');
+                darkModeToggle.setAttribute('aria-pressed', 'true');
             } else {
-                darkModeToggle.innerHTML = '🌙 暗色模式';
+                darkModeToggle.textContent = 'Dark';
                 darkModeToggle.title = '切换到暗色模式';
+                darkModeToggle.classList.remove('active');
+                darkModeToggle.setAttribute('aria-pressed', 'false');
             }
         }
     }
@@ -216,12 +225,17 @@ class ThemeManager {
 // 导航加载和文件管理
 class NavManager {
     constructor() {
-        this.navData = null;
+        this.navData = { pages: [], notes: {} };
+        this.entryMapBySrc = new Map();
+        this.pageMap = new Map();
+        this.currentHeadings = [];
+        this.outlineScrollHandler = null;
         this.init();
     }
 
     async init() {
         await this.loadNavData();
+        this.renderSitePages();
         this.renderFileTree();
         this.bindEvents();
         
@@ -239,115 +253,343 @@ class NavManager {
     async loadNavData() {
         try {
             const response = await fetch('nav.json');
-            this.navData = await response.json();
+            const data = await response.json();
+            this.navData = this.normalizeNavData(data);
         } catch (error) {
             console.error('加载导航数据失败:', error);
-            this.navData = {};
+            this.navData = { pages: [], notes: {} };
         }
+        this.buildIndexes();
+    }
+
+    normalizeNavData(data) {
+        return {
+            pages: Array.isArray(data?.pages) ? data.pages : [],
+            notes: data?.notes && typeof data.notes === 'object' ? data.notes : {},
+        };
+    }
+
+    buildIndexes() {
+        this.entryMapBySrc = new Map();
+        this.pageMap = new Map();
+
+        this.navData.pages = this.navData.pages.map((page) => {
+            const normalized = {
+                ...page,
+                ...this.derivePageMeta(page.note_src),
+                type: 'page',
+                kicker: 'Site',
+            };
+            this.pageMap.set(normalized.slug, normalized);
+            this.entryMapBySrc.set(normalized.note_src, normalized);
+            return normalized;
+        });
+
+        for (const [category, notes] of Object.entries(this.navData.notes)) {
+            this.navData.notes[category] = notes.map((note) => {
+                const slug = note.slug || this.deriveNoteSlug(note.note_src, category);
+                const normalized = {
+                    ...note,
+                    type: 'note',
+                    category,
+                    kicker: category,
+                    slug,
+                    title: note.title || slug,
+                };
+                this.entryMapBySrc.set(normalized.note_src, normalized);
+                return normalized;
+            });
+        }
+    }
+
+    derivePageMeta(noteSrc) {
+        const normalized = String(noteSrc || '').replace(/\\/g, '/');
+        if (normalized.endsWith('/LEA/index.md')) {
+            return { slug: 'overview' };
+        }
+        if (normalized.endsWith('/LEA/Timeline.md')) {
+            return { slug: 'timeline' };
+        }
+        if (normalized.endsWith('/LEA/Friends.md')) {
+            return { slug: 'friends' };
+        }
+
+        const stem = normalized.split('/').pop()?.replace(/\.md$/i, '') || 'page';
+        return { slug: stem.toLowerCase() };
+    }
+
+    deriveNoteSlug(noteSrc, category = '') {
+        const normalized = String(noteSrc || '').replace(/\\/g, '/');
+        const parts = normalized.split('/').filter(Boolean);
+        const postsIndex = parts.indexOf('_posts');
+        if (postsIndex !== -1) {
+            const postParts = parts.slice(postsIndex + 1);
+            if (postParts.length === 2) {
+                return postParts[1].replace(/\.md$/i, '');
+            }
+            if (postParts.length >= 3) {
+                return postParts[1] === category
+                    ? postParts[2]
+                    : postParts[postParts.length - 2];
+            }
+        }
+        return normalized.split('/').pop()?.replace(/\.md$/i, '') || 'note';
+    }
+
+    renderSitePages() {
+        const sitePagesNav = document.getElementById('site-pages-nav');
+        if (!sitePagesNav) return;
+
+        sitePagesNav.innerHTML = '';
+
+        if (!this.navData.pages.length) {
+            sitePagesNav.innerHTML = '<div class="empty-message">暂无页面</div>';
+            return;
+        }
+
+        this.navData.pages.forEach((page) => {
+            sitePagesNav.appendChild(this.createPageItem(page));
+        });
+    }
+
+    createPageItem(page) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'site-page-link';
+        button.tabIndex = 0;
+        button.dataset.slug = page.slug;
+        button.dataset.src = page.note_src;
+
+        const label = document.createElement('span');
+        label.className = 'site-page-name';
+        label.textContent = page.title;
+
+        button.appendChild(label);
+        return button;
     }
 
     renderFileTree() {
         const fileTree = document.querySelector('.file-tree');
         fileTree.innerHTML = '';
+        const noteCount = document.getElementById('note-count');
 
-        if (!this.navData || Object.keys(this.navData).length === 0) {
+        const notesEntries = Object.entries(this.navData.notes);
+        const totalNotes = notesEntries.reduce((sum, [, notes]) => sum + notes.length, 0);
+        if (noteCount) noteCount.textContent = String(totalNotes);
+
+        if (notesEntries.length === 0) {
             fileTree.innerHTML = '<div class="empty-message">暂无笔记</div>';
             return;
         }
 
-        for (const [category, notes] of Object.entries(this.navData)) {
-            // 创建目录项
-            const categoryItem = this.createCategoryItem(category, notes);
-            fileTree.appendChild(categoryItem);
-        }
+        notesEntries.forEach(([category, notes]) => {
+            fileTree.appendChild(this.createCategoryItem(category, notes));
+        });
     }
 
     createCategoryItem(category, notes) {
         const categoryDiv = document.createElement('div');
         categoryDiv.className = 'category-item';
-        
+        categoryDiv.dataset.category = category;
+
         const categoryHeader = document.createElement('div');
         categoryHeader.className = 'category-header';
-        categoryHeader.innerHTML = `
-            <div class="category-icon">📁</div>
-            <span class="category-name">${category}</span>
-            <div class="expand-icon">▶</div>
-        `;
+        categoryHeader.tabIndex = 0;
+
+        const categoryIcon = document.createElement('div');
+        categoryIcon.className = 'category-icon';
+
+        const categoryName = document.createElement('span');
+        categoryName.className = 'category-name';
+        categoryName.textContent = category;
+
+        const categoryCount = document.createElement('span');
+        categoryCount.className = 'category-count';
+        categoryCount.textContent = notes.length;
+
+        const expandIcon = document.createElement('div');
+        expandIcon.className = 'expand-icon';
+        expandIcon.setAttribute('aria-hidden', 'true');
+
+        categoryHeader.appendChild(categoryIcon);
+        categoryHeader.appendChild(categoryName);
+        categoryHeader.appendChild(categoryCount);
+        categoryHeader.appendChild(expandIcon);
 
         const notesContainer = document.createElement('div');
         notesContainer.className = 'notes-container';
-        
-        notes.forEach(note => {
-            const noteItem = document.createElement('div');
-            noteItem.className = 'note-item';
-            noteItem.innerHTML = `
-                <div class="note-icon">📄</div>
-                <span class="note-name">${note.note_name}</span>
-            `;
-            noteItem.dataset.src = note.note_src;
-            noteItem.dataset.root = note.note_root;
-            notesContainer.appendChild(noteItem);
+
+        notes.forEach((note) => {
+            notesContainer.appendChild(this.createNoteItem(category, note));
         });
 
         categoryDiv.appendChild(categoryHeader);
         categoryDiv.appendChild(notesContainer);
-
         return categoryDiv;
     }
 
+    createNoteItem(category, note) {
+        const noteItem = document.createElement('div');
+        noteItem.className = 'note-item';
+        noteItem.tabIndex = 0;
+        noteItem.dataset.src = note.note_src;
+        noteItem.dataset.root = note.note_root;
+        noteItem.dataset.slug = note.slug;
+        noteItem.dataset.category = category;
+        noteItem.dataset.search = `${category} ${note.title} ${note.slug}`.toLowerCase();
+
+        const noteIcon = document.createElement('div');
+        noteIcon.className = 'note-icon';
+
+        const noteName = document.createElement('span');
+        noteName.className = 'note-name';
+        noteName.textContent = note.title;
+
+        noteItem.appendChild(noteIcon);
+        noteItem.appendChild(noteName);
+        return noteItem;
+    }
+
     bindEvents() {
+        const searchInput = document.getElementById('note-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                this.filterNotes(searchInput.value);
+            });
+        }
+
         // 目录展开/收起事件
         document.addEventListener('click', (e) => {
+            if (e.target.closest('.site-page-link')) {
+                const pageLink = e.target.closest('.site-page-link');
+                const page = this.findPageBySlug(pageLink.dataset.slug);
+                if (page) {
+                    this.activateEntry(page, true);
+                    window.dispatchEvent(new CustomEvent('note-selected'));
+                }
+                return;
+            }
+
             if (e.target.closest('.category-header')) {
                 const categoryHeader = e.target.closest('.category-header');
-                const categoryItem = categoryHeader.parentElement;
-                const notesContainer = categoryItem.querySelector('.notes-container');
-                const expandIcon = categoryHeader.querySelector('.expand-icon');
-                
-                if (notesContainer.style.display === 'none' || !notesContainer.style.display) {
-                    notesContainer.style.display = 'block';
-                    expandIcon.textContent = '▼';
-                    categoryItem.classList.add('expanded');
-                } else {
-                    notesContainer.style.display = 'none';
-                    expandIcon.textContent = '▶';
-                    categoryItem.classList.remove('expanded');
-                }
+                this.toggleCategory(categoryHeader.parentElement);
             }
 
             // 笔记项点击事件
             if (e.target.closest('.note-item')) {
                 const noteItem = e.target.closest('.note-item');
-                const noteItems = document.querySelectorAll('.note-item');
-                
-                // 移除所有激活状态
-                noteItems.forEach(item => item.classList.remove('active'));
-                
-                // 添加当前激活状态
-                noteItem.classList.add('active');
-                
-                // 加载笔记内容并更新URL
-                this.loadNoteContent(noteItem.dataset.src, true);
+                const note = this.findNoteByPath(noteItem.dataset.category, noteItem.dataset.slug);
+                if (note) {
+                    this.activateEntry(note, true);
+                }
+                window.dispatchEvent(new CustomEvent('note-selected'));
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const target = e.target instanceof Element ? e.target : null;
+            if (!target) return;
+
+            if (e.key === 'Enter' && target.closest('.category-header')) {
+                this.toggleCategory(target.closest('.category-item'));
+            }
+
+            if (e.key === 'Enter' && target.closest('.site-page-link')) {
+                target.closest('.site-page-link').click();
+            }
+
+            if (e.key === 'Enter' && target.closest('.note-item')) {
+                target.closest('.note-item').click();
             }
         });
     }
 
-    async loadNoteContent(noteSrc, updateURL = false) {
+    toggleCategory(categoryItem, forceExpanded = null) {
+        if (!categoryItem) return;
+
+        const shouldExpand = forceExpanded === null
+            ? !categoryItem.classList.contains('expanded')
+            : forceExpanded;
+
+        categoryItem.classList.toggle('expanded', shouldExpand);
+    }
+
+    filterNotes(query) {
+        const normalizedQuery = query.trim().toLowerCase();
+        const categoryItems = document.querySelectorAll('.category-item');
+        const fileTree = document.querySelector('.file-tree');
+        let visibleNotes = 0;
+
+        categoryItems.forEach(categoryItem => {
+            const categoryName = categoryItem.dataset.category.toLowerCase();
+            const categoryMatches = normalizedQuery && categoryName.includes(normalizedQuery);
+            const noteItems = categoryItem.querySelectorAll('.note-item');
+            let categoryHasMatch = false;
+
+            noteItems.forEach(noteItem => {
+                const noteMatches = !normalizedQuery
+                    || categoryMatches
+                    || noteItem.dataset.search.includes(normalizedQuery);
+
+                noteItem.hidden = !noteMatches;
+                categoryHasMatch = categoryHasMatch || noteMatches;
+                if (noteMatches) visibleNotes += 1;
+            });
+
+            categoryItem.hidden = !categoryHasMatch;
+            if (normalizedQuery && categoryHasMatch) {
+                this.toggleCategory(categoryItem, true);
+            }
+        });
+
+        let noResults = fileTree.querySelector('.no-results-message');
+        if (!noResults) {
+            noResults = document.createElement('div');
+            noResults.className = 'no-results-message';
+            noResults.textContent = '没有匹配的笔记';
+            fileTree.appendChild(noResults);
+        }
+
+        noResults.hidden = visibleNotes !== 0;
+    }
+
+    activateEntry(entry, updateURL = false) {
+        this.setActiveEntry(entry);
+        this.loadEntry(entry, updateURL);
+    }
+
+    setActiveEntry(entry) {
+        document.querySelectorAll('.note-item.active, .site-page-link.active').forEach((item) => {
+            item.classList.remove('active');
+        });
+
+        if (entry.type === 'page') {
+            const pageLink = Array.from(document.querySelectorAll('.site-page-link')).find(
+                (item) => item.dataset.slug === entry.slug,
+            );
+            pageLink?.classList.add('active');
+            return;
+        }
+
+        this.expandCategory(entry.category);
+        const noteItem = Array.from(document.querySelectorAll('.note-item')).find(
+            (item) => item.dataset.category === entry.category && item.dataset.slug === entry.slug,
+        );
+        noteItem?.classList.add('active');
+    }
+
+    async loadEntry(entry, updateURL = false) {
         try {
-            const response = await fetch(noteSrc);
+            const response = await fetch(entry.note_src);
             if (!response.ok) throw new Error('文件不存在');
-            
+
             const markdownContent = await response.text();
-            
-            // 获取对应的note_root
-            const noteItem = document.querySelector(`.note-item[data-src="${noteSrc}"]`);
-            const noteRoot = noteItem ? noteItem.dataset.root : './';
-            
-            this.renderMarkdown(markdownContent, noteSrc, noteRoot);
-            
+
+            this.renderMarkdown(markdownContent, entry);
+
             // 如果需要更新URL，则更新hash
             if (updateURL) {
-                this.updateURLForNote(noteSrc);
+                this.updateURLForEntry(entry);
             }
         } catch (error) {
             console.error('加载笔记内容失败:', error);
@@ -355,23 +597,190 @@ class NavManager {
         }
     }
 
-    renderMarkdown(content, noteSrc, noteRoot) {
+    renderMarkdown(content, entry) {
         const contentArea = document.querySelector('.markdown-body');
         const noteTitle = document.querySelector('.content-header h1');
-        
-        // 提取文件名作为标题
-        const fileName = noteSrc.split('/').pop().replace('.md', '');
-        noteTitle.textContent = fileName;
-        
+        const noteKicker = document.getElementById('content-kicker');
+
+        noteTitle.textContent = entry.title;
+        document.title = `${entry.title} | imLZH1's Blog`;
+        document.querySelector('.app-container')?.classList.toggle(
+            'home-layout',
+            entry.type === 'page' && entry.slug === 'overview',
+        );
+        if (noteKicker) {
+            noteKicker.textContent = entry.kicker || 'Notebook';
+        }
+
         // 使用marked.js解析Markdown，并处理资源路径
-        const htmlContent = this.parseMarkdownWithMarked(content, noteRoot);
+        const htmlContent = this.parseMarkdownWithMarked(content, entry.note_root);
         contentArea.innerHTML = htmlContent;
+
+        this.enhanceRenderedContent(contentArea);
         
         // 手动触发Prism.js代码高亮
         this.highlightCodeBlocks(contentArea);
         
         // 更新大纲导航
         this.updateOutline(contentArea);
+
+        const scrollContainer = document.querySelector('.content-area');
+        if (scrollContainer) {
+            scrollContainer.scrollTop = 0;
+        }
+        this.scrollToRequestedSection();
+        window.dispatchEvent(new CustomEvent('note-rendered'));
+    }
+
+    enhanceRenderedContent(container) {
+        this.decorateHeadings(container);
+        this.decorateImages(container);
+    }
+
+    decorateHeadings(container) {
+        const headingCounts = new Map();
+        const headings = container.querySelectorAll('h1, h2, h3, h4');
+
+        headings.forEach((heading, index) => {
+            const text = heading.textContent.trim();
+            if (!heading.id) {
+                heading.id = this.buildHeadingId(text, index, headingCounts);
+            }
+
+            if (!heading.matches('h2, h3, h4') || heading.querySelector('.heading-anchor')) {
+                return;
+            }
+
+            const anchorButton = document.createElement('button');
+            anchorButton.type = 'button';
+            anchorButton.className = 'heading-anchor';
+            anchorButton.title = '复制段落链接';
+            anchorButton.setAttribute('aria-label', '复制段落链接');
+            anchorButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                this.copyHeadingLink(heading, anchorButton);
+            });
+
+            heading.appendChild(anchorButton);
+        });
+    }
+
+    decorateImages(container) {
+        const images = container.querySelectorAll('img');
+
+        images.forEach((img) => {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+
+            const parent = img.parentElement;
+            const shouldWrap = parent
+                && parent.tagName === 'P'
+                && parent.children.length === 1
+                && parent.textContent.trim() === '';
+
+            if (!shouldWrap) {
+                return;
+            }
+
+            const figure = document.createElement('figure');
+            figure.className = 'markdown-media';
+
+            const captionText = this.getImageCaption(img);
+            parent.parentElement.insertBefore(figure, parent);
+            figure.appendChild(img);
+
+            if (captionText) {
+                const figcaption = document.createElement('figcaption');
+                figcaption.className = 'image-caption';
+                figcaption.textContent = captionText;
+                figure.appendChild(figcaption);
+            }
+
+            parent.remove();
+        });
+    }
+
+    getImageCaption(image) {
+        const alt = (image.getAttribute('alt') || '').trim();
+        if (!alt) return '';
+
+        const normalized = alt.toLowerCase();
+        if (
+            normalized === 'image'
+            || normalized === 'img'
+            || normalized === 'screenshot'
+            || normalized.startsWith('pasted image')
+            || /^image[-_\s]?\d*$/i.test(alt)
+            || /^[a-f0-9]{20,}$/i.test(alt)
+        ) {
+            return '';
+        }
+
+        return alt;
+    }
+
+    buildHeadingId(text, index, counts) {
+        const base = this.slugifyHeading(text) || `section-${index + 1}`;
+        const currentCount = counts.get(base) || 0;
+        counts.set(base, currentCount + 1);
+        return currentCount === 0 ? base : `${base}-${currentCount + 1}`;
+    }
+
+    slugifyHeading(text) {
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/[^\p{Letter}\p{Number}\u4e00-\u9fff]+/gu, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
+    copyHeadingLink(heading, anchorButton) {
+        if (!heading.id) return;
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('section', heading.id);
+        window.history.replaceState(null, '', url.toString());
+
+        const shareUrl = url.toString();
+        const finalize = () => this.flashHeadingAnchor(anchorButton);
+
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+            this.copyCodeFallback(shareUrl);
+            finalize();
+            return;
+        }
+
+        navigator.clipboard.writeText(shareUrl).then(finalize).catch(() => {
+            this.copyCodeFallback(shareUrl);
+            finalize();
+        });
+    }
+
+    flashHeadingAnchor(anchorButton) {
+        anchorButton.classList.add('copied');
+        anchorButton.title = '链接已复制';
+        anchorButton.setAttribute('aria-label', '链接已复制');
+
+        clearTimeout(anchorButton._copiedTimer);
+        anchorButton._copiedTimer = setTimeout(() => {
+            anchorButton.classList.remove('copied');
+            anchorButton.title = '复制段落链接';
+            anchorButton.setAttribute('aria-label', '复制段落链接');
+        }, 1400);
+    }
+
+    scrollToRequestedSection() {
+        const sectionId = new URLSearchParams(window.location.search).get('section');
+        if (!sectionId) return;
+
+        const target = document.getElementById(sectionId);
+        if (!target) return;
+
+        requestAnimationFrame(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            this.updateActiveOutline();
+        });
     }
 
     highlightCodeBlocks(container) {
@@ -384,11 +793,12 @@ class NavManager {
                 if (parent && parent.nodeName === 'PRE') {
                     // 确保有正确的类名
                     if (!parent.classList.contains('language-none')) {
-                        const lang = code.className.replace('language-', '');
-                        if (lang && Prism.languages[lang]) {
-                            code.innerHTML = Prism.highlight(code.textContent, Prism.languages[lang], lang);
-                        } else {
-                            code.innerHTML = Prism.highlight(code.textContent, Prism.languages.plain, 'plain');
+                        const langMatch = code.className.match(/language-([a-zA-Z0-9_-]+)/);
+                        const lang = langMatch ? langMatch[1] : 'plain';
+                        parent.dataset.lang = lang;
+                        const grammar = Prism.languages[lang] || Prism.languages.plain || Prism.languages.plaintext;
+                        if (grammar) {
+                            code.innerHTML = Prism.highlight(code.textContent, grammar, lang);
                         }
                     }
                     
@@ -424,22 +834,32 @@ class NavManager {
         
         const codeText = codeElement.textContent || codeElement.innerText;
         
-        // 使用现代Clipboard API复制文本
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+            this.copyCodeFallback(codeText);
+            this.showCopySuccess(preElement);
+            return;
+        }
+
         navigator.clipboard.writeText(codeText).then(() => {
             // 显示复制成功提示
             this.showCopySuccess(preElement);
         }).catch(err => {
-            // 降级方案：使用传统document.execCommand
-            const textArea = document.createElement('textarea');
-            textArea.value = codeText;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            
+            this.copyCodeFallback(codeText);
             // 显示复制成功提示
             this.showCopySuccess(preElement);
         });
+    }
+
+    copyCodeFallback(codeText) {
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
     }
 
     showCopySuccess(preElement) {
@@ -466,22 +886,21 @@ class NavManager {
 
     parseMarkdownWithMarked(markdown, noteRoot) {
         try {
+            const markdownBody = this.stripFrontmatter(markdown);
+
             // 配置marked选项
             marked.setOptions({
                 highlight: function(code, lang) {
                     // 使用Prism.js进行代码高亮
-                    if (Prism.languages[lang]) {
-                        return Prism.highlight(code, Prism.languages[lang], lang);
-                    } else {
-                        return code;
-                    }
+                    const grammar = Prism.languages[lang] || Prism.languages.plain || Prism.languages.plaintext;
+                    return grammar ? Prism.highlight(code, grammar, lang || 'plain') : code;
                 },
                 breaks: true, // 将\n转换为<br>
                 gfm: true,    // 启用GitHub Flavored Markdown
             });
             
             // 使用marked解析Markdown
-            const parsedHtml = marked.parse(markdown);
+            const parsedHtml = marked.parse(markdownBody);
             
             // 处理资源文件路径
             const processedHtml = this.processResourcePaths(parsedHtml, noteRoot);
@@ -494,6 +913,16 @@ class NavManager {
             console.error('Markdown解析错误:', error);
             return '<div class="error-message">Markdown解析错误</div>';
         }
+    }
+
+    stripFrontmatter(markdown) {
+        const normalized = markdown.replace(/^[\uFEFF\r\n]+/, '');
+        if (!normalized.startsWith('---')) {
+            return normalized;
+        }
+
+        const match = normalized.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/);
+        return match ? normalized.slice(match[0].length) : normalized;
     }
 
     processResourcePaths(html, noteRoot) {
@@ -542,6 +971,7 @@ class NavManager {
     updateOutline(contentElement) {
         const outlineContainer = document.querySelector('.outline-container');
         const headings = contentElement.querySelectorAll('h1, h2, h3');
+        this.currentHeadings = Array.from(headings);
         
         if (headings.length === 0) {
             outlineContainer.innerHTML = '<div class="empty-outline">暂无大纲</div>';
@@ -552,9 +982,12 @@ class NavManager {
         headings.forEach((heading, index) => {
             const level = parseInt(heading.tagName.substring(1));
             const text = heading.textContent;
+            if (!heading.id) {
+                heading.id = `heading-${index}-${this.slugifyHeading(text) || 'section'}`;
+            }
             outlineHtml += `
                 <div class="outline-item level-${level}" data-index="${index}">
-                    ${text}
+                    ${this.escapeHtml(text)}
                 </div>
             `;
         });
@@ -563,6 +996,8 @@ class NavManager {
         
         // 绑定大纲点击事件
         this.bindOutlineEvents(headings);
+        this.bindOutlineScrollSpy();
+        requestAnimationFrame(() => this.updateActiveOutline());
     }
 
     bindOutlineEvents(headings) {
@@ -576,112 +1011,129 @@ class NavManager {
         });
     }
 
-    loadDefaultHome() {
-        // 查找LEA目录下的index.md文件
-        const leaIndexNote = this.findLEAIndexNote();
-        if (leaIndexNote) {
-            // 模拟点击LEA/index.md笔记项
-            const noteItem = document.querySelector(`.note-item[data-src="${leaIndexNote.note_src}"]`);
-            if (noteItem) {
-                noteItem.classList.add('active');
-                this.loadNoteContent(leaIndexNote.note_src);
-            }
-        }
+    bindOutlineScrollSpy() {
+        const contentArea = document.querySelector('.content-area');
+        if (!contentArea || this.outlineScrollHandler) return;
+
+        this.outlineScrollHandler = () => this.updateActiveOutline();
+        contentArea.addEventListener('scroll', this.outlineScrollHandler, { passive: true });
     }
 
-    findLEAIndexNote() {
-        if (!this.navData || !this.navData.LEA) return null;
-        
-        // 在LEA目录中查找index.md
-        for (const note of this.navData.LEA) {
-            if (note.note_name === 'index') {
-                return note;
+    updateActiveOutline() {
+        const contentArea = document.querySelector('.content-area');
+        const outlineItems = document.querySelectorAll('.outline-item');
+        if (!contentArea || !this.currentHeadings.length || outlineItems.length === 0) return;
+
+        const containerTop = contentArea.getBoundingClientRect().top;
+        let activeIndex = 0;
+
+        this.currentHeadings.forEach((heading, index) => {
+            const headingTop = heading.getBoundingClientRect().top - containerTop;
+            if (headingTop <= 90) {
+                activeIndex = index;
             }
+        });
+
+        outlineItems.forEach((item, index) => {
+            item.classList.toggle('active', index === activeIndex);
+        });
+    }
+
+    escapeHtml(text) {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    loadDefaultHome() {
+        const overviewPage = this.findPageBySlug('overview');
+        if (overviewPage) {
+            this.activateEntry(overviewPage, false);
         }
-        return null;
     }
 
     // URL路由处理方法
     handleHashChange() {
         const hash = window.location.hash;
-        
+
         if (hash && hash.startsWith('#/')) {
-            // 解析hash并加载指定笔记
-            const path = hash.substring(2); // 移除 '#/'
-            this.loadNoteFromPath(path);
+            const path = decodeURIComponent(hash.substring(2)).replace(/^\/+|\/+$/g, '');
+            const normalizedPath = this.resolveLegacyPath(path);
+
+            if (normalizedPath !== path) {
+                this.replaceHash(normalizedPath);
+                return;
+            }
+
+            this.loadEntryFromPath(normalizedPath);
         } else {
             // 没有hash或hash为空，重定向到默认主页
             this.redirectToDefaultHome();
         }
     }
+
     
-    loadNoteFromPath(path) {
-        console.log('加载路径:', path);
-        
-        // 解析路径格式：目录/笔记名
-        const parts = path.split('/');
-        if (parts.length < 2) {
-            console.warn('无效的URL路径格式:', path);
+    resolveLegacyPath(path) {
+        const legacyMap = {
+            'LEA/index': 'overview',
+            'LEA/Timeline': 'timeline',
+            'LEA/Friends': 'friends',
+        };
+        return legacyMap[path] || path;
+    }
+
+    replaceHash(path) {
+        const url = new URL(window.location.href);
+        url.hash = `#/${path}`;
+        window.history.replaceState(null, '', url.toString());
+        this.loadEntryFromPath(path);
+    }
+
+    loadEntryFromPath(path) {
+        if (!path) {
             this.loadDefaultHome();
             return;
         }
-        
-        const category = decodeURIComponent(parts[0]);
-        const noteName = decodeURIComponent(parts[1]);
-        
-        console.log('查找笔记(解码后):', category, noteName);
-        
-        // 查找对应的笔记
-        const note = this.findNoteByPath(category, noteName);
-        if (note) {
-            console.log('找到笔记:', note);
-            
-            // 激活对应的笔记项并加载内容
-            const noteItem = document.querySelector(`.note-item[data-src="${note.note_src}"]`);
-            if (noteItem) {
-                console.log('找到笔记项:', noteItem);
-                
-                // 移除所有激活状态
-                const noteItems = document.querySelectorAll('.note-item');
-                noteItems.forEach(item => item.classList.remove('active'));
-                
-                // 添加当前激活状态
-                noteItem.classList.add('active');
-                
-                // 加载笔记内容，但不更新URL（避免循环）
-                this.loadNoteContent(note.note_src, false);
-                
-                // 展开对应的目录
-                this.expandCategory(category);
-            } else {
-                console.warn('未找到对应的笔记项:', note.note_src);
-                // 即使没有找到DOM元素，也直接加载笔记内容
-                this.loadNoteContent(note.note_src, false);
-            }
-        } else {
-            console.warn('未找到笔记:', category, noteName);
-            this.loadDefaultHome();
+
+        const page = this.findPageBySlug(path);
+        if (page) {
+            this.activateEntry(page, false);
+            return;
         }
+
+        const parts = path.split('/');
+        if (parts.length >= 2) {
+            const category = parts[0];
+            const slug = parts[1];
+            const note = this.findNoteByPath(category, slug);
+            if (note) {
+                this.activateEntry(note, false);
+                return;
+            }
+        }
+
+        console.warn('未找到路径:', path);
+        this.loadDefaultHome();
+    }
+
+    findPageBySlug(slug) {
+        return this.pageMap.get(slug) || null;
     }
     
-    findNoteByPath(category, noteName) {
-        console.log('查找笔记:', category, noteName);
-        console.log('navData:', this.navData);
-        
-        if (!this.navData || !this.navData[category]) {
-            console.log('目录不存在:', category);
+    findNoteByPath(category, slug) {
+        if (!this.navData.notes || !this.navData.notes[category]) {
             return null;
         }
         
         // 在指定目录中查找笔记
-        for (const note of this.navData[category]) {
-            console.log('检查笔记:', note.note_name, '==', noteName);
-            if (note.note_name === noteName) {
-                console.log('找到匹配的笔记:', note);
+        for (const note of this.navData.notes[category]) {
+            if (note.slug === slug) {
                 return note;
             }
         }
-        console.log('未找到匹配的笔记');
         return null;
     }
     
@@ -691,33 +1143,26 @@ class NavManager {
         categoryItems.forEach(item => {
             const categoryName = item.querySelector('.category-name').textContent;
             if (categoryName === category) {
-                const notesContainer = item.querySelector('.notes-container');
-                const expandIcon = item.querySelector('.expand-icon');
-                
-                notesContainer.style.display = 'block';
-                expandIcon.textContent = '▼';
-                item.classList.add('expanded');
+                this.toggleCategory(item, true);
             }
         });
     }
     
-    updateURLForNote(noteSrc) {
-        // 从当前激活的笔记项获取目录和笔记名
-        const activeNoteItem = document.querySelector('.note-item.active');
-        if (activeNoteItem) {
-            const category = activeNoteItem.closest('.category-item').querySelector('.category-name').textContent;
-            const noteName = activeNoteItem.querySelector('.note-name').textContent;
-            
-            const newHash = `#/${category}/${noteName}`;
-            if (window.location.hash !== newHash) {
-                window.history.replaceState(null, null, newHash);
-            }
+    updateURLForEntry(entry) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('section');
+        url.hash = entry.type === 'page'
+            ? `#/${entry.slug}`
+            : `#/${entry.category}/${entry.slug}`;
+
+        if (window.location.href !== url.toString()) {
+            window.history.replaceState(null, '', url.toString());
         }
     }
     
     redirectToDefaultHome() {
         // 重定向到默认主页
-        const defaultPath = 'LEA/index';
+        const defaultPath = 'overview';
         const newHash = `#/${defaultPath}`;
         
         if (window.location.hash !== newHash) {
@@ -731,17 +1176,139 @@ class NavManager {
     renderError(message) {
         const contentArea = document.querySelector('.markdown-body');
         contentArea.innerHTML = `<div class="error-message">${message}</div>`;
+        window.dispatchEvent(new CustomEvent('note-rendered'));
+    }
+}
+
+class MobileNavigation {
+    constructor() {
+        this.sidebar = document.getElementById('sidebar-left');
+        this.backdrop = document.getElementById('sidebar-backdrop');
+        this.toggleButton = document.getElementById('mobile-menu-toggle');
+        this.init();
+    }
+
+    init() {
+        if (!this.sidebar || !this.backdrop || !this.toggleButton) return;
+
+        this.toggleButton.addEventListener('click', () => this.toggle());
+        this.backdrop.addEventListener('click', () => this.close());
+        window.addEventListener('note-selected', () => this.close());
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                this.close();
+            }
+        });
+    }
+
+    toggle() {
+        const shouldOpen = !this.sidebar.classList.contains('active');
+        if (shouldOpen) {
+            this.open();
+        } else {
+            this.close();
+        }
+    }
+
+    open() {
+        this.sidebar.classList.add('active');
+        this.backdrop.classList.add('active');
+        this.toggleButton.setAttribute('aria-expanded', 'true');
+    }
+
+    close() {
+        this.sidebar.classList.remove('active');
+        this.backdrop.classList.remove('active');
+        this.toggleButton.setAttribute('aria-expanded', 'false');
+    }
+}
+
+class ReadingProgress {
+    constructor() {
+        this.contentArea = document.querySelector('.content-area');
+        this.progressBar = document.getElementById('reading-progress-bar');
+        this.percentLabel = document.getElementById('reading-percent');
+        this.scrollTopButton = document.getElementById('scroll-top');
+        this.init();
+    }
+
+    init() {
+        if (!this.contentArea || !this.progressBar) return;
+
+        this.contentArea.addEventListener('scroll', () => this.update(), { passive: true });
+        window.addEventListener('resize', () => this.update());
+        window.addEventListener('note-rendered', () => requestAnimationFrame(() => this.update()));
+        if (this.scrollTopButton) {
+            this.scrollTopButton.addEventListener('click', () => {
+                this.contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        this.update();
+    }
+
+    update() {
+        const maxScroll = this.contentArea.scrollHeight - this.contentArea.clientHeight;
+        const progress = maxScroll <= 0 ? 0 : (this.contentArea.scrollTop / maxScroll) * 100;
+        const boundedProgress = Math.min(100, Math.max(0, progress));
+        this.progressBar.style.width = `${boundedProgress}%`;
+        if (this.percentLabel) {
+            this.percentLabel.textContent = `${Math.round(boundedProgress)}%`;
+        }
+    }
+}
+
+class StartupIntro {
+    constructor() {
+        this.intro = document.getElementById('startup-intro');
+        this.app = document.querySelector('.app-container');
+        this.isClosed = false;
+        this.startedAt = performance.now();
+        this.minDuration = 1700;
+        this.init();
+    }
+
+    init() {
+        if (!this.intro) return;
+
+        window.addEventListener('note-rendered', () => this.close(), { once: true });
+        window.addEventListener('load', () => {
+            window.setTimeout(() => this.close(), 2300);
+        }, { once: true });
+
+        window.setTimeout(() => this.close(), 4600);
+    }
+
+    close() {
+        if (this.isClosed || !this.intro) return;
+
+        const elapsed = performance.now() - this.startedAt;
+        if (elapsed < this.minDuration) {
+            window.setTimeout(() => this.close(), this.minDuration - elapsed);
+            return;
+        }
+
+        this.isClosed = true;
+        this.intro.classList.add('is-hidden');
+        this.app?.classList.add('is-entering');
+        window.setTimeout(() => {
+            this.intro?.remove();
+            this.app?.classList.remove('is-entering');
+        }, 950);
     }
 }
 
 // 初始化应用
 document.addEventListener('DOMContentLoaded', () => {
-    new Resizer();
+    const resizer = new Resizer();
+    new StartupIntro();
     new ThemeManager();
+    new MobileNavigation();
+    new ReadingProgress();
     new NavManager();
     
     // 加载保存的布局
     setTimeout(() => {
-        new Resizer().loadLayout();
+        resizer.loadLayout();
     }, 100);
 });

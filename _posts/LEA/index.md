@@ -1,139 +1,49 @@
-# 🚀 喜欢肘击
-
-<div align="center">
-
-![博客封面](assets/Chicken_Flapping.gif)
-
-> 记录技术成长，分享学习心得
-
-</div>
-
-## 📋 关于我
-
-<div style="display: flex; align-items: center; gap: 20px; margin: 30px 0;">
-
-<div style="flex: 1;">
-
-### 👨‍💻 个人简介
-
-- **技能**：Pwn
-- **状态**：年轻多折腾😅
-
-</div>
-
-<div style="flex: 1;">
-
-### 🎯 技术栈
-
-- **二进制安全**：IDA Pro、GDB、Pwntools
-- **开发语言**：Python、C
-
-</div>
-
-</div>
-
-
-
-
-## 🎉 一些屁话
-
-<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; margin: 30px 0;">
-
-- **⚡ AAAA**: xxxx
-- **🌙 BBBB**: xxxx
-
-</div>
-
-## 🔗 联系我
-
-<div style="text-align: center; margin: 40px 0;">
-
-**QQ**：3461665835
-**email**：qingwachong[@]qq.com
-
-</div>
-
-
+---
+title: Overview
+date: 2026-05-08T00:00:00+08:00
+lastmod: 2026-05-08T00:00:00+08:00
 ---
 
-<div align="center">
+<h1 class="home-page-title">imLZH1</h1>
 
-**END**
-
-> 
-
-*最后更新：2025年10月*
-
-<br>
-
-<div style="margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
-
-### 🤝 共同创作
-
-本网站由 **[ImLZH1](https://github.com/ImLZH1)** 和 **[DeepSeek](https://www.deepseek.com)** 共同打造
-
-> 技术让创作更简单，AI让想法更精彩
-
+<div class="home-shell">
+<section class="home-hero">
+<div class="home-hero-copy">
+<p class="home-eyebrow">Good one</p>
+<div class="home-hero-title">🐤🐤🐤</div>
+<p class="home-hero-lead">这里放一些 CTF、Pwn、二进制安全、渗透测试和日常折腾时留下的记录。</p>
 </div>
-
+<aside class="home-hero-side">
+<div class="home-terminal">
+<figure class="home-visual">
+<img src="/assets/nl1.gif" alt="animated mascot">
+</figure>
 </div>
+</aside>
+</section>
 
-<style>
-/* 自定义主页样式 */
-h1 {
-    text-align: center;
-    margin: 30px 0;
-    color: #2c3e50;
-}
+<section class="home-contact">
+<span class="home-contact-item"><strong>Author</strong>imLZH1</span>
+<span class="home-contact-item"><strong>Field</strong> CTF / Pwn / Binary Security</span>
+<span class="home-contact-item"><strong>Motto</strong> 奶龙是龙，龙趴着休息很正常</span>
+<span class="home-contact-item"><strong>QQ</strong> 3461665835</span>
+<span class="home-contact-item"><strong>Email</strong> qingwachong[@]qq.com</span>
+<a class="home-contact-item" href="https://github.com/ImLZH1">GitHub</a>
+</section>
 
-h2 {
-    border-bottom: 2px solid #4285f4;
-    padding-bottom: 10px;
-    margin-top: 40px;
-}
-
-h3 {
-    color: #34495e;
-    margin-top: 25px;
-}
-
-blockquote {
-    border-left: 4px solid #4285f4;
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 0 8px 8px 0;
-    margin: 20px 0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #e1e5e9;
-}
-
-th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-}
-
-tr:hover {
-    background-color: #f5f7fa;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    div[style*="display: flex"] {
-        flex-direction: column;
-    }
-    
-    div[style*="grid-template-columns"] {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+<footer class="home-footer">
+<div class="home-footer-copy">
+<span class="home-footer-kicker">Still building</span>
+<p class="home-footer-title">某人：八千里路云和月</p>
+</div>
+<nav class="home-footer-links" aria-label="Footer links">
+<a href="#/timeline">Timeline</a>
+<a href="#/pwn-tips/glibc_IO_FILE-利用">Pwn Tips</a>
+<a href="https://github.com/ImLZH1">GitHub</a>
+</nav>
+<div class="home-footer-meta">
+<span>© 2026 imLZH1</span>
+<span>CTF / Pwn / Binary Security</span>
+</div>
+</footer>
+</div>

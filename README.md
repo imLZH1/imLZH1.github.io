@@ -1,198 +1,109 @@
-# 思源风格 Markdown 博客
+# imLZH1's Blog
 
-> 一个优雅、现代化的个人技术博客平台
+一个轻量的静态 Markdown 技术博客，主要用于记录 CTF、Pwn、二进制安全、渗透测试和日常折腾笔记。
 
-![博客预览](_posts/LEA/assets/Chicken_Flapping.gif)
+![Blog preview](assets/nl1.gif)
 
-## 🌟 项目简介
+## 特性
 
-这是一个基于纯前端技术构建的思源笔记风格Markdown博客系统，专为技术爱好者和博客作者设计。项目结合了思源笔记的优雅界面和现代Web开发的最佳实践，提供了出色的阅读和写作体验。
+- 纯静态部署，适合直接托管到 GitHub Pages
+- Markdown 文章渲染，支持代码高亮和目录大纲
+- 左侧分类导航、搜索、阅读进度和暗色模式
+- 自动扫描 `_posts` 目录生成 `nav.json`
+- 自动生成 `Timeline.md` 时间线页面
+- 支持两种文章组织方式：带独立资源目录、直接放在分类目录下
 
-### 🤝 共同创作
+## 项目结构
 
-本网站由 **[ImLZH1](https://github.com/ImLZH1)** 和 **[DeepSeek](https://www.deepseek.com)** 共同打造
-
-> 技术让创作更简单，AI让想法更精彩
-
-## ✨ 核心特性
-
-### 🎨 界面设计
-- **思源笔记风格**：经典的三栏布局，优雅的视觉设计
-- **暗色/亮色模式**：一键切换，保护眼睛的同时提供舒适阅读体验
-- **响应式设计**：完美适配各种屏幕尺寸和设备
-- **现代化滚动条**：精心美化的滚动条，流畅的滚动体验
-
-### 📝 内容管理
-- **Markdown支持**：完整的Markdown语法解析和渲染
-- **代码高亮**：支持多种编程语言的语法高亮（Python、JavaScript、C、Shell等）
-- **代码复制**：一键复制代码块内容，带成功提示
-- **图片优化**：自适应图片大小，悬停放大效果
-- **大纲导航**：自动生成文档大纲，快速定位内容
-
-### 🚀 交互体验
-- **拖拽布局**：可自由调整侧边栏宽度，布局自动保存
-- **目录树导航**：智能目录展开/收起，快速访问笔记
-- **平滑动画**：页面切换、目录展开等都有流畅的动画效果
-- **微交互设计**：按钮涟漪效果、悬停提示等精致细节
-
-### 🔧 技术特色
-- **纯前端实现**：无需后端服务器，直接部署到静态托管
-- **本地化资源**：所有依赖库下载到本地，无需CDN
-- **安全防护**：使用DOMPurify防止XSS攻击
-- **性能优化**：优化的资源加载和渲染速度
-
-## 📁 项目结构
-
-```
-new_blog/
-├── index.html              # 主页面
-├── styles.css              # 样式文件（优化版）
-├── app.js                  # 主要JavaScript逻辑
-├── main.py                 # Python脚本，生成导航结构
+```text
+.
+├── index.html              # 页面入口
+├── app.js                  # 前端路由、Markdown 渲染、导航交互
+├── styles.css              # 站点样式
+├── main.py                 # 生成 nav.json 和 Timeline.md
 ├── nav.json                # 自动生成的导航数据
-├── README.md               # 项目说明文档
-├── _posts/                 # 博客文章目录
-│   ├── LEA/               # 主页内容
-│   │   └── index.md
-│   ├── 2025-writeups/     # CTF Writeup文章
-│   └── pwn-tips/          # 技术技巧文章
-└── 第三方库/
-    ├── marked.min.js       # Markdown解析器
-    ├── prism.min.js        # 代码高亮
-    ├── prism.css
-    ├── purify.min.js       # HTML净化
-    └── ...
+├── _posts/                 # 页面和文章
+│   ├── LEA/                # 首页、时间线等站点页面
+│   ├── 2025-writeups/      # 示例分类
+│   └── pwn_note1/          # 示例分类
+├── assets/                 # 公共资源
+├── imgs/                   # 背景、头像等图片
+└── prism*.js / marked*.js / purify*.js
 ```
 
-## 🛠️ 快速开始
+## 写文章
 
-### 环境要求
-- Python 3.x（用于生成导航）
-- 现代浏览器（Chrome、Firefox、Edge等）
+文章放在 `_posts` 下，一级目录会被识别为分类。
 
-### 部署步骤
+推荐的文章目录结构：
 
-1. **克隆或下载项目**
-   ```bash
-   # 将项目文件放置到您的Web服务器目录
-   ```
-
-2. **更新博客内容**
-   - 在 `_posts/` 目录下添加您的Markdown文件
-   - 按照现有目录结构组织您的文章
-
-3. **生成导航**
-   ```bash
-   python main.py
-   ```
-   这将自动扫描 `_posts/` 目录并更新 `nav.json`
-
-4. **打开博客**
-   - 直接在浏览器中打开 `index.html`
-   - 或部署到Web服务器
-
-### 自定义配置
-
-#### 修改主题颜色
-在 `styles.css` 中修改CSS变量：
-```css
-:root {
-    --accent-color: #4285f4;  /* 主色调 */
-    --bg-color: #ffffff;      /* 背景色 */
-    --text-color: #2c3e50;    /* 文字颜色 */
-    /* ... 其他变量 */
-}
+```text
+_posts/<category>/<post-slug>/<post-slug>.md
+_posts/<category>/<post-slug>/assets/image.png
 ```
 
-#### 添加新文章
-1. 在 `_posts/` 下创建新的目录和Markdown文件
-2. 文件命名格式：`文章标题/文章标题.md`
-3. 运行 `python main.py` 更新导航
+如果文章不需要独立 `assets` 目录，也可以直接放在分类目录里：
 
-## 🎯 使用指南
+```text
+_posts/<category>/<post-slug>.md
+```
 
-### 浏览文章
-- 点击左侧目录树中的文章标题加载内容
-- 使用右侧大纲导航快速跳转到章节
-- 拖拽分隔条调整侧边栏宽度
+可选 frontmatter：
 
-### 阅读体验
-- 点击右上角月亮/太阳图标切换暗色/亮色模式
-- 鼠标悬停在代码块上显示复制按钮
-- 图片悬停时有放大效果
-
-### 写作规范
-- 使用标准Markdown语法
-- 代码块使用三个反引号包裹，指定语言类型
-- 图片放置在 `assets/` 目录下
-
-## 🔧 技术栈
-
-- **前端框架**：纯原生HTML、CSS、JavaScript
-- **Markdown解析**：marked.js
-- **代码高亮**：Prism.js
-- **安全处理**：DOMPurify
-- **样式设计**：CSS3 + CSS变量 + 现代化布局
-
-## 🌈 功能亮点
-
-### 代码块处理
-- 自动语法高亮
-- 一键复制功能
-- 水平滚动支持
-- 暗色模式适配
-
-### 图片展示
-- 自适应大小
-- 圆角阴影设计
-- 悬停放大动画
-- 居中显示优化
-
-### 用户体验
-- 平滑的页面过渡
-- 优雅的加载动画
-- 智能的焦点管理
-- 无障碍访问支持
-
-## 🚀 部署选项
-
-### 本地部署
-直接打开 `index.html` 文件即可使用
-
-### 静态网站托管
-支持部署到：
-- GitHub Pages
-- Netlify
-- Vercel
-- 任何静态文件服务器
-
-### 自定义域名
-配置您的域名指向部署的静态文件
-
-## 🤝 贡献指南
-
-欢迎提交Issue和Pull Request来改进这个项目！
-
-### 开发流程
-1. Fork 本项目
-2. 创建特性分支
-3. 提交您的更改
-4. 推送到分支
-5. 创建Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
-
-## 🙏 致谢
-
-- **marked.js** - 优秀的Markdown解析库
-- **Prism.js** - 强大的代码高亮解决方案
-- **DeepSeek** - AI辅助开发与优化
-
+```markdown
 ---
+title: 文章标题
+date: 2026-05-09T00:00:00+08:00
+lastmod: 2026-05-09T00:00:00+08:00
+---
+```
 
+如果没有 `title`，会使用文件名或目录名作为标题；如果文件名以 `YYYY-MM-DD` 开头，会自动推断日期。
 
-*最后更新：2025年10月*
+## 生成导航
 
-> 记录技术成长，分享学习心得 - 喜欢肘击 🚀
+新增、删除或移动文章后，运行：
+
+```bash
+python main.py
+```
+
+脚本会自动更新：
+
+- `nav.json`
+- `_posts/LEA/Timeline.md`
+
+## 本地预览
+
+由于页面会通过 `fetch` 加载 Markdown 和 JSON，建议使用本地 HTTP 服务预览：
+
+```bash
+python -m http.server 8000
+```
+
+然后打开：
+
+```text
+http://127.0.0.1:8000/#/overview
+```
+
+## 部署到 GitHub Pages
+
+1. 运行 `python main.py`
+2. 提交更新后的文章、`nav.json` 和 `_posts/LEA/Timeline.md`
+3. 推送到 GitHub
+4. 在仓库 `Settings -> Pages` 中选择部署分支和根目录
+
+仓库里包含 `.nojekyll`，GitHub Pages 会按普通静态文件托管，不走 Jekyll 构建。
+
+## 技术栈
+
+- Vanilla JavaScript
+- Marked.js
+- DOMPurify
+- Prism.js
+- Python 3
+
+## License
+
+代码按 [MIT License](LICENSE) 开源。博客文章和图片资源如无特别说明，版权归作者所有。
