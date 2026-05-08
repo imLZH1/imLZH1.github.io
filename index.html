@@ -12,13 +12,13 @@
     <meta property="og:description" content="个人技术博客，分享CTF题解、Pwn技巧、二进制安全研究等内容。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://imLZH1.github.io">
+    <link rel="stylesheet" href="prism.css">
     <link rel="stylesheet" href="styles.css">
     <!-- Marked.js for Markdown parsing -->
     <script src="marked.min.js"></script>
     <!-- DOMPurify for security -->
     <script src="purify.min.js"></script>
     <!-- Prism.js for code syntax highlighting -->
-    <link rel="stylesheet" href="prism.css">
     <script src="prism.min.js"></script>
     <!-- Prism.js language components -->
     <script src="prism-python.min.js"></script>
@@ -26,11 +26,44 @@
     <script src="prism-bash.min.js"></script>
 </head>
 <body>
+    <div class="startup-intro" id="startup-intro" role="status" aria-live="polite" aria-label="Loading blog">
+        <div class="startup-mist startup-mist-a" aria-hidden="true"></div>
+        <div class="startup-mist startup-mist-b" aria-hidden="true"></div>
+        <div class="startup-mist startup-mist-c" aria-hidden="true"></div>
+        <div class="startup-glow" aria-hidden="true"></div>
+        <div class="startup-whisper">
+            <span>imLZH1's Blog</span>
+        </div>
+    </div>
+
     <div class="app-container">
+        <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
         <!-- 左侧边栏 - 笔记列表 -->
         <div class="sidebar-left" id="sidebar-left">
+            <div class="site-panel">
+                <img class="site-avatar" src="./imgs/tx.png" alt="imLZH1">
+                <div>
+                    <div class="site-title">imLZH1</div>
+                    <div id="copywriting" class="site-subtitle">flag{true_love}</div>
+                </div>
+            </div>
+            <div class="site-pages-panel">
+                <div class="sidebar-header sidebar-header-lite">
+                    <h2>Pages</h2>
+                </div>
+                <div class="site-pages-nav" id="site-pages-nav">
+                </div>
+            </div>
+            <div class="sidebar-tools">
+                <label class="search-box" for="note-search">
+                    <span class="search-icon">/</span>
+                    <input id="note-search" type="search" placeholder="Search notes" autocomplete="off">
+                </label>
+            </div>
             <div class="sidebar-header">
-                <h2>Note List</h2>
+                <h2>Notes</h2>
+                <span class="sidebar-count" id="note-count">0</span>
             </div>
             <div class="file-tree">
             </div>
@@ -41,11 +74,22 @@
 
         <!-- 中间主体 - 内容展示 -->
         <div class="main-content" id="main-content">
+            <div class="reading-progress" aria-hidden="true">
+                <div class="reading-progress-bar" id="reading-progress-bar"></div>
+            </div>
             <div class="content-header">
-                <h1></h1>
+                <button id="mobile-menu-toggle" class="icon-btn mobile-menu-toggle" title="打开目录" aria-label="打开目录">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="title-block">
+                    <div class="content-kicker" id="content-kicker">Notebook</div>
+                    <h1></h1>
+                </div>
                 <div class="content-actions">
                     <button id="dark-mode-toggle" class="btn" title="切换暗色模式">
-                        🌙 暗色模式
+                        Dark
                     </button>
                 </div>
             </div>
@@ -61,13 +105,61 @@
         <!-- 右侧边栏 - 导航大纲 -->
         <div class="sidebar-right" id="sidebar-right">
             <div class="sidebar-header">
-                <h2>大纲</h2>
+                <h2>Outline</h2>
+                <div class="outline-tools">
+                    <span class="reading-percent" id="reading-percent">0%</span>
+                    <button id="scroll-top" class="icon-btn outline-top-btn" title="回到顶部" aria-label="回到顶部">↑</button>
+                </div>
             </div>
             <div class="outline-container">
             </div>
         </div>
     </div>
 
+    <script>
+        (async function loadCopywriting() {
+            const copywritingElement = document.getElementById('copywriting');
+            if (!copywritingElement) return;
+
+            try {
+                const response = await fetch('./copywriting.json', { cache: 'no-cache' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const copywriting = await response.json();
+                if (!Array.isArray(copywriting)) return;
+
+                const candidates = copywriting.filter((item) => typeof item === 'string' && item.trim());
+                if (!candidates.length) return;
+
+                const selected = candidates[Math.floor(Math.random() * candidates.length)];
+                const safeSelected = window.DOMPurify
+                    ? DOMPurify.sanitize(selected, { ALLOWED_TAGS: ['br'], ALLOWED_ATTR: [] })
+                    : selected;
+
+                console.log(`%c
+  _    _.--.____.--._
+ ( )=.-":;:;:;;':;:;:;"-._
+  \\\\:;:;:;:;:;;:;::;:;:;:\\
+   \\\\:;:;:;:;:;;:;:;:;:;:;\\
+    \\\\:;::;:;:;:;:;::;:;:;:\\
+     \\\\:;:;:;:;:;;:;::;:;:;:\\
+      \\\\:;::;:;:;:;:;::;:;:;:\\
+       \\\\;;:;:_:--:_:_:--:_;:;\\
+        \\\\_.-"             "-._\\
+         \\\\
+          \\\\
+           \\\\
+            \\\\
+             \\\\
+              \\\\\\
+`, 'color: #03A9F4; font-weight: bold');
+                console.log(`%c ${selected.replace(/<br\s*\/?>/gi, ' ')}`, 'color: #03A9F4; font-weight: bold');
+                copywritingElement.innerHTML = safeSelected;
+            } catch (error) {
+                console.warn('Copywriting load failed:', error);
+            }
+        })();
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
