@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-06-05T00:27:32+08:00"
+            "date": "2026-06-05T01:31:54+08:00"
         }
     ],
     "notes": {
@@ -132,28 +132,23 @@
                 "date": "2026-04-30T08:53:59+08:00"
             }
         ],
+        "FGT": [
+            {
+                "title": "FortiGayte-Article-1",
+                "slug": "FortiGayte-Article-1",
+                "note_root": "./_posts/FGT/FortiGayte-Article-1/",
+                "note_src": "./_posts/FGT/FortiGayte-Article-1/FortiGayte-Article-1.md",
+                "date": "2025-12-17T21:53:39+08:00"
+            },
+            {
+                "title": "FortiGayte-Article-2",
+                "slug": "FortiGayte-Article-2",
+                "note_root": "./_posts/FGT/FortiGayte-Article-2/",
+                "note_src": "./_posts/FGT/FortiGayte-Article-2/FortiGayte-Article-2.md",
+                "date": "2025-06-10T13:24:52+08:00"
+            }
+        ],
         "gugugaga": [
-            {
-                "title": "测试加密1",
-                "slug": "test_enc",
-                "note_root": "./_posts/gugugaga/",
-                "note_src": "./_posts/gugugaga/test_enc.md",
-                "date": "2026-06-03T08:18:11+08:00"
-            },
-            {
-                "title": "测试加密2",
-                "slug": "test_enc2",
-                "note_root": "./_posts/gugugaga/",
-                "note_src": "./_posts/gugugaga/test_enc2.md",
-                "date": "2026-06-03T08:18:11+08:00"
-            },
-            {
-                "title": "测试加密3",
-                "slug": "test_enc3",
-                "note_root": "./_posts/gugugaga/",
-                "note_src": "./_posts/gugugaga/test_enc3.md",
-                "date": "2026-06-03T08:18:11+08:00"
-            },
             {
                 "title": "Oauth",
                 "slug": "Oauth",

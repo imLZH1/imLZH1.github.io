@@ -597,7 +597,7 @@ class NavManager {
         }
     }
 
-    renderMarkdown(content, entry) {
+    renderMarkdown(content, entry, embeddedAssets = null) {
         const contentArea = document.querySelector('.markdown-body');
         const noteTitle = document.querySelector('.content-header h1');
         const noteKicker = document.getElementById('content-kicker');
@@ -619,7 +619,7 @@ class NavManager {
         }
 
         // 使用marked.js解析Markdown，并处理资源路径
-        const htmlContent = this.parseMarkdownWithMarked(content, entry.note_root);
+        const htmlContent = this.parseMarkdownWithMarked(content, entry.note_root, embeddedAssets);
         contentArea.innerHTML = htmlContent;
 
         this.enhanceRenderedContent(contentArea);
@@ -1007,8 +1007,9 @@ class NavManager {
             message.classList.remove('is-error');
 
             try {
-                const markdown = await this.decryptEncryptedPayload(payload, rawKey);
-                this.renderMarkdown(markdown, entry);
+                const decrypted = await this.decryptEncryptedPayload(payload, rawKey);
+                const articleBundle = this.parseEncryptedArticleBundle(decrypted);
+                this.renderMarkdown(articleBundle.markdown, entry, articleBundle.assets);
             } catch (error) {
                 console.error('Article decrypt failed:', error);
                 message.textContent = 'Key 错误或密文已损坏';
@@ -1082,6 +1083,76 @@ class NavManager {
         return new TextDecoder('utf-8').decode(decrypted);
     }
 
+    parseEncryptedArticleBundle(plaintext) {
+        try {
+            const bundle = JSON.parse(plaintext);
+            if (
+                bundle
+                && bundle.kind === 'markleafnote.article.v2'
+                && typeof bundle.markdown === 'string'
+                && Array.isArray(bundle.assets)
+            ) {
+                return {
+                    markdown: bundle.markdown,
+                    assets: this.buildEmbeddedAssetMap(bundle.assets),
+                };
+            }
+        } catch (_error) {
+            // Old encrypted articles decrypt to plain Markdown.
+        }
+
+        return {
+            markdown: plaintext,
+            assets: null,
+        };
+    }
+
+    buildEmbeddedAssetMap(assets) {
+        const map = new Map();
+
+        assets.forEach((asset) => {
+            if (!asset || typeof asset.data !== 'string') return;
+
+            const mime = typeof asset.mime === 'string' && asset.mime
+                ? asset.mime
+                : 'application/octet-stream';
+            const dataUri = `data:${mime};base64,${asset.data}`;
+            const candidates = [
+                asset.url,
+                asset.path,
+                asset.root_path,
+                asset.path ? `./${asset.path}` : '',
+                asset.root_path ? `./${asset.root_path}` : '',
+            ];
+
+            candidates.forEach((candidate) => {
+                if (typeof candidate !== 'string' || !candidate) return;
+                this.addEmbeddedAssetCandidate(map, candidate, dataUri);
+            });
+        });
+
+        return map;
+    }
+
+    addEmbeddedAssetCandidate(map, value, dataUri) {
+        const variants = new Set();
+        const withoutQuery = value.split('#')[0].split('?')[0];
+        variants.add(value);
+        variants.add(withoutQuery);
+        variants.add(value.replace(/^\.\//, ''));
+        variants.add(withoutQuery.replace(/^\.\//, ''));
+
+        variants.forEach((variant) => {
+            if (!variant) return;
+            map.set(variant, dataUri);
+            try {
+                map.set(decodeURIComponent(variant), dataUri);
+            } catch (_error) {
+                // Keep the encoded variant when the URL cannot be decoded.
+            }
+        });
+    }
+
     base64ToBytes(value) {
         let normalized = value.trim().replace(/^['"]|['"]$/g, '').replace(/\s+/g, '');
         normalized = normalized.replace(/-/g, '+').replace(/_/g, '/');
@@ -1098,7 +1169,7 @@ class NavManager {
         return bytes;
     }
 
-    parseMarkdownWithMarked(markdown, noteRoot) {
+    parseMarkdownWithMarked(markdown, noteRoot, embeddedAssets = null) {
         try {
             const markdownBody = this.stripFrontmatter(markdown);
 
@@ -1117,7 +1188,7 @@ class NavManager {
             const parsedHtml = marked.parse(markdownBody);
             
             // 处理资源文件路径
-            const processedHtml = this.processResourcePaths(parsedHtml, noteRoot);
+            const processedHtml = this.processResourcePaths(parsedHtml, noteRoot, embeddedAssets);
             
             // 使用DOMPurify进行安全过滤
             const cleanHtml = DOMPurify.sanitize(processedHtml);
@@ -1133,7 +1204,7 @@ class NavManager {
         return this.parseFrontmatter(markdown).body;
     }
 
-    processResourcePaths(html, noteRoot) {
+    processResourcePaths(html, noteRoot, embeddedAssets = null) {
         // 创建一个临时DOM元素来处理HTML
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
@@ -1142,7 +1213,10 @@ class NavManager {
         const images = tempDiv.querySelectorAll('img');
         images.forEach(img => {
             const src = img.getAttribute('src');
-            if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {
+            const embeddedSrc = this.resolveEmbeddedResource(src, embeddedAssets);
+            if (embeddedSrc) {
+                img.setAttribute('src', embeddedSrc);
+            } else if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {
                 // 相对路径，转换为基于noteRoot的绝对路径
                 const fullPath = this.resolvePath(src, noteRoot);
                 img.setAttribute('src', fullPath);
@@ -1153,7 +1227,10 @@ class NavManager {
         const links = tempDiv.querySelectorAll('a');
         links.forEach(link => {
             const href = link.getAttribute('href');
-            if (href && !href.startsWith('http') && !href.startsWith('/') && !href.startsWith('#') && 
+            const embeddedHref = this.resolveEmbeddedResource(href, embeddedAssets);
+            if (embeddedHref) {
+                link.setAttribute('href', embeddedHref);
+            } else if (href && !href.startsWith('http') && !href.startsWith('/') && !href.startsWith('#') && 
                 (href.endsWith('.png') || href.endsWith('.jpg') || href.endsWith('.jpeg') || href.endsWith('.gif') || href.endsWith('.svg'))) {
                 // 相对路径的资源文件链接，转换为基于noteRoot的绝对路径
                 const fullPath = this.resolvePath(href, noteRoot);
@@ -1162,6 +1239,34 @@ class NavManager {
         });
         
         return tempDiv.innerHTML;
+    }
+
+    resolveEmbeddedResource(value, embeddedAssets) {
+        if (!value || !embeddedAssets) return null;
+
+        const withoutQuery = value.split('#')[0].split('?')[0];
+        const candidates = [
+            value,
+            withoutQuery,
+            value.replace(/^\.\//, ''),
+            withoutQuery.replace(/^\.\//, ''),
+        ];
+
+        for (const candidate of candidates) {
+            if (embeddedAssets.has(candidate)) {
+                return embeddedAssets.get(candidate);
+            }
+            try {
+                const decoded = decodeURIComponent(candidate);
+                if (embeddedAssets.has(decoded)) {
+                    return embeddedAssets.get(decoded);
+                }
+            } catch (_error) {
+                // Ignore invalid URL encodings.
+            }
+        }
+
+        return null;
     }
 
     resolvePath(relativePath, noteRoot) {

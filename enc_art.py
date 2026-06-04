@@ -4,11 +4,16 @@ import argparse
 import base64
 import hashlib
 import json
+import mimetypes
+import re
 import secrets
 import string
+import subprocess
+import sys
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -22,9 +27,16 @@ KEY_STORE_RANDOM_CHARS = 32
 
 ALG = "AES-256-GCM"
 VERSION = 1
+BUNDLE_KIND = "markleafnote.article.v2"
 KEY_BYTES = 32
 IV_BYTES = 12
 TAG_BYTES = 16
+LOCAL_RESOURCE_PATTERN = re.compile(
+    r"""!\[[^\]]*]\(\s*([^)\s]+)(?:\s+['"][^)]*['"])?\s*\)|"""
+    r"""\[[^\]]+]\(\s*([^)\s]+)(?:\s+['"][^)]*['"])?\s*\)|"""
+    r"""(?:src|href)\s*=\s*["']([^"']+)["']""",
+    re.IGNORECASE,
+)
 
 
 @dataclass
@@ -139,6 +151,191 @@ def looks_encrypted(body: str) -> bool:
     return all(key in payload for key in ("id", "iv", "tag", "data"))
 
 
+def is_local_resource_url(url: str) -> bool:
+    value = url.strip()
+    if not value or value.startswith(("#", "/", "//")):
+        return False
+
+    parsed = urlsplit(value)
+    if parsed.scheme or parsed.netloc:
+        return False
+
+    lowered = value.lower()
+    return not lowered.startswith(("data:", "mailto:", "tel:", "javascript:"))
+
+
+def find_local_resource_urls(markdown: str) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+    for match in LOCAL_RESOURCE_PATTERN.finditer(markdown):
+        url = next((group for group in match.groups() if group), "").strip()
+        if not is_local_resource_url(url) or url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+    return urls
+
+
+def resolve_resource_path(article: Article, url: str) -> Path | None:
+    parsed = urlsplit(url.strip())
+    if not parsed.path:
+        return None
+
+    article_dir = article.path.parent.resolve()
+    candidate = (article.path.parent / unquote(parsed.path)).resolve()
+    try:
+        candidate.relative_to(article_dir)
+    except ValueError:
+        print(f"skip resource outside article dir: {url}")
+        return None
+
+    if not candidate.is_file():
+        print(f"skip missing resource: {article.relative_path} -> {url}")
+        return None
+    return candidate
+
+
+def companion_asset_paths(article: Article) -> list[Path]:
+    assets_dir = article.path.parent / "assets"
+    if not assets_dir.is_dir():
+        return []
+
+    sibling_markdown = [path for path in article.path.parent.glob("*.md") if path.is_file()]
+    if len(sibling_markdown) != 1 or sibling_markdown[0] != article.path:
+        return []
+
+    return sorted(path.resolve() for path in assets_dir.rglob("*") if path.is_file())
+
+
+def collect_local_resources(article: Article) -> list[dict[str, str]]:
+    resources: list[dict[str, str]] = []
+    seen_paths: set[Path] = set()
+    for url in find_local_resource_urls(article.body):
+        path = resolve_resource_path(article, url)
+        if path is None or path in seen_paths:
+            continue
+
+        seen_paths.add(path)
+        mime_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        resources.append(
+            {
+                "url": url,
+                "path": path.relative_to(article.path.parent).as_posix(),
+                "root_path": path.relative_to(ROOT).as_posix(),
+                "mime": mime_type,
+                "data": b64encode(path.read_bytes()),
+            }
+        )
+
+    for path in companion_asset_paths(article):
+        if path in seen_paths:
+            continue
+
+        seen_paths.add(path)
+        relative_path = path.relative_to(article.path.parent).as_posix()
+        mime_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        resources.append(
+            {
+                "url": relative_path,
+                "path": relative_path,
+                "root_path": path.relative_to(ROOT).as_posix(),
+                "mime": mime_type,
+                "data": b64encode(path.read_bytes()),
+            }
+        )
+    return resources
+
+
+def pack_article_body(article: Article, assets: list[dict[str, str]]) -> str:
+    if not assets:
+        return article.body
+
+    return json.dumps(
+        {
+            "kind": BUNDLE_KIND,
+            "markdown": article.body,
+            "assets": assets,
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
+
+def unpack_article_body(plaintext: str) -> tuple[str, list[dict[str, str]]]:
+    try:
+        bundle = json.loads(plaintext)
+    except json.JSONDecodeError:
+        return plaintext, []
+
+    if not isinstance(bundle, dict) or bundle.get("kind") != BUNDLE_KIND:
+        return plaintext, []
+
+    markdown = bundle.get("markdown")
+    assets = bundle.get("assets")
+    if not isinstance(markdown, str) or not isinstance(assets, list):
+        return plaintext, []
+
+    valid_assets = [asset for asset in assets if isinstance(asset, dict)]
+    return markdown, valid_assets
+
+
+def cleanup_empty_dirs(start: Path, stop: Path) -> None:
+    current = start.resolve()
+    stop = stop.resolve()
+    while current != stop:
+        try:
+            current.relative_to(stop)
+        except ValueError:
+            return
+        try:
+            current.rmdir()
+        except OSError:
+            return
+        current = current.parent
+
+
+def remove_public_resources(article: Article, assets: list[dict[str, str]]) -> None:
+    article_dir = article.path.parent.resolve()
+    for asset in assets:
+        relative_path = asset.get("path")
+        if not isinstance(relative_path, str) or not relative_path:
+            continue
+
+        path = (article.path.parent / relative_path).resolve()
+        try:
+            path.relative_to(article_dir)
+        except ValueError:
+            continue
+
+        if path.exists() and path.is_file():
+            path.unlink()
+            print(f"removed resource: {path.relative_to(ROOT).as_posix()}")
+            cleanup_empty_dirs(path.parent, article.path.parent)
+
+
+def restore_local_resources(article: Article, assets: list[dict[str, str]]) -> int:
+    article_dir = article.path.parent.resolve()
+    restored = 0
+    for asset in assets:
+        relative_path = asset.get("path")
+        encoded = asset.get("data")
+        if not isinstance(relative_path, str) or not isinstance(encoded, str):
+            continue
+
+        path = (article.path.parent / relative_path).resolve()
+        try:
+            path.relative_to(article_dir)
+        except ValueError:
+            print(f"skip unsafe restored resource path: {relative_path}")
+            continue
+
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b64decode(encoded))
+        print(f"restored resource: {path.relative_to(ROOT).as_posix()}")
+        restored += 1
+    return restored
+
+
 def random_key_store_path() -> Path:
     alphabet = string.ascii_letters + string.digits
     for _attempt in range(100):
@@ -244,9 +441,12 @@ def encrypt_article(article: Article, store: KeyStore) -> bool:
         print(f"skip already-encrypted body: {article.relative_path}")
         return False
 
+    assets = collect_local_resources(article)
+    plaintext = pack_article_body(article, assets)
+
     key = secrets.token_bytes(KEY_BYTES)
     iv = secrets.token_bytes(IV_BYTES)
-    encrypted = AESGCM(key).encrypt(iv, article.body.encode("utf-8"), None)
+    encrypted = AESGCM(key).encrypt(iv, plaintext.encode("utf-8"), None)
     ciphertext, tag = encrypted[:-TAG_BYTES], encrypted[-TAG_BYTES:]
     art_id = article_id(article.relative_path)
 
@@ -270,12 +470,14 @@ def encrypt_article(article: Article, store: KeyStore) -> bool:
         "key": b64encode(key),
         "iv": payload["iv"],
         "tag": payload["tag"],
+        "assets": len(assets),
         "encrypted_at": datetime.now().astimezone().isoformat(timespec="seconds"),
     }
 
     set_encrypt_value(article, "ok")
     encrypted_body = article.newline + json.dumps(payload, indent=2, ensure_ascii=False) + article.newline
     write_text_atomic(article.path, compose_article(article, encrypted_body))
+    remove_public_resources(article, assets)
     print(f"encrypted {art_id}: {article.relative_path}")
     return True
 
@@ -326,10 +528,13 @@ def decrypt_article(article: Article, store: KeyStore, target: str) -> bool:
         print(f"decrypt failed for {art_id}: {error.__class__.__name__}")
         return False
 
+    markdown, assets = unpack_article_body(plaintext)
     set_encrypt_value(article, "true")
-    write_text_atomic(article.path, compose_article(article, plaintext))
+    write_text_atomic(article.path, compose_article(article, markdown))
+    restored = restore_local_resources(article, assets)
     articles.pop(art_id, None)
-    print(f"decrypted {art_id}: {article.relative_path}")
+    suffix = f" ({restored} resources)" if restored else ""
+    print(f"decrypted {art_id}: {article.relative_path}{suffix}")
     return True
 
 
@@ -349,7 +554,10 @@ def decrypt_selected(target: str | None) -> None:
     store = read_key_store(create=False)
     if target is None:
         print_key_store_articles(store)
-        target = input("Article id or all: ").strip()
+        try:
+            target = input("Article id or all: ").strip()
+        except EOFError:
+            raise SystemExit("missing decrypt target") from None
     if not target:
         raise SystemExit("missing decrypt target")
 
@@ -366,6 +574,13 @@ def decrypt_selected(target: str | None) -> None:
     print(f"decrypted articles: {count}")
 
 
+def rebuild_navigation() -> None:
+    subprocess.run(
+        [sys.executable, "-B", str(ROOT / "main_update.py")],
+        check=True,
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Encrypt or decrypt blog articles.")
     parser.add_argument("mode", choices=("enc", "dec"), help="enc encrypts, dec decrypts")
@@ -374,8 +589,7 @@ def main() -> None:
 
     if args.mode == "enc":
         encrypt_all()
-        import os
-        os.system('python ./main_update.py')
+        rebuild_navigation()
     elif args.mode == "dec":
         decrypt_selected(args.target)
 
