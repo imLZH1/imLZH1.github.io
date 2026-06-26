@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-06-05T01:31:54+08:00"
+            "date": "2026-06-26T23:24:12+08:00"
         }
     ],
     "notes": {
@@ -199,6 +199,15 @@
                 "note_root": "./_posts/pwn_note1/Kernel-security/",
                 "note_src": "./_posts/pwn_note1/Kernel-security/pwn.college-Kernel-security.md",
                 "date": null
+            }
+        ],
+        "王的日常": [
+            {
+                "title": "2026-06-26",
+                "slug": "2026-06-26",
+                "note_root": "./_posts/王的日常/",
+                "note_src": "./_posts/王的日常/2026-06-26.md",
+                "date": "2026-06-26T00:00:00"
             }
         ]
     }

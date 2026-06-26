@@ -1577,7 +1577,7 @@ class StartupIntro {
         this.app = document.querySelector('.app-container');
         this.isClosed = false;
         this.startedAt = performance.now();
-        this.minDuration = 1700;
+        this.minDuration = 0;
         this.init();
     }
 
@@ -1614,7 +1614,7 @@ class StartupIntro {
 // 初始化应用
 document.addEventListener('DOMContentLoaded', () => {
     const resizer = new Resizer();
-    new StartupIntro();
+    new StartupIntro();  // xx 已关闭全屏入场动画
     new ThemeManager();
     new MobileNavigation();
     new ReadingProgress();
