@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-06-30T14:22:29+08:00"
+            "date": "2026-07-06T10:23:37+08:00"
         }
     ],
     "notes": {
@@ -137,6 +137,13 @@
                 "note_root": "./_posts/2026/2026 ccb决赛部分题目复现/",
                 "note_src": "./_posts/2026/2026 ccb决赛部分题目复现/2026 ccb决赛部分题目复现.md",
                 "date": "2026-04-30T08:53:59+08:00"
+            },
+            {
+                "title": "R3CTF2026-tap2pwn-Writeup",
+                "slug": "R3CTF2026-tap2pwn-Writeup",
+                "note_root": "./_posts/2026/",
+                "note_src": "./_posts/2026/R3CTF2026-tap2pwn-Writeup.md",
+                "date": null
             },
             {
                 "title": "sekaiCTF-2026_3in1-Ladybird",
