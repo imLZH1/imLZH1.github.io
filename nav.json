@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-07-06T10:23:37+08:00"
+            "date": "2026-07-07T21:47:11+08:00"
         }
     ],
     "notes": {
@@ -169,43 +169,6 @@
                 "date": "2025-06-10T13:24:52+08:00"
             }
         ],
-        "gugugaga": [
-            {
-                "title": "Oauth",
-                "slug": "Oauth",
-                "note_root": "./_posts/gugugaga/Oauth/",
-                "note_src": "./_posts/gugugaga/Oauth/Oauth.md",
-                "date": "2026-05-29T16:11:49+08:00"
-            },
-            {
-                "title": "Baker",
-                "slug": "Baker",
-                "note_root": "./_posts/gugugaga/Baker/",
-                "note_src": "./_posts/gugugaga/Baker/Baker.md",
-                "date": "2026-05-09T18:48:12+08:00"
-            },
-            {
-                "title": "无境靶场：州弟学安全-三层综合渗透",
-                "slug": "无境靶场-州弟学安全-三层综合渗透",
-                "note_root": "./_posts/gugugaga/无境靶场-州弟学安全-三层综合渗透/",
-                "note_src": "./_posts/gugugaga/无境靶场-州弟学安全-三层综合渗透/无境靶场-州弟学安全-三层综合渗透.md",
-                "date": "2026-05-05T08:18:11+08:00"
-            },
-            {
-                "title": "Vulnhub-HackthonCTF-2",
-                "slug": "Vulnhub-HackthonCTF-2",
-                "note_root": "./_posts/gugugaga/",
-                "note_src": "./_posts/gugugaga/Vulnhub-HackthonCTF-2.md",
-                "date": null
-            },
-            {
-                "title": "Vulnhub-SecureCode1",
-                "slug": "Vulnhub-SecureCode1",
-                "note_root": "./_posts/gugugaga/",
-                "note_src": "./_posts/gugugaga/Vulnhub-SecureCode1.md",
-                "date": null
-            }
-        ],
         "pwn_note1": [
             {
                 "title": "glibc_IO_FILE-利用",
@@ -229,6 +192,50 @@
                 "note_root": "./_posts/王的日常/",
                 "note_src": "./_posts/王的日常/2026-06-26.md",
                 "date": "2026-06-26T00:00:00"
+            }
+        ],
+        "靶机渗透": [
+            {
+                "title": "无境靶场:Soupedecode 01 thm靶场复刻",
+                "slug": "无境靶场_Soupedecode-01-thm靶场复刻",
+                "note_root": "./_posts/靶机渗透/",
+                "note_src": "./_posts/靶机渗透/无境靶场_Soupedecode-01-thm靶场复刻.md",
+                "date": "2026-07-07T18:46:26+08:00"
+            },
+            {
+                "title": "Oauth",
+                "slug": "Oauth",
+                "note_root": "./_posts/靶机渗透/Oauth/",
+                "note_src": "./_posts/靶机渗透/Oauth/Oauth.md",
+                "date": "2026-05-29T16:11:49+08:00"
+            },
+            {
+                "title": "Baker",
+                "slug": "Baker",
+                "note_root": "./_posts/靶机渗透/Baker/",
+                "note_src": "./_posts/靶机渗透/Baker/Baker.md",
+                "date": "2026-05-09T18:48:12+08:00"
+            },
+            {
+                "title": "无境靶场：州弟学安全-三层综合渗透",
+                "slug": "无境靶场-州弟学安全-三层综合渗透",
+                "note_root": "./_posts/靶机渗透/无境靶场-州弟学安全-三层综合渗透/",
+                "note_src": "./_posts/靶机渗透/无境靶场-州弟学安全-三层综合渗透/无境靶场-州弟学安全-三层综合渗透.md",
+                "date": "2026-05-05T08:18:11+08:00"
+            },
+            {
+                "title": "Vulnhub-HackthonCTF-2",
+                "slug": "Vulnhub-HackthonCTF-2",
+                "note_root": "./_posts/靶机渗透/",
+                "note_src": "./_posts/靶机渗透/Vulnhub-HackthonCTF-2.md",
+                "date": null
+            },
+            {
+                "title": "Vulnhub-SecureCode1",
+                "slug": "Vulnhub-SecureCode1",
+                "note_root": "./_posts/靶机渗透/",
+                "note_src": "./_posts/靶机渗透/Vulnhub-SecureCode1.md",
+                "date": null
             }
         ]
     }
