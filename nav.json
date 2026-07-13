@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-07-07T21:47:11+08:00"
+            "date": "2026-07-14T01:23:47+08:00"
         }
     ],
     "notes": {
@@ -195,6 +195,20 @@
             }
         ],
         "靶机渗透": [
+            {
+                "title": "BloodHound Community Edition Quickstart",
+                "slug": "BloodHound Community Edition Quickstart",
+                "note_root": "./_posts/靶机渗透/BloodHound Community Edition Quickstart/",
+                "note_src": "./_posts/靶机渗透/BloodHound Community Edition Quickstart/BloodHound Community Edition Quickstart.md",
+                "date": "2026-07-13T23:21:02+08:00"
+            },
+            {
+                "title": "无境靶场：[无境原创] Chaos Corp",
+                "slug": "无境靶场：[无境原创] Chaos Corp",
+                "note_root": "./_posts/靶机渗透/无境靶场：[无境原创] Chaos Corp/",
+                "note_src": "./_posts/靶机渗透/无境靶场：[无境原创] Chaos Corp/无境靶场：[无境原创] Chaos Corp.md",
+                "date": "2026-07-10T15:35:20+08:00"
+            },
             {
                 "title": "无境靶场:Soupedecode 01 thm靶场复刻",
                 "slug": "无境靶场_Soupedecode-01-thm靶场复刻",

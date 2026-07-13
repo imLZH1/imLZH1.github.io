@@ -1,7 +1,7 @@
 ---
 title: Timeline
-date: 2026-07-07T21:47:11+08:00
-lastmod: 2026-07-07T21:47:11+08:00
+date: 2026-07-14T01:23:47+08:00
+lastmod: 2026-07-14T01:23:47+08:00
 ---
 
 # Timeline
@@ -9,6 +9,14 @@ lastmod: 2026-07-07T21:47:11+08:00
 <p class="timeline-page-intro">按时间顺序整理站内文章，方便快速回看近期写了什么、补了什么、记录了什么。</p>
 
 <div class="timeline-simple-list">
+  <a class="timeline-simple-item" href="#/靶机渗透/BloodHound Community Edition Quickstart">
+    <span class="timeline-simple-date">2026.07.13</span>
+    <strong class="timeline-simple-title">BloodHound Community Edition Quickstart</strong>
+  </a>
+  <a class="timeline-simple-item" href="#/靶机渗透/无境靶场：[无境原创] Chaos Corp">
+    <span class="timeline-simple-date">2026.07.10</span>
+    <strong class="timeline-simple-title">无境靶场：[无境原创] Chaos Corp</strong>
+  </a>
   <a class="timeline-simple-item" href="#/靶机渗透/无境靶场_Soupedecode-01-thm靶场复刻">
     <span class="timeline-simple-date">2026.07.07</span>
     <strong class="timeline-simple-title">无境靶场:Soupedecode 01 thm靶场复刻</strong>
