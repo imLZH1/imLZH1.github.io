@@ -10,7 +10,7 @@
             "title": "Timeline",
             "note_root": "./_posts/LEA/",
             "note_src": "./_posts/LEA/Timeline.md",
-            "date": "2026-07-27T01:42:45+08:00"
+            "date": "2026-08-19T15:12:06+08:00"
         }
     ],
     "notes": {
@@ -150,6 +150,13 @@
                 "slug": "sekaiCTF-2026_3in1-Ladybird",
                 "note_root": "./_posts/2026/",
                 "note_src": "./_posts/2026/sekaiCTF-2026_3in1-Ladybird.md",
+                "date": null
+            },
+            {
+                "title": "重装windows11-配置",
+                "slug": "重装windows11-配置",
+                "note_root": "./_posts/2026/重装windows11-配置/",
+                "note_src": "./_posts/2026/重装windows11-配置/重装windows11-配置.md",
                 "date": null
             }
         ],
